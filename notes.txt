@@ -352,7 +352,9 @@ SymbolTable API:
 
 	startSubroutine - Resets subroutine symbol table
 
-	define - Defines new identifier of given name, type, and kind, and assigns it a running index. STATIC/FIELD identifiers have class scope, others have only subroutine scope. All arguments: name -> String, type -> String, kind -> STATIC, FIELD, ARG, VAR.
+	define - Defines new identifier of given name, type, and kind, and assigns it a running index. STATIC/FIELD
+	identifiers have class scope, others have only subroutine scope. All arguments: name -> String, type -> String,
+	kind -> STATIC, FIELD, ARG, VAR.
 
 	VarCount - Returns num of variables of the given kind. Returns an integer. Arguments: kind -> STATIC, FIELD, ARG, VAR.
 
@@ -364,7 +366,8 @@ SymbolTable API:
 
 Can be implemented with two separate hash tables.
 When we start compiling a new subroutine, the latter hash table can be reset.
-When compiling error-free Jack code, each symbol not yet found in the symbol tables can be assumed to be either a subroutine name or a class name.
+When compiling error-free Jack code, each symbol not yet found in the symbol tables can be assumed to be either a
+subroutine name or a class name.
 
 VMWriter emits code to output VM file.
 

@@ -1,0 +1,29 @@
+SymbolTable
+    __init__(self)
+        creates two dicts, classTable and subroutineTable
+        Structure for both dicts: {name:[type, kind, num]}
+
+    startSubroutine(self)
+        subroutineTable becomes an empty dict
+
+    define(self, name, type, kind)
+        defines a new identifier of a given name.
+        if kind is STATIC or FIELD, add it to the class table.
+        otherwise, add it to subroutine table.
+        format: classTable[name] = [type, kind, varCount(kind)]
+
+    varCount(self, kind)
+        initialize kindCount
+        loop through all key, value pairs
+        if kind in value, kindCount += 1
+
+        return kindCount
+
+    kindOf(self, name)
+        access name and return value[1]
+
+    typeOf(self, name)
+        access name and return value[0]
+
+    indexOf(self, name)
+        access name and return value[2]
