@@ -42,4 +42,3 @@ class VMWriter:
     # closes the write-only output
     def close(self):
         pass
-
