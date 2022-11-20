@@ -27,3 +27,37 @@ SymbolTable
 
     indexOf(self, name)
         access name and return value[2]
+
+VMWriter
+    __init__(self):
+        open write-only vm file with the name of the input file.
+
+    writePush(segment, index):
+        write "push " + segment + " " + index
+
+    writePop(segment, index):
+        write "pop " + segment + index
+
+    writeArithmetic(command):
+        write command
+
+    writeLabel(label):
+        write "label " + label
+
+    writeGoto(label):
+        write "goto " + label
+
+    writeIf(label):
+        write "goto " + label
+
+    writeCall(function, args):
+        write "call " + function + " " + args
+
+    writeFunction(function, args):
+        write "function " + function + " " + args
+
+    writeReturn():
+        write "return"
+
+    close():
+        close output file

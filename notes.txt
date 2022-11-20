@@ -374,25 +374,26 @@ VMWriter emits code to output VM file.
 VMWriter API:
 	Constructor - Creates new write-only output .vm file. Args: file/stream.
 
-	writePush - Writes "push" + segment + index. Args: segment, index. Trivial.
+	writePush - Writes "push" + segment + index. Args: segment, index.
 
-	writePop - Writes "pop" + segment + index. Args: segment, index. Trivial.
+	writePop - Writes "pop" + segment + index. Args: segment, index.
 
-	writeArithmetic - writes an arithmetic command. Args: command. Trivial.
+	writeArithmetic - writes an arithmetic command. Args: command.
 
-	writeLabel - writes a label command. Trivial.
+	writeLabel - writes a label command.
 
-	writeGoto - writes a goto command. Trivial.
+	writeGoto - writes a goto command.
 
-	writeIf - writes an if-goto command. Trivial.
+	writeIf - writes an if-goto command.
 
-	writeCall - writes a call command. Trivial.
+	writeCall - writes a call command.
 
-	writeFunction - writes a function command. Trivial.
+	writeFunction - writes a function command.
 
-	writeReturn - writes "return". Trivial.
+	writeReturn - writes "return".
 
-	close - closes the output file. Trivial.
+	close - closes the output file.
+
 
 this is just an encapsulation.
 
