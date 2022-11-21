@@ -10,11 +10,12 @@ Files I've tested with the current version of code:
 
 from compilationEngine import *
 from TokenType import *
+from SymbolTable import *
 
 # the root of all files I'll need to test here.
 file_root = "10/Square/"
 
-compilationEngine = CompilationEngine(file_root + "Square.jack")
+# compilationEngine = CompilationEngine(file_root + "Square.jack")
 
 
 def mainLoop(ce):
@@ -70,5 +71,8 @@ def mainLoop(ce):
     outputXML.write("</tokens>")
 
 
-compilationEngine.compileClass()
+# compilationEngine.compileClass()
 # compilationEngine.testCompile()
+symbolTable = SymbolTable()
+symbolTable.define("happy", "ARGUMENT", "int")
+print(symbolTable.kindOf("happy"))

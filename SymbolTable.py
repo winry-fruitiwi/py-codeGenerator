@@ -31,9 +31,16 @@ class SymbolTable:
 
         return kindCount
 
+    # a helper function that says which table name is in.
+    def findNameInTables(self, name):
+        if name in self.subroutineTable:
+            return self.subroutineTable
+        return self.classTable
+
     # finds the kind of the given identifier
     def kindOf(self, name):
-        pass
+        table = self.findNameInTables(name)
+        return table[name][1]
 
     # finds the type of the given identifier
     def typeOf(self, name):
