@@ -49,4 +49,5 @@ class SymbolTable:
 
     # finds the index of the given identifier
     def indexOf(self, name):
-        pass
+        table = self.findNameInTables(name)
+        return table[2]
