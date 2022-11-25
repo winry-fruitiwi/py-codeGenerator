@@ -99,4 +99,6 @@ def symbolTableTest():
 # compilationEngine.testCompile()
 VMWriter = VMWriter()
 VMWriter.writePush("argument", 2)
-VMWriter.writePush("this", 0)
+VMWriter.writePop("this", 0)
+VMWriter.writeArithmetic("add")
+VMWriter.writeLabel("L1")

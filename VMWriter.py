@@ -3,21 +3,25 @@ class VMWriter:
         # opens a write-only VM file
         self.out = open("output.vm", "w")
 
+    # a wrapper for self.out.write(string + "\n")
+    def write(self, string):
+        self.out.write(string + "\n")
+
     # writes a push statement
     def writePush(self, segment, index):
-        self.out.write("push " + segment + " " + str(index) + "\n")
+        self.write("push " + segment + " " + str(index))
 
     # writes a pop statement
     def writePop(self, segment, index):
-        pass
+        self.write("pop " + segment + " " + str(index))
 
     # writes command to the output file.
     def writeArithmetic(self, command):
-        pass
+        self.write(command)
 
     # writes a label
     def writeLabel(self, label):
-        pass
+        self.write("label " + label)
 
     # writes a goto label statement
     def writeGoto(self, label):

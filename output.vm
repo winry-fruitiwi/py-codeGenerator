@@ -1,2 +1,4 @@
 push argument 2
-push this 0
+pop this 0
+add
+label L1
