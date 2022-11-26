@@ -2,3 +2,6 @@ push argument 2
 pop this 0
 add
 label L1
+goto L3
+if-goto L2
+call Keyboard.KeyPressed 0

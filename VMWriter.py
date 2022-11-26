@@ -25,15 +25,15 @@ class VMWriter:
 
     # writes a goto label statement
     def writeGoto(self, label):
-        pass
+        self.write("goto " + label)
 
     # writes an if-goto label statement
     def writeIf(self, label):
-        pass
+        self.write("if-goto " + label)
 
     # writes a function call statement
     def writeCall(self, function, args):
-        pass
+        self.write("call " + function + " " + str(args))
 
     # writes a function declaration
     def writeFunction(self, function, args):
