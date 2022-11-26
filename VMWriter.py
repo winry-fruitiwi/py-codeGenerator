@@ -1,17 +1,17 @@
 class VMWriter:
     def __init__(self):
         # opens a write-only VM file
-        pass
+        self.out = open("output.vm", "w")
 
     # writes a push statement
     def writePush(self, segment, index):
-        pass
+        self.out.write("push " + segment + " " + str(index) + "\n")
 
     # writes a pop statement
     def writePop(self, segment, index):
         pass
 
-    # writes command
+    # writes command to the output file.
     def writeArithmetic(self, command):
         pass
 

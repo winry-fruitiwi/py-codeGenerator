@@ -11,6 +11,7 @@ Files I've tested with the current version of code:
 from compilationEngine import *
 from TokenType import *
 from SymbolTable import *
+from VMWriter import *
 
 # the root of all files I'll need to test here.
 file_root = "10/Square/"
@@ -71,21 +72,31 @@ def mainLoop(ce):
     outputXML.write("</tokens>")
 
 
+def symbolTableTest():
+    sT = SymbolTable()
+    sT.define("have", "ARGUMENT", "int")
+    sT.define("some", "FIELD", "int")
+    sT.define("good", "FIELD", "int")
+    sT.define("game", "ARGUMENT", "int")
+
+    print("class table pre-reset:", sT.classTable)
+    print("subroutine table pre-reset:", sT.subroutineTable)
+    print(sT.typeOf("have"), sT.kindOf("have"),
+          sT.indexOf("have"))
+    print(sT.typeOf("some"), sT.kindOf("some"),
+          sT.indexOf("some"))
+    print(sT.typeOf("good"), sT.kindOf("good"),
+          sT.indexOf("good"))
+    print(sT.typeOf("game"), sT.kindOf("game"),
+          sT.indexOf("game"))
+
+    sT.startSubroutine()
+    print("class table post-reset:", sT.classTable)
+    print("subroutine table post-reset:", sT.subroutineTable)
+
+
 # compilationEngine.compileClass()
 # compilationEngine.testCompile()
-symbolTable = SymbolTable()
-symbolTable.define("have", "ARGUMENT", "int")
-symbolTable.define("some", "FIELD", "int")
-symbolTable.define("good", "FIELD", "int")
-symbolTable.define("game", "ARGUMENT", "int")
-
-print("class table pre-reset:", symbolTable.classTable)
-print("subroutine table pre-reset:", symbolTable.subroutineTable)
-print(symbolTable.typeOf("have"), symbolTable.kindOf("have"), symbolTable.indexOf("have"))
-print(symbolTable.typeOf("some"), symbolTable.kindOf("some"), symbolTable.indexOf("some"))
-print(symbolTable.typeOf("good"), symbolTable.kindOf("good"), symbolTable.indexOf("good"))
-print(symbolTable.typeOf("game"), symbolTable.kindOf("game"), symbolTable.indexOf("game"))
-
-symbolTable.startSubroutine()
-print("class table post-reset:", symbolTable.classTable)
-print("subroutine table post-reset:", symbolTable.subroutineTable)
+VMWriter = VMWriter()
+VMWriter.writePush("argument", 2)
+VMWriter.writePush("this", 0)
