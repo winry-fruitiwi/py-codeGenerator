@@ -73,35 +73,50 @@ def mainLoop(ce):
 
 
 def symbolTableTest():
+    # initialize symbol table
     sT = SymbolTable()
+
+    # populate symbol table with values
     sT.define("have", "ARGUMENT", "int")
     sT.define("some", "FIELD", "int")
     sT.define("good", "FIELD", "int")
     sT.define("game", "ARGUMENT", "int")
 
+    # print all variable names' name, type, kind, and index. name is hardcoded
     print("class table pre-reset:", sT.classTable)
     print("subroutine table pre-reset:", sT.subroutineTable)
-    print(sT.typeOf("have"), sT.kindOf("have"),
-          sT.indexOf("have"))
-    print(sT.typeOf("some"), sT.kindOf("some"),
-          sT.indexOf("some"))
-    print(sT.typeOf("good"), sT.kindOf("good"),
-          sT.indexOf("good"))
-    print(sT.typeOf("game"), sT.kindOf("game"),
-          sT.indexOf("game"))
+    print("some:", sT.typeOf("have"), sT.kindOf("have"), sT.indexOf("have"))
+    print("have:", sT.typeOf("some"), sT.kindOf("some"), sT.indexOf("some"))
+    print("good:", sT.typeOf("good"), sT.kindOf("good"), sT.indexOf("good"))
+    print("game:", sT.typeOf("game"), sT.kindOf("game"), sT.indexOf("game"))
 
+    # start a new subroutine and make sure that only the subroutine table is
+    # reset to default state of empty dictionary
     sT.startSubroutine()
     print("class table post-reset:", sT.classTable)
     print("subroutine table post-reset:", sT.subroutineTable)
 
 
+def VMWriterTest():
+    # initialize the VMWriter
+    vm_writer = VMWriter()
+
+    # use VMWriter to write to output.vm. I just tested this random sequence of
+    # statements without thinking about its effects, but it will be an infinite
+    # loop!
+    vm_writer.writeFunction("KB.keyPressed", 0)
+    vm_writer.writePush("argument", 2)
+    vm_writer.writePop("this", 0)
+    vm_writer.writeArithmetic("add")
+    vm_writer.writeLabel("L1")
+    vm_writer.writeGoto("L1")
+    vm_writer.writeIf("L2")
+    vm_writer.writeCall("Keyboard.keyPressed", 0)
+    vm_writer.writeReturn()
+
+    # close the file
+    vm_writer.close()
+
+
 # compilationEngine.compileClass()
 # compilationEngine.testCompile()
-VMWriter = VMWriter()
-VMWriter.writePush("argument", 2)
-VMWriter.writePop("this", 0)
-VMWriter.writeArithmetic("add")
-VMWriter.writeLabel("L1")
-VMWriter.writeGoto("L3")
-VMWriter.writeIf("L2")
-VMWriter.writeCall("Keyboard.keyPressed", 0)

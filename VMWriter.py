@@ -37,12 +37,12 @@ class VMWriter:
 
     # writes a function declaration
     def writeFunction(self, function, args):
-        pass
+        self.write("function " + function + " " + str(args))
 
     # writes a return statement, which is just return
     def writeReturn(self):
-        pass
+        self.write("return")
 
     # closes the write-only output
     def close(self):
-        pass
+        self.out.close()
