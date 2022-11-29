@@ -1,4 +1,5 @@
 from jackTokenizer import *
+from symbolTable import *
 
 
 class CompilationEngine:
@@ -11,6 +12,9 @@ class CompilationEngine:
 
         # the number of indents before each line
         self.indents = 0
+
+        # a symbol table instance
+        self.st = SymbolTable()
 
     # compiles a complete class. This needs to be called immediately after
     # an instance is initialized.
@@ -30,7 +34,7 @@ class CompilationEngine:
         self.advance()
         self.skip_advance = True
 
-        # compile statements. TODO change this to classVarDec and subRoutineDec
+        # compile statements.
         while self.tokenizer.current_token in ["static", "field"]:
             self.compileClassVarDec()
             self.advance()
@@ -38,6 +42,7 @@ class CompilationEngine:
 
         while self.tokenizer.current_token in ["constructor", "function",
                                                "method"]:
+            self.st.startSubroutine()
             self.compileSubRoutineDec()
             self.advance()
             self.skip_advance = True
@@ -60,17 +65,23 @@ class CompilationEngine:
 
         if self.tokenizer.current_token == "static":
             self.eat("static")
+            currentKind = "STATIC"
         else:
             self.eat("field")
+            currentKind = "FIELD"
 
         # advance
         self.advance()
         self.skip_advance = True
 
         # compile a type
+        currentType = self.tokenizer.current_token
         self.compileType()
 
         # compile an identifier
+        self.advance()
+        self.skip_advance = True
+        self.st.define(self.tokenizer.current_token, currentKind, currentType)
         self.compileIdentifier()
 
         # advance
@@ -80,6 +91,9 @@ class CompilationEngine:
         # while the next token is a comma, eat a comma and compile an identifier
         while self.tokenizer.current_token == ",":
             self.eat(",")
+            self.advance()
+            self.skip_advance = True
+            self.st.define(self.tokenizer.current_token, currentKind, currentType)
             self.compileIdentifier()
 
             self.advance()
@@ -216,12 +230,17 @@ class CompilationEngine:
 
         # advance
         self.advance()
+        print(self.tokenizer.current_token)
+        currentType = self.tokenizer.current_token
         self.skip_advance = True
 
         # compile a type
         self.compileType()
 
         # compile an identifier
+        self.advance()
+        self.skip_advance = True
+        self.st.define(self.tokenizer.current_token, "LOCAL", currentType)
         self.compileIdentifier()
 
         # advance
@@ -231,6 +250,9 @@ class CompilationEngine:
         # while the next token is a comma, eat a comma and compile an identifier
         while self.tokenizer.current_token == ",":
             self.eat(",")
+            self.advance()
+            self.skip_advance = True
+            self.st.define(self.tokenizer.current_token, "LOCAL", currentType)
             self.compileIdentifier()
 
             self.advance()
@@ -260,7 +282,6 @@ class CompilationEngine:
             if not self.skip_advance:
                 self.advance()
             self.skip_advance = True
-            print("\n\nstatement done!\n\n")
 
         self.dedent()
         self.writeToOutput("</statements>\n")
@@ -410,7 +431,7 @@ class CompilationEngine:
         # write ending tag to output
         self.dedent()
         self.writeToOutput("</ifStatement>\n")
-        print("after an if statement: ", self.tokenizer.current_token)
+        # print("after an if statement: ", self.tokenizer.current_token)
 
     # compiles a while statement. grammar: while (expression) {statements}
     def compileWhileStatement(self):
@@ -538,12 +559,12 @@ class CompilationEngine:
         if not self.skip_advance:
             self.advance()
         self.skip_advance = True
-        print(self.tokenizer.current_token)
+        # print(self.tokenizer.current_token)
 
         # if the current token is in the list [+, -, *, /, &, |, <, >, =], eat
         # a symbol and a term
         while self.tokenizer.current_token in ['+', '-', '*', '/', '&', '|', '<', '>', '=']:
-            print("hello!")
+            # print("hello!")
             self.compileSymbol()
             self.compileTerm()
             if not self.skip_advance:
@@ -637,7 +658,7 @@ class CompilationEngine:
                 self.compileExpression()
                 self.eat(")")
 
-        print("done")
+        # print("done")
 
         self.dedent()
         self.writeToOutput("</term>\n")
@@ -673,7 +694,7 @@ class CompilationEngine:
         # if term's requirements are met:
         if self.tokenizer.current_token != ")":
             # compile an expression
-            print(self.tokenizer.current_token)
+            # print(self.tokenizer.current_token)
             self.compileExpression()
 
             # while commas are detected, eat a comma and then compile an
@@ -700,8 +721,15 @@ class CompilationEngine:
 
         assert self.tokenizer.tokenType() == TokenType.IDENTIFIER
 
+        try:
+            identifierKind = self.st.kindOf(self.tokenizer.current_token)
+            identifierType = self.st.typeOf(self.tokenizer.current_token)
+            identifier = identifierKind + identifierType
+        except KeyError:
+            identifier = "identifier"
+
         self.writeToOutput(
-            f"<identifier> {self.tokenizer.identifier()} </identifier>\n")
+            f"<{identifier}> {self.tokenizer.identifier()} </{identifier}>\n")
 
     def compileStrConst(self):
         if not self.skip_advance:

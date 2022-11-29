@@ -5,21 +5,15 @@
   <classVarDec>
     <keyword> field </keyword>
     <keyword> int </keyword>
-    <FIELDint> x </FIELDint>
+    <identifier> x </identifier>
     <symbol> , </symbol>
-    <FIELDint> y </FIELDint>
+    <identifier> y </identifier>
     <symbol> ; </symbol>
   </classVarDec>
   <classVarDec>
     <keyword> field </keyword>
     <keyword> int </keyword>
-    <FIELDint> size </FIELDint>
-    <symbol> ; </symbol>
-  </classVarDec>
-  <classVarDec>
-    <keyword> static </keyword>
-    <identifier> type </identifier>
-    <STATICtype> hello </STATICtype>
+    <identifier> size </identifier>
     <symbol> ; </symbol>
   </classVarDec>
   <subroutineDec>
@@ -43,7 +37,7 @@
       <statements>
         <letStatement>
           <keyword> let </keyword>
-          <FIELDint> x </FIELDint>
+          <identifier> x </identifier>
           <symbol> = </symbol>
           <expression>
             <term>
@@ -54,7 +48,7 @@
         </letStatement>
         <letStatement>
           <keyword> let </keyword>
-          <FIELDint> y </FIELDint>
+          <identifier> y </identifier>
           <symbol> = </symbol>
           <expression>
             <term>
@@ -65,7 +59,7 @@
         </letStatement>
         <letStatement>
           <keyword> let </keyword>
-          <FIELDint> size </FIELDint>
+          <identifier> size </identifier>
           <symbol> = </symbol>
           <expression>
             <term>
@@ -167,33 +161,33 @@
           <expressionList>
             <expression>
               <term>
-                <FIELDint> x </FIELDint>
+                <identifier> x </identifier>
               </term>
             </expression>
             <symbol> , </symbol>
             <expression>
               <term>
-                <FIELDint> y </FIELDint>
+                <identifier> y </identifier>
               </term>
             </expression>
             <symbol> , </symbol>
             <expression>
               <term>
-                <FIELDint> x </FIELDint>
+                <identifier> x </identifier>
               </term>
               <symbol> + </symbol>
               <term>
-                <FIELDint> size </FIELDint>
+                <identifier> size </identifier>
               </term>
             </expression>
             <symbol> , </symbol>
             <expression>
               <term>
-                <FIELDint> y </FIELDint>
+                <identifier> y </identifier>
               </term>
               <symbol> + </symbol>
               <term>
-                <FIELDint> size </FIELDint>
+                <identifier> size </identifier>
               </term>
             </expression>
           </expressionList>
@@ -244,33 +238,33 @@
           <expressionList>
             <expression>
               <term>
-                <FIELDint> x </FIELDint>
+                <identifier> x </identifier>
               </term>
             </expression>
             <symbol> , </symbol>
             <expression>
               <term>
-                <FIELDint> y </FIELDint>
+                <identifier> y </identifier>
               </term>
             </expression>
             <symbol> , </symbol>
             <expression>
               <term>
-                <FIELDint> x </FIELDint>
+                <identifier> x </identifier>
               </term>
               <symbol> + </symbol>
               <term>
-                <FIELDint> size </FIELDint>
+                <identifier> size </identifier>
               </term>
             </expression>
             <symbol> , </symbol>
             <expression>
               <term>
-                <FIELDint> y </FIELDint>
+                <identifier> y </identifier>
               </term>
               <symbol> + </symbol>
               <term>
-                <FIELDint> size </FIELDint>
+                <identifier> size </identifier>
               </term>
             </expression>
           </expressionList>
@@ -307,11 +301,11 @@
                   <symbol> ( </symbol>
                   <expression>
                     <term>
-                      <FIELDint> y </FIELDint>
+                      <identifier> y </identifier>
                     </term>
                     <symbol> + </symbol>
                     <term>
-                      <FIELDint> size </FIELDint>
+                      <identifier> size </identifier>
                     </term>
                   </expression>
                   <symbol> ) </symbol>
@@ -331,11 +325,11 @@
                   <symbol> ( </symbol>
                   <expression>
                     <term>
-                      <FIELDint> x </FIELDint>
+                      <identifier> x </identifier>
                     </term>
                     <symbol> + </symbol>
                     <term>
-                      <FIELDint> size </FIELDint>
+                      <identifier> size </identifier>
                     </term>
                   </expression>
                   <symbol> ) </symbol>
@@ -362,11 +356,11 @@
             </doStatement>
             <letStatement>
               <keyword> let </keyword>
-              <FIELDint> size </FIELDint>
+              <identifier> size </identifier>
               <symbol> = </symbol>
               <expression>
                 <term>
-                  <FIELDint> size </FIELDint>
+                  <identifier> size </identifier>
                 </term>
                 <symbol> + </symbol>
                 <term>
@@ -411,7 +405,7 @@
           <symbol> ( </symbol>
           <expression>
             <term>
-              <FIELDint> size </FIELDint>
+              <identifier> size </identifier>
             </term>
             <symbol> &gt; </symbol>
             <term>
@@ -432,11 +426,11 @@
             </doStatement>
             <letStatement>
               <keyword> let </keyword>
-              <FIELDint> size </FIELDint>
+              <identifier> size </identifier>
               <symbol> = </symbol>
               <expression>
                 <term>
-                  <FIELDint> size </FIELDint>
+                  <identifier> size </identifier>
                 </term>
                 <symbol> - </symbol>
                 <term>
@@ -481,7 +475,7 @@
           <symbol> ( </symbol>
           <expression>
             <term>
-              <FIELDint> y </FIELDint>
+              <identifier> y </identifier>
             </term>
             <symbol> &gt; </symbol>
             <term>
@@ -516,7 +510,7 @@
               <expressionList>
                 <expression>
                   <term>
-                    <FIELDint> x </FIELDint>
+                    <identifier> x </identifier>
                   </term>
                 </expression>
                 <symbol> , </symbol>
@@ -525,11 +519,11 @@
                     <symbol> ( </symbol>
                     <expression>
                       <term>
-                        <FIELDint> y </FIELDint>
+                        <identifier> y </identifier>
                       </term>
                       <symbol> + </symbol>
                       <term>
-                        <FIELDint> size </FIELDint>
+                        <identifier> size </identifier>
                       </term>
                     </expression>
                     <symbol> ) </symbol>
@@ -542,21 +536,21 @@
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <FIELDint> x </FIELDint>
+                    <identifier> x </identifier>
                   </term>
                   <symbol> + </symbol>
                   <term>
-                    <FIELDint> size </FIELDint>
+                    <identifier> size </identifier>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <FIELDint> y </FIELDint>
+                    <identifier> y </identifier>
                   </term>
                   <symbol> + </symbol>
                   <term>
-                    <FIELDint> size </FIELDint>
+                    <identifier> size </identifier>
                   </term>
                 </expression>
               </expressionList>
@@ -565,11 +559,11 @@
             </doStatement>
             <letStatement>
               <keyword> let </keyword>
-              <FIELDint> y </FIELDint>
+              <identifier> y </identifier>
               <symbol> = </symbol>
               <expression>
                 <term>
-                  <FIELDint> y </FIELDint>
+                  <identifier> y </identifier>
                 </term>
                 <symbol> - </symbol>
                 <term>
@@ -603,29 +597,29 @@
               <expressionList>
                 <expression>
                   <term>
-                    <FIELDint> x </FIELDint>
+                    <identifier> x </identifier>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <FIELDint> y </FIELDint>
+                    <identifier> y </identifier>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <FIELDint> x </FIELDint>
+                    <identifier> x </identifier>
                   </term>
                   <symbol> + </symbol>
                   <term>
-                    <FIELDint> size </FIELDint>
+                    <identifier> size </identifier>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <FIELDint> y </FIELDint>
+                    <identifier> y </identifier>
                   </term>
                   <symbol> + </symbol>
                   <term>
@@ -666,11 +660,11 @@
               <symbol> ( </symbol>
               <expression>
                 <term>
-                  <FIELDint> y </FIELDint>
+                  <identifier> y </identifier>
                 </term>
                 <symbol> + </symbol>
                 <term>
-                  <FIELDint> size </FIELDint>
+                  <identifier> size </identifier>
                 </term>
               </expression>
               <symbol> ) </symbol>
@@ -708,29 +702,29 @@
               <expressionList>
                 <expression>
                   <term>
-                    <FIELDint> x </FIELDint>
+                    <identifier> x </identifier>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <FIELDint> y </FIELDint>
+                    <identifier> y </identifier>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <FIELDint> x </FIELDint>
+                    <identifier> x </identifier>
                   </term>
                   <symbol> + </symbol>
                   <term>
-                    <FIELDint> size </FIELDint>
+                    <identifier> size </identifier>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <FIELDint> y </FIELDint>
+                    <identifier> y </identifier>
                   </term>
                   <symbol> + </symbol>
                   <term>
@@ -743,11 +737,11 @@
             </doStatement>
             <letStatement>
               <keyword> let </keyword>
-              <FIELDint> y </FIELDint>
+              <identifier> y </identifier>
               <symbol> = </symbol>
               <expression>
                 <term>
-                  <FIELDint> y </FIELDint>
+                  <identifier> y </identifier>
                 </term>
                 <symbol> + </symbol>
                 <term>
@@ -781,7 +775,7 @@
               <expressionList>
                 <expression>
                   <term>
-                    <FIELDint> x </FIELDint>
+                    <identifier> x </identifier>
                   </term>
                 </expression>
                 <symbol> , </symbol>
@@ -790,11 +784,11 @@
                     <symbol> ( </symbol>
                     <expression>
                       <term>
-                        <FIELDint> y </FIELDint>
+                        <identifier> y </identifier>
                       </term>
                       <symbol> + </symbol>
                       <term>
-                        <FIELDint> size </FIELDint>
+                        <identifier> size </identifier>
                       </term>
                     </expression>
                     <symbol> ) </symbol>
@@ -807,21 +801,21 @@
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <FIELDint> x </FIELDint>
+                    <identifier> x </identifier>
                   </term>
                   <symbol> + </symbol>
                   <term>
-                    <FIELDint> size </FIELDint>
+                    <identifier> size </identifier>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <FIELDint> y </FIELDint>
+                    <identifier> y </identifier>
                   </term>
                   <symbol> + </symbol>
                   <term>
-                    <FIELDint> size </FIELDint>
+                    <identifier> size </identifier>
                   </term>
                 </expression>
               </expressionList>
@@ -855,7 +849,7 @@
           <symbol> ( </symbol>
           <expression>
             <term>
-              <FIELDint> x </FIELDint>
+              <identifier> x </identifier>
             </term>
             <symbol> &gt; </symbol>
             <term>
@@ -893,11 +887,11 @@
                     <symbol> ( </symbol>
                     <expression>
                       <term>
-                        <FIELDint> x </FIELDint>
+                        <identifier> x </identifier>
                       </term>
                       <symbol> + </symbol>
                       <term>
-                        <FIELDint> size </FIELDint>
+                        <identifier> size </identifier>
                       </term>
                     </expression>
                     <symbol> ) </symbol>
@@ -910,27 +904,27 @@
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <FIELDint> y </FIELDint>
+                    <identifier> y </identifier>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <FIELDint> x </FIELDint>
+                    <identifier> x </identifier>
                   </term>
                   <symbol> + </symbol>
                   <term>
-                    <FIELDint> size </FIELDint>
+                    <identifier> size </identifier>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <FIELDint> y </FIELDint>
+                    <identifier> y </identifier>
                   </term>
                   <symbol> + </symbol>
                   <term>
-                    <FIELDint> size </FIELDint>
+                    <identifier> size </identifier>
                   </term>
                 </expression>
               </expressionList>
@@ -939,11 +933,11 @@
             </doStatement>
             <letStatement>
               <keyword> let </keyword>
-              <FIELDint> x </FIELDint>
+              <identifier> x </identifier>
               <symbol> = </symbol>
               <expression>
                 <term>
-                  <FIELDint> x </FIELDint>
+                  <identifier> x </identifier>
                 </term>
                 <symbol> - </symbol>
                 <term>
@@ -977,19 +971,19 @@
               <expressionList>
                 <expression>
                   <term>
-                    <FIELDint> x </FIELDint>
+                    <identifier> x </identifier>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <FIELDint> y </FIELDint>
+                    <identifier> y </identifier>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <FIELDint> x </FIELDint>
+                    <identifier> x </identifier>
                   </term>
                   <symbol> + </symbol>
                   <term>
@@ -999,11 +993,11 @@
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <FIELDint> y </FIELDint>
+                    <identifier> y </identifier>
                   </term>
                   <symbol> + </symbol>
                   <term>
-                    <FIELDint> size </FIELDint>
+                    <identifier> size </identifier>
                   </term>
                 </expression>
               </expressionList>
@@ -1040,11 +1034,11 @@
               <symbol> ( </symbol>
               <expression>
                 <term>
-                  <FIELDint> x </FIELDint>
+                  <identifier> x </identifier>
                 </term>
                 <symbol> + </symbol>
                 <term>
-                  <FIELDint> size </FIELDint>
+                  <identifier> size </identifier>
                 </term>
               </expression>
               <symbol> ) </symbol>
@@ -1082,19 +1076,19 @@
               <expressionList>
                 <expression>
                   <term>
-                    <FIELDint> x </FIELDint>
+                    <identifier> x </identifier>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <FIELDint> y </FIELDint>
+                    <identifier> y </identifier>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <FIELDint> x </FIELDint>
+                    <identifier> x </identifier>
                   </term>
                   <symbol> + </symbol>
                   <term>
@@ -1104,11 +1098,11 @@
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <FIELDint> y </FIELDint>
+                    <identifier> y </identifier>
                   </term>
                   <symbol> + </symbol>
                   <term>
-                    <FIELDint> size </FIELDint>
+                    <identifier> size </identifier>
                   </term>
                 </expression>
               </expressionList>
@@ -1117,11 +1111,11 @@
             </doStatement>
             <letStatement>
               <keyword> let </keyword>
-              <FIELDint> x </FIELDint>
+              <identifier> x </identifier>
               <symbol> = </symbol>
               <expression>
                 <term>
-                  <FIELDint> x </FIELDint>
+                  <identifier> x </identifier>
                 </term>
                 <symbol> + </symbol>
                 <term>
@@ -1158,11 +1152,11 @@
                     <symbol> ( </symbol>
                     <expression>
                       <term>
-                        <FIELDint> x </FIELDint>
+                        <identifier> x </identifier>
                       </term>
                       <symbol> + </symbol>
                       <term>
-                        <FIELDint> size </FIELDint>
+                        <identifier> size </identifier>
                       </term>
                     </expression>
                     <symbol> ) </symbol>
@@ -1175,27 +1169,27 @@
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <FIELDint> y </FIELDint>
+                    <identifier> y </identifier>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <FIELDint> x </FIELDint>
+                    <identifier> x </identifier>
                   </term>
                   <symbol> + </symbol>
                   <term>
-                    <FIELDint> size </FIELDint>
+                    <identifier> size </identifier>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <FIELDint> y </FIELDint>
+                    <identifier> y </identifier>
                   </term>
                   <symbol> + </symbol>
                   <term>
-                    <FIELDint> size </FIELDint>
+                    <identifier> size </identifier>
                   </term>
                 </expression>
               </expressionList>
