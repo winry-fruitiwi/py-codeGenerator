@@ -1,5 +1,6 @@
 from jackTokenizer import *
 from symbolTable import *
+from VMWriter import *
 
 
 class CompilationEngine:
@@ -15,6 +16,9 @@ class CompilationEngine:
 
         # a symbol table instance
         self.st = SymbolTable()
+
+        # an instance of a VM writer
+        self.vmw = VMWriter()
 
     # compiles a complete class. This needs to be called immediately after
     # an instance is initialized.
@@ -547,8 +551,7 @@ class CompilationEngine:
         self.dedent()
         self.writeToOutput("</returnStatement>\n")
 
-    # compiles an expression. Important: do this last! grammar: term (op term)*
-    # for now call compile_simple_term here
+    # compiles an expression. grammar: term (op term)*
     def compileExpression(self):
         self.writeToOutput("<expression>\n")
         self.indent()
@@ -564,6 +567,31 @@ class CompilationEngine:
         # if the current token is in the list [+, -, *, /, &, |, <, >, =], eat
         # a symbol and a term
         while self.tokenizer.current_token in ['+', '-', '*', '/', '&', '|', '<', '>', '=']:
+            match self.tokenizer.current_token:
+                case '+':
+                    self.vmw.writeArithmetic("add")
+
+                case '-':
+                    self.vmw.writeArithmetic("sub")
+
+                case '*':
+                    self.vmw.writeCall("Math.multiply", 2)
+
+                case '/':
+                    self.vmw.writeCall("Math.divide", 2)
+
+                case '&':
+                    self.vmw.writeArithmetic("and")
+
+                case '|':
+                    self.vmw.writeArithmetic("or")
+
+                case '<':
+                    self.vmw.writeArithmetic("lt")
+
+                case '>':
+                    self.vmw.writeArithmetic("gt")
+
             # print("hello!")
             self.compileSymbol()
             self.compileTerm()
@@ -614,6 +642,9 @@ class CompilationEngine:
 
             # if current token is an identifier, eat it
             case TokenType.IDENTIFIER:
+                identifierSegment = self.st.kindOf(self.tokenizer.current_token).lower()
+                identifierIndex = self.st.indexOf(self.tokenizer.current_token)
+                self.vmw.writePush(identifierSegment, identifierIndex)
                 self.compileIdentifier()
 
                 self.advance()
@@ -646,10 +677,12 @@ class CompilationEngine:
             # if the current token is a unary operator, eat it and call term().
             if self.tokenizer.current_token == "-":
                 self.eat("-")
+                self.vmw.writeArithmetic("neg")
                 self.compileTerm()
 
             elif self.tokenizer.current_token == "~":
                 self.eat("~")
+                self.vmw.writeArithmetic("not")
                 self.compileTerm()
 
                 # if the current token is (, eat (, compile expr, eat )

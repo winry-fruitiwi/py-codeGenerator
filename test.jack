@@ -1,1 +1,1 @@
-do Screen.drawRectangle(x, y, x + size, y + size);
+x

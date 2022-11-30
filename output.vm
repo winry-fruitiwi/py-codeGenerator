@@ -1,9 +1,1 @@
-function KB.keyPressed 0
-push argument 2
-pop this 0
-add
-label L1
-goto L3
-if-goto L2
-call Keyboard.keyPressed 0
-return
+push argument 0
