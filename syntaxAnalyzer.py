@@ -14,10 +14,9 @@ from symbolTable import *
 from VMWriter import *
 
 # the root of all files I'll need to test here.
-file_root = "test.jack"
+file_root = "10/Square/"
 
-compilationEngine = CompilationEngine(file_root)
-compilationEngine.st.define("x", "ARGUMENT", "int")
+compilationEngine = CompilationEngine(file_root + "Square.jack")
 
 
 def mainLoop(ce):
@@ -119,7 +118,7 @@ def VMWriterTest():
     vm_writer.close()
 
 
-# compilationEngine.compileClass()
-compilationEngine.testCompile()
+compilationEngine.compileClass()
+# compilationEngine.testCompile()
 print("subroutine table: ", compilationEngine.st.subroutineTable)
 print("class table: ", compilationEngine.st.classTable)

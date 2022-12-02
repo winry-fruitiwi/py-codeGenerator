@@ -35,17 +35,20 @@ class CompilationEngine:
         # eat {
         self.eat("{")
 
+        # advance
         self.advance()
         self.skip_advance = True
 
-        # compile statements.
+        # compile class variable declarations
         while self.tokenizer.current_token in ["static", "field"]:
             self.compileClassVarDec()
             self.advance()
             self.skip_advance = True
 
+        # compile a subroutine declaration.
         while self.tokenizer.current_token in ["constructor", "function",
                                                "method"]:
+            print("subroutine table: ", self.st.subroutineTable)
             self.st.startSubroutine()
             self.compileSubRoutineDec()
             self.advance()
@@ -94,7 +97,10 @@ class CompilationEngine:
 
         # while the next token is a comma, eat a comma and compile an identifier
         while self.tokenizer.current_token == ",":
+            # eat a comma
             self.eat(",")
+
+            # advance and define a new variable. then, compile an identifier
             self.advance()
             self.skip_advance = True
             self.st.define(self.tokenizer.current_token, currentKind, currentType)
@@ -167,7 +173,7 @@ class CompilationEngine:
         # eat (
         self.eat("(")
 
-        # compile parameterList (empty function for now)
+        # compile parameterList
         self.compileParameterList()
 
         # eat )
@@ -190,9 +196,13 @@ class CompilationEngine:
         if (self.tokenizer.current_token in ["int", "char", "boolean"] or
                 self.tokenizer.tokenType() == TokenType.IDENTIFIER):
             # compile type
+            currentType = self.tokenizer.current_token
             self.compileType()
 
             # compile identifier
+            self.advance()
+            self.skip_advance = True
+            self.st.define(self.tokenizer.current_token, "ARGUMENT", currentType)
             self.compileIdentifier()
 
             # advance
@@ -202,12 +212,28 @@ class CompilationEngine:
             # while the token is a comma, eat it, compile type and identifier,
             # then advance.
             while self.tokenizer.current_token == ",":
+                # eat a comma
                 self.eat(",")
+
+                # advance, then set currentType to the current token
                 self.advance()
                 self.skip_advance = True
+                currentType = self.tokenizer.current_token
+
+                # compile type
                 self.compileType()
+
+                # advance, then define a new variable with the current token
+                # (name), "ARGUMENT" (kind), and currentType (type).
+                self.advance()
+                self.skip_advance = True
+                self.st.define(self.tokenizer.current_token, "ARGUMENT",
+                               currentType)
+
+                # compile identifier
                 self.compileIdentifier()
 
+                # advance to prepare for the next iteration
                 self.advance()
                 self.skip_advance = True
 
