@@ -1,126 +1,135 @@
 push argument 0
-push argument 1
-push argument 2
+pop field 0
+push argument 0
+pop field 0
+push argument 0
+pop field 0
 push field 0
-push field 1
 push field 0
-add
-push field 2
-push field 1
-add
-push field 2
-push field 0
-push field 1
 push field 0
 add
-push field 2
-push field 1
+push field 0
+push field 0
 add
-push field 2
-push field 1
+push field 0
+push field 0
+push field 0
+push field 0
 add
-push field 2
+push field 0
+push field 0
+add
+push field 0
+push field 0
+add
+push field 0
 lt
 and
 push field 0
 add
-push field 2
-lt
-push field 2
-add
-push field 2
-gt
-push field 2
-sub
-push field 1
-gt
 push field 0
-push field 1
-add
-push field 2
-sub
-push field 0
-add
-push field 2
-push field 1
-add
-push field 2
-push field 1
-sub
-push field 0
-push field 1
-push field 0
-add
-push field 2
-push field 1
-add
-push field 1
-add
-push field 2
 lt
 push field 0
-push field 1
-push field 0
 add
-push field 2
-push field 1
-add
-push field 1
-add
-push field 0
-push field 1
-add
-push field 2
-sub
-push field 0
-add
-push field 2
-push field 1
-add
-push field 2
+pop field 0
 push field 0
 gt
 push field 0
-add
-push field 2
 sub
-push field 1
+pop field 0
+push field 0
+gt
+push field 0
 push field 0
 add
-push field 2
-push field 1
-add
-push field 2
 push field 0
 sub
 push field 0
-push field 1
+add
+push field 0
 push field 0
 add
-push field 1
-add
-push field 2
+push field 0
+push field 0
+sub
+pop field 0
+push field 0
+push field 0
 push field 0
 add
-push field 2
+push field 0
+push field 0
+add
+push field 0
+add
+push field 0
 lt
 push field 0
-push field 1
 push field 0
-add
-push field 1
-add
-push field 2
 push field 0
 add
 push field 0
+push field 0
 add
-push field 2
+push field 0
+add
+pop field 0
+push field 0
+push field 0
+add
+push field 0
 sub
-push field 1
 push field 0
 add
-push field 2
-push field 1
+push field 0
+push field 0
 add
-push field 2
+push field 0
+push field 0
+gt
+push field 0
+add
+push field 0
+sub
+push field 0
+push field 0
+add
+push field 0
+push field 0
+add
+push field 0
+push field 0
+sub
+pop field 0
+push field 0
+push field 0
+push field 0
+add
+push field 0
+add
+push field 0
+push field 0
+add
+push field 0
+lt
+push field 0
+push field 0
+push field 0
+add
+push field 0
+add
+push field 0
+push field 0
+add
+pop field 0
+push field 0
+add
+push field 0
+sub
+push field 0
+push field 0
+add
+push field 0
+push field 0
+add
+push field 0

@@ -326,7 +326,6 @@ class CompilationEngine:
 
     # compiles a type
     def compileType(self):
-
         # eat int, char, boolean, or an identifier
         match self.tokenizer.current_token:
             case "int":
@@ -385,6 +384,11 @@ class CompilationEngine:
         # eat let
         self.eat("let")
 
+        # advance and find the name of the current identifier
+        self.advance()
+        self.skip_advance = True
+        name = self.tokenizer.current_token
+
         # compile an identifier
         self.compileIdentifier()
 
@@ -408,6 +412,9 @@ class CompilationEngine:
 
         self.dedent()
         self.writeToOutput("</letStatement>\n")
+
+        # write a pop statement for the kind of the name
+        self.vmw.writePop(self.st.kindOf(name), self.st.indexOf(name))
 
     # compiles an if statement. grammar: if (expression){statement} (else
     # {statements})?

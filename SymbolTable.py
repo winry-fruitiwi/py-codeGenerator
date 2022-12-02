@@ -64,7 +64,7 @@ class SymbolTable:
     # typeOf, and indexOf in syntaxAnalyzer.py demonstrating their usage.
     def kindOf(self, name):
         table = self.findNameInTables(name)
-        return table[name][1]
+        return table[name][1].lower()
 
     # finds the type of the given identifier. Test in main file.
     def typeOf(self, name):
