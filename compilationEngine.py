@@ -638,7 +638,7 @@ class CompilationEngine:
             if command == "mul":
                 self.vmw.writeCall("Math.multiply", 2)
 
-            if command == "div":
+            elif command == "div":
                 self.vmw.writeCall("Math.divide", 2)
 
             else:
@@ -827,6 +827,8 @@ class CompilationEngine:
             self.skip_advance = False
 
         assert self.tokenizer.tokenType() == TokenType.INT_CONST
+
+        self.vmw.writePush("constant", self.tokenizer.current_token)
 
         self.writeToOutput(
             f"<integerConstant> {self.tokenizer.intVal()} </integerConstant>\n")

@@ -14,9 +14,9 @@ from symbolTable import *
 from VMWriter import *
 
 # the root of all files I'll need to test here.
-file_root = "10/Square/"
+file_root = "C:/Users/Winry/Dropbox/code/nand2tetris/winry/nand2tetris/projects/11/Seven/"
 
-compilationEngine = CompilationEngine(file_root + "Square.jack")
+compilationEngine = CompilationEngine(file_root + "Main.jack")
 
 
 def mainLoop(ce):
