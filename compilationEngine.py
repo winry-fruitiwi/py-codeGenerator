@@ -598,32 +598,34 @@ class CompilationEngine:
         # print(self.tokenizer.current_token)
 
         # if the current token is in the list [+, -, *, /, &, |, <, >, =], eat
-        # a symbol and a term
+        # a symbol and a term. keep track of the command and add it to the end
+        # of the file later on
+        currentCommands = []
         while self.tokenizer.current_token in ['+', '-', '*', '/', '&', '|', '<', '>', '=']:
             match self.tokenizer.current_token:
                 case '+':
-                    self.vmw.writeArithmetic("add")
+                    currentCommands.append("add")
 
                 case '-':
-                    self.vmw.writeArithmetic("sub")
+                    currentCommands.append("sub")
 
                 case '*':
-                    self.vmw.writeCall("Math.multiply", 2)
+                    currentCommands.append("mul")
 
                 case '/':
-                    self.vmw.writeCall("Math.divide", 2)
+                    currentCommands.append("div")
 
                 case '&':
-                    self.vmw.writeArithmetic("and")
+                    currentCommands.append("and")
 
                 case '|':
-                    self.vmw.writeArithmetic("or")
+                    currentCommands.append("or")
 
                 case '<':
-                    self.vmw.writeArithmetic("lt")
+                    currentCommands.append("lt")
 
                 case '>':
-                    self.vmw.writeArithmetic("gt")
+                    currentCommands.append("gt")
 
             # print("hello!")
             self.compileSymbol()
@@ -631,6 +633,16 @@ class CompilationEngine:
             if not self.skip_advance:
                 self.advance()
             self.skip_advance = True
+
+        for command in currentCommands:
+            if command == "mul":
+                self.vmw.writeCall("Math.multiply", 2)
+
+            if command == "div":
+                self.vmw.writeCall("Math.divide", 2)
+
+            else:
+                self.vmw.writeArithmetic(command)
 
         self.dedent()
         self.writeToOutput("</expression>\n")

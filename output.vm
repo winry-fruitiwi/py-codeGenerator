@@ -7,13 +7,6 @@ pop field 0
 push field 0
 push field 0
 push field 0
-add
-push field 0
-push field 0
-add
-push field 0
-push field 0
-push field 0
 push field 0
 add
 push field 0
@@ -21,16 +14,23 @@ push field 0
 add
 push field 0
 push field 0
+push field 0
+push field 0
 add
 push field 0
+push field 0
+add
+push field 0
+push field 0
+add
+lt
+push field 0
+push field 0
+add
 lt
 and
 push field 0
 add
-push field 0
-lt
-push field 0
-add
 pop field 0
 push field 0
 gt
@@ -41,34 +41,34 @@ push field 0
 gt
 push field 0
 push field 0
-add
 push field 0
+add
 sub
 push field 0
-add
-push field 0
 push field 0
 add
 push field 0
+push field 0
+add
 push field 0
 sub
 pop field 0
 push field 0
 push field 0
 push field 0
-add
-push field 0
 push field 0
 add
 push field 0
 add
 push field 0
+push field 0
+add
 lt
 push field 0
 push field 0
 push field 0
-add
 push field 0
+add
 push field 0
 add
 push field 0
@@ -76,28 +76,28 @@ add
 pop field 0
 push field 0
 push field 0
-add
 push field 0
+add
 sub
 push field 0
-add
-push field 0
 push field 0
 add
 push field 0
+push field 0
+add
 push field 0
 gt
 push field 0
-add
 push field 0
+add
 sub
 push field 0
 push field 0
-add
-push field 0
 push field 0
 add
 push field 0
+push field 0
+add
 push field 0
 sub
 pop field 0
@@ -106,30 +106,30 @@ push field 0
 push field 0
 add
 push field 0
-add
-push field 0
 push field 0
 add
 push field 0
+push field 0
+add
 lt
 push field 0
 push field 0
 push field 0
 add
 push field 0
-add
 push field 0
+add
 push field 0
 add
 pop field 0
 push field 0
-add
 push field 0
+add
 sub
 push field 0
 push field 0
-add
-push field 0
 push field 0
 add
 push field 0
+push field 0
+add
