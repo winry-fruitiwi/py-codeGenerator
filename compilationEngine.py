@@ -558,7 +558,9 @@ class CompilationEngine:
         self.dedent()
         self.writeToOutput("</doStatement>\n")
 
-        pass
+        # we know there was no value to be saved, so we should just dump the
+        # current value on the stack.
+        self.vmw.writePop("temp", "0")
 
     # compiles a return statement. grammar: return expression?;
     def compileReturnStatement(self):
@@ -577,8 +579,16 @@ class CompilationEngine:
                 self.tokenizer.tokenType() == TokenType.IDENTIFIER):
             self.compileExpression()
 
+        # otherwise, then we know that there's no new value pushed onto the
+        # stack, so we can write "push constant 0"
+        else:
+            self.vmw.writePush("constant", 0)
+
         # no matter what happened previously, eat ";"
         self.eat(";")
+
+        # write return
+        self.vmw.writeReturn()
 
         # write output tag
         self.dedent()
@@ -769,11 +779,17 @@ class CompilationEngine:
         else:
             self.skip_advance = False
 
+        # initialize a variable saying how many variables are in the expression
+        numArgs = 0
+
         # if term's requirements are met:
         if self.tokenizer.current_token != ")":
             # compile an expression
             # print(self.tokenizer.current_token)
             self.compileExpression()
+
+            # increment numArgs
+            numArgs += 1
 
             # while commas are detected, eat a comma and then compile an
             # expression.
@@ -781,6 +797,7 @@ class CompilationEngine:
                 self.advance()
             self.skip_advance = True
             while self.tokenizer.current_token == ",":
+                numArgs += 1
                 self.eat(",")
                 self.compileExpression()
                 if not self.skip_advance:
@@ -789,6 +806,7 @@ class CompilationEngine:
 
         self.dedent()
         self.writeToOutput("</expressionList>\n")
+        return numArgs
 
     # compiles an identifier
     def compileIdentifier(self):
@@ -912,6 +930,13 @@ class CompilationEngine:
 
     # an unneeded subroutine call method for use in terms and do statements.
     def compileSubRoutineCall(self):
+        # advance and make the name of the current subroutine
+        if not self.skip_advance:
+            self.advance()
+        self.skip_advance = True
+
+        currentSubName = self.tokenizer.current_token
+
         # compile an identifier
         self.compileIdentifier()
 
@@ -924,21 +949,28 @@ class CompilationEngine:
             self.eat("(")
 
             # compile an expression
-            self.compileExpressionList()
+            numArgs = self.compileExpressionList()
 
             # eat )
             self.eat(")")
 
         # otherwise, eat period, compile another identifier, eat (, eat an
         # expression list, and then eat ).
-        elif self.tokenizer.current_token == ".":
+        else:
+            # add . to currentSubName
+            currentSubName += "."
             self.eat(".")
+
+            # then add the subroutine name
+            self.advance()
+            self.skip_advance = True
+            currentSubName += self.tokenizer.current_token
             self.compileIdentifier()
             self.eat("(")
-            self.compileExpressionList()
+            numArgs = self.compileExpressionList()
             self.eat(")")
 
-        pass
+        self.vmw.writeCall(currentSubName, numArgs)
 
     # increases self.indent
     def indent(self):
