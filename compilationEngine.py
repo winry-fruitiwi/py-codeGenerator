@@ -5,6 +5,7 @@ from VMWriter import *
 
 class CompilationEngine:
     def __init__(self, path):
+        self.currentClassName = None
         self.tokenizer = JackTokenizer(path)
         self.output = open("test.xml", "w")
 
@@ -29,6 +30,13 @@ class CompilationEngine:
         # eat class
         self.eat("class")
 
+        # advance
+        self.advance()
+        self.skip_advance = True
+
+        # create the current class name
+        self.currentClassName = self.tokenizer.current_token
+
         # compile an identifier
         self.compileIdentifier()
 
@@ -50,6 +58,7 @@ class CompilationEngine:
                                                "method"]:
             print("subroutine table: ", self.st.subroutineTable)
             self.st.startSubroutine()
+
             self.compileSubRoutineDec()
             self.advance()
             self.skip_advance = True
@@ -166,6 +175,12 @@ class CompilationEngine:
             self.eat("void")
         else:
             self.compileType()
+
+        # advance, then write call statement with current name
+        self.advance()
+        self.skip_advance = True
+
+        self.vmw.writeFunction(self.currentClassName + "." + self.tokenizer.current_token, 0)
 
         # compile an identifier
         self.compileIdentifier()
