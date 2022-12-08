@@ -5,6 +5,7 @@ from VMWriter import *
 
 class CompilationEngine:
     def __init__(self, path):
+        self.vmw = None
         self.currentClassName = None
         self.tokenizer = JackTokenizer(path)
         self.output = open("test.xml", "w")
@@ -17,9 +18,6 @@ class CompilationEngine:
 
         # a symbol table instance
         self.st = SymbolTable()
-
-        # an instance of a VM writer
-        self.vmw = VMWriter()
 
     # compiles a complete class. This needs to be called immediately after
     # an instance is initialized.
@@ -36,6 +34,9 @@ class CompilationEngine:
 
         # create the current class name
         self.currentClassName = self.tokenizer.current_token
+
+        # an instance of a VM writer
+        self.vmw = VMWriter(self.currentClassName)
 
         # compile an identifier
         self.compileIdentifier()

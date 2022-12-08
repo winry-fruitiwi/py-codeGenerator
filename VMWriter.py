@@ -1,7 +1,7 @@
 class VMWriter:
-    def __init__(self):
+    def __init__(self, file):
         # opens a write-only VM file
-        self.out = open("Main.vm", "w")
+        self.out = open(file + ".vm", "w")
 
     # a wrapper for self.out.write(string + "\n")
     def write(self, string):

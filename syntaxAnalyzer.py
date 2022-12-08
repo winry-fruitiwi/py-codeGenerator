@@ -14,7 +14,7 @@ from symbolTable import *
 from VMWriter import *
 
 # the root of all files I'll need to test here.
-file_root = "C:/Users/Winry/Dropbox/code/nand2tetris/winry/nand2tetris/projects/11/Seven/"
+file_root = "11/Seven/"
 
 compilationEngine = CompilationEngine(file_root + "Main.jack")
 
@@ -99,7 +99,7 @@ def symbolTableTest():
 
 def VMWriterTest():
     # initialize the VMWriter
-    vm_writer = VMWriter()
+    vm_writer = VMWriter("output.vm")
 
     # use VMWriter to write to output.vm. I just tested this random sequence of
     # statements without thinking about its effects, but it will be an infinite
