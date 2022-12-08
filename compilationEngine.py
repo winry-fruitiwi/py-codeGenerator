@@ -713,9 +713,9 @@ class CompilationEngine:
 
             # if current token is an identifier, eat it
             case TokenType.IDENTIFIER:
-                identifierSegment = self.st.kindOf(self.tokenizer.current_token).lower()
-                identifierIndex = self.st.indexOf(self.tokenizer.current_token)
-                self.vmw.writePush(identifierSegment, identifierIndex)
+                # prepare for a potential subroutine call
+                current_name = self.tokenizer.current_token
+
                 self.compileIdentifier()
 
                 self.advance()
@@ -736,11 +736,28 @@ class CompilationEngine:
 
                     # if the next token is a period, eat period, identifier, (, exprList, )
                     case ".":
+                        # this is a subroutine call, so add a period and the
+                        # next token to current_name, then write call statement
+                        # with numArgs from compileExpressionList
+                        current_name += "."
                         self.eat(".")
+
+                        self.advance()
+                        self.skip_advance = True
+                        current_name += self.tokenizer.current_token
                         self.compileIdentifier()
                         self.eat("(")
-                        self.compileExpressionList()
+                        numArgs = self.compileExpressionList()
                         self.eat(")")
+
+                        self.vmw.writeCall(current_name, numArgs)
+
+                    case _:
+                        identifierSegment = self.st.kindOf(
+                            self.tokenizer.current_token).lower()
+                        identifierIndex = self.st.indexOf(self.tokenizer.current_token)
+                        self.vmw.writePush(identifierSegment, identifierIndex)
+
                 compiledToken = True
 
 
@@ -748,13 +765,13 @@ class CompilationEngine:
             # if the current token is a unary operator, eat it and call term().
             if self.tokenizer.current_token == "-":
                 self.eat("-")
-                self.vmw.writeArithmetic("neg")
                 self.compileTerm()
+                self.vmw.writeArithmetic("neg")
 
             elif self.tokenizer.current_token == "~":
                 self.eat("~")
-                self.vmw.writeArithmetic("not")
                 self.compileTerm()
+                self.vmw.writeArithmetic("not")
 
                 # if the current token is (, eat (, compile expr, eat )
             elif self.tokenizer.current_token == "(":

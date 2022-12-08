@@ -14,7 +14,7 @@ from symbolTable import *
 from VMWriter import *
 
 # the root of all files I'll need to test here.
-file_root = "11/Seven/"
+file_root = "11/ConvertToBin/"
 
 compilationEngine = CompilationEngine(file_root + "Main.jack")
 
