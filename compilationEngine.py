@@ -725,8 +725,10 @@ class CompilationEngine:
                     # if the next token is (, eat (, compile exprList, eat )
                     case "(":
                         self.eat("(")
-                        self.compileExpressionList()
+                        numArgs = self.compileExpressionList()
                         self.eat(")")
+
+                        self.vmw.writeCall(current_name, numArgs)
 
                     # if the next token is [, eat [, compile expr, eat ]
                     case "[":
