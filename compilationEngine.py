@@ -716,6 +716,7 @@ class CompilationEngine:
                 # prepare for a potential subroutine call
                 current_name = self.tokenizer.current_token
 
+                print("identifier", self.tokenizer.current_token, "found")
                 self.compileIdentifier()
 
                 self.advance()
@@ -756,8 +757,8 @@ class CompilationEngine:
 
                     case _:
                         identifierSegment = self.st.kindOf(
-                            self.tokenizer.current_token).lower()
-                        identifierIndex = self.st.indexOf(self.tokenizer.current_token)
+                            current_name).lower()
+                        identifierIndex = self.st.indexOf(current_name)
                         self.vmw.writePush(identifierSegment, identifierIndex)
 
                 compiledToken = True
