@@ -98,10 +98,7 @@ class JackTokenizer:
                     try:
                         if stripped_line[0:3] == "/**":
                             in_multiline_comment = True
-                            stripped_line = stripped_line[3:]
-
-                            if stripped_line == "":
-                                continue
+                            continue
 
                         if stripped_line.index("*/"):
                             in_multiline_comment = False
