@@ -47,6 +47,15 @@ pop temp 0
 pop local 0
 push constant 0
 return
+function Main.nextMask 0
+push argument 0
+push constant 0
+push constant 1
+return
+push argument 0
+push constant 2
+call Math.multiply 2
+return
 function Main.fillMemory 0
 push argument 0
 push constant 0

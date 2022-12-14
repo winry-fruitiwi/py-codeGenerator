@@ -113,7 +113,8 @@ class CompilationEngine:
             # advance and define a new variable. then, compile an identifier
             self.advance()
             self.skip_advance = True
-            self.st.define(self.tokenizer.current_token, currentKind, currentType)
+            self.st.define(self.tokenizer.current_token, currentKind,
+                           currentType)
             self.compileIdentifier()
 
             self.advance()
@@ -181,7 +182,8 @@ class CompilationEngine:
         self.advance()
         self.skip_advance = True
 
-        self.vmw.writeFunction(self.currentClassName + "." + self.tokenizer.current_token, 0)
+        self.vmw.writeFunction(
+            self.currentClassName + "." + self.tokenizer.current_token, 0)
 
         # compile an identifier
         self.compileIdentifier()
@@ -218,7 +220,8 @@ class CompilationEngine:
             # compile identifier
             self.advance()
             self.skip_advance = True
-            self.st.define(self.tokenizer.current_token, "ARGUMENT", currentType)
+            self.st.define(self.tokenizer.current_token, "ARGUMENT",
+                           currentType)
             self.compileIdentifier()
 
             # advance
@@ -590,9 +593,11 @@ class CompilationEngine:
         self.advance()
         self.skip_advance = True
 
-        # if the current token is "this" or type identifier, compile a term
+        # if the current token is a term, compile expression
         if (self.tokenizer.current_token == "this" or
-                self.tokenizer.tokenType() == TokenType.IDENTIFIER):
+                self.tokenizer.tokenType() == TokenType.IDENTIFIER or
+                self.tokenizer.tokenType() == TokenType.STRING_CONST or
+                self.tokenizer.tokenType() == TokenType.INT_CONST):
             self.compileExpression()
 
         # otherwise, then we know that there's no new value pushed onto the
@@ -627,7 +632,8 @@ class CompilationEngine:
         # a symbol and a term. keep track of the command and add it to the end
         # of the file later on
         currentCommands = []
-        while self.tokenizer.current_token in ['+', '-', '*', '/', '&', '|', '<', '>', '=']:
+        while self.tokenizer.current_token in ['+', '-', '*', '/', '&', '|',
+                                               '<', '>', '=']:
             match self.tokenizer.current_token:
                 case '+':
                     currentCommands.append("add")
@@ -698,18 +704,15 @@ class CompilationEngine:
                 self.compileStrConst()
                 compiledToken = True
 
-
             # if the current token is an integer constant, compile it and return.
             case TokenType.INT_CONST:
                 self.compileIntConst()
                 compiledToken = True
 
-
             # if the type is a keyword, compile a keyword.
             case TokenType.KEYWORD:
                 self.compileKeyword()
                 compiledToken = True
-
 
             # if current token is an identifier, eat it
             case TokenType.IDENTIFIER:
@@ -762,7 +765,6 @@ class CompilationEngine:
                         self.vmw.writePush(identifierSegment, identifierIndex)
 
                 compiledToken = True
-
 
         if not compiledToken:
             # if the current token is a unary operator, eat it and call term().

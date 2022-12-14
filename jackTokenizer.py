@@ -98,14 +98,14 @@ class JackTokenizer:
                     try:
                         if stripped_line[0:3] == "/**":
                             in_multiline_comment = True
-                            continue
 
                         if stripped_line.index("*/"):
                             in_multiline_comment = False
 
                         continue
                     except ValueError:
-                        pass
+                        if in_multiline_comment:
+                            continue
 
                     # this is why there's a try-except block. index() returns a
                     # ValueError if the substring doesn't exist. in this block,
