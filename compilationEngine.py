@@ -19,6 +19,9 @@ class CompilationEngine:
         # a symbol table instance
         self.st = SymbolTable()
 
+        # the number of times I've created a label in an if/while statement
+        self.numLabels = 0
+
     # compiles a complete class. This needs to be called immediately after
     # an instance is initialized.
     def compileClass(self):
@@ -468,12 +471,17 @@ class CompilationEngine:
 
         self.eat("if")
 
+        self.numLabels += 1
+
         # eat expression in parens
         self.compileExprInParens()
+        self.vmw.writeArithmetic("not")
+        self.vmw.writeIf(f"L{self.numLabels}")
 
         # eat statement in brackets
         self.eat("{")
         self.compileStatements()
+        self.vmw.writeLabel(f"L{self.numLabels}")
         self.eat("}")
 
         # advance the tokenizer, then check if the current token is else. if
