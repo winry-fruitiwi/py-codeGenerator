@@ -19,8 +19,14 @@ class CompilationEngine:
         # a symbol table instance
         self.st = SymbolTable()
 
-        # the number of times I've created a label in an if/while statement
-        self.numLabels = 0
+        # the number of times I've created a label in an if statement
+        self.numIfLabels = 0
+
+        # the number of times I've created a label in a while statement
+        self.numWhileLabels = 0
+
+        # the labels that currently need to be written
+        self.labelsToBeWritten = []
 
     # compiles a complete class. This needs to be called immediately after
     # an instance is initialized.
@@ -471,17 +477,18 @@ class CompilationEngine:
 
         self.eat("if")
 
-        self.numLabels += 1
+        self.numIfLabels += 1
 
         # eat expression in parens
         self.compileExprInParens()
         self.vmw.writeArithmetic("not")
-        self.vmw.writeIf(f"L{self.numLabels}")
+        self.vmw.writeIf(f"L{self.numIfLabels}")
+        self.labelsToBeWritten.append(self.numIfLabels)
 
         # eat statement in brackets
         self.eat("{")
         self.compileStatements()
-        self.vmw.writeLabel(f"L{self.numLabels}")
+        self.vmw.writeLabel(f"L{self.labelsToBeWritten.pop()}")
         self.eat("}")
 
         # advance the tokenizer, then check if the current token is else. if
@@ -537,6 +544,8 @@ class CompilationEngine:
 
         :return:
         """
+        self.numIfLabels += 1
+
         # while + write to output
         self.writeToOutput("<whileStatement>\n")
         self.indent()
@@ -544,10 +553,17 @@ class CompilationEngine:
         self.eat("while")
 
         # compile (expression)
+        self.vmw.writeLabel("START" + str(self.numIfLabels))
         self.compileExprInParens()
+        self.vmw.writeArithmetic("not")
+        self.vmw.writeIf("END" + str(self.numIfLabels))
 
         # compile {statements}
+        self.labelsToBeWritten.append(f"END{str(self.numIfLabels)}")
+        self.labelsToBeWritten.append(f"START{str(self.numIfLabels)}")
         self.compileStatementsInBrackets()
+        self.vmw.writeGoto(self.labelsToBeWritten.pop())
+        self.vmw.writeLabel(self.labelsToBeWritten.pop())
 
         # write closing tag
         self.dedent()
