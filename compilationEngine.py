@@ -134,7 +134,7 @@ class CompilationEngine:
         self.writeToOutput("</classVarDec>\n")
 
     # compiles the inside of a subroutine declaration
-    def compileSubRoutineBody(self):
+    def compileSubRoutineBody(self, functionName):
         self.writeToOutput("<subroutineBody>\n")
         self.indent()
 
@@ -145,11 +145,18 @@ class CompilationEngine:
         self.advance()
         self.skip_advance = True
 
+        # the total number of local variables found
+        totalNumVars = 0
+
         # while the current token is var, compile varDec
         while self.tokenizer.current_token == "var":
-            self.compileVarDec()
+            totalNumVars += self.compileVarDec()
             self.advance()
             self.skip_advance = True
+
+        # write a function call
+        self.vmw.writeFunction(
+            self.currentClassName + "." + functionName, totalNumVars)
 
         # compile statements
         self.compileStatements()
@@ -191,8 +198,7 @@ class CompilationEngine:
         self.advance()
         self.skip_advance = True
 
-        self.vmw.writeFunction(
-            self.currentClassName + "." + self.tokenizer.current_token, 0)
+        functionName = self.tokenizer.current_token
 
         # compile an identifier
         self.compileIdentifier()
@@ -208,7 +214,7 @@ class CompilationEngine:
 
         # compile subRoutineBody. for now, this can just be a compile statement
         # for statements in brackets.
-        self.compileSubRoutineBody()
+        self.compileSubRoutineBody(functionName)
 
         self.dedent()
         self.writeToOutput("</subroutineDec>\n")
@@ -286,6 +292,9 @@ class CompilationEngine:
         # eat var
         self.eat("var")
 
+        # keeps track of the number of expressions I've encountered
+        numExpressions = 1
+
         # advance
         self.advance()
         print(self.tokenizer.current_token)
@@ -307,6 +316,7 @@ class CompilationEngine:
 
         # while the next token is a comma, eat a comma and compile an identifier
         while self.tokenizer.current_token == ",":
+            numExpressions += 1
             self.eat(",")
             self.advance()
             self.skip_advance = True
@@ -319,6 +329,8 @@ class CompilationEngine:
 
         self.dedent()
         self.writeToOutput("</varDec>\n")
+
+        return numExpressions
 
     # compiles a sequence of statements. doesn't handle enclosing {}s. grammar:
     # statement*

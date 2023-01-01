@@ -50,6 +50,33 @@
           <symbol> ) </symbol>
           <symbol> ; </symbol>
         </doStatement>
+        <doStatement>
+          <keyword> do </keyword>
+          <identifier> Output </identifier>
+          <symbol> . </symbol>
+          <identifier> printInt </identifier>
+          <symbol> ( </symbol>
+          <expressionList>
+            <expression>
+              <term>
+                <identifier> Memory </identifier>
+                <symbol> . </symbol>
+                <identifier> peek </identifier>
+                <symbol> ( </symbol>
+                <expressionList>
+                  <expression>
+                    <term>
+                      <integerConstant> 8000 </integerConstant>
+                    </term>
+                  </expression>
+                </expressionList>
+                <symbol> ) </symbol>
+              </term>
+            </expression>
+          </expressionList>
+          <symbol> ) </symbol>
+          <symbol> ; </symbol>
+        </doStatement>
         <letStatement>
           <keyword> let </keyword>
           <localint> value </localint>
@@ -72,6 +99,22 @@
           </expression>
           <symbol> ; </symbol>
         </letStatement>
+        <doStatement>
+          <keyword> do </keyword>
+          <identifier> Output </identifier>
+          <symbol> . </symbol>
+          <identifier> printInt </identifier>
+          <symbol> ( </symbol>
+          <expressionList>
+            <expression>
+              <term>
+                <localint> value </localint>
+              </term>
+            </expression>
+          </expressionList>
+          <symbol> ) </symbol>
+          <symbol> ; </symbol>
+        </doStatement>
         <doStatement>
           <keyword> do </keyword>
           <identifier> Main </identifier>
