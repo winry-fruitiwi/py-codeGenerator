@@ -43,6 +43,10 @@ class VMWriter:
     def writeReturn(self):
         self.write("return")
 
+    # utility method writing a comment
+    def writeComment(self, comment):
+        self.write("// " + comment)
+
     # closes the write-only output
     def close(self):
         self.out.close()

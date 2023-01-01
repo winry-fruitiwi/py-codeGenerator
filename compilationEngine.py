@@ -550,6 +550,8 @@ class CompilationEngine:
         self.writeToOutput("<whileStatement>\n")
         self.indent()
 
+        self.vmw.writeComment("while")
+
         self.eat("while")
 
         # compile (expression)
@@ -557,6 +559,8 @@ class CompilationEngine:
         self.compileExprInParens()
         self.vmw.writeArithmetic("not")
         self.vmw.writeIf("END" + str(self.numIfLabels))
+
+        self.vmw.writeComment("while loop")
 
         # compile {statements}
         self.labelsToBeWritten.append(f"END{str(self.numIfLabels)}")

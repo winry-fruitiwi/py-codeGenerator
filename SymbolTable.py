@@ -44,7 +44,7 @@ class SymbolTable:
         # use kindOf to access the name in target. You can't use in here, as it
         # doesn't check values or inside them if they're lists.
         for name in target:
-            if self.kindOf(name) == kind:
+            if self.kindOf(name) == kind.lower():
                 kindCount += 1
 
         return kindCount

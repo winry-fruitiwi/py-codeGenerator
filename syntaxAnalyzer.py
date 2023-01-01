@@ -1,12 +1,4 @@
-"""
-The main file, where I make JackTokenizers and CompilationEngines!
-
-Files I've tested with the current version of code:
-    10/Square/Main.jack
-    10/Square/Square.jack
-    10/Square/SquareGame.jack
-
-"""
+# The main file, where I make JackTokenizers and CompilationEngines!
 
 from compilationEngine import *
 from TokenType import *
