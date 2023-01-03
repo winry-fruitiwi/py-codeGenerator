@@ -751,6 +751,13 @@ class CompilationEngine:
 
             # if the type is a keyword, compile a keyword.
             case TokenType.KEYWORD:
+                if self.tokenizer.current_token == "true":
+                    self.vmw.writePush("constant", 1)
+                    self.vmw.writeArithmetic("neg")
+
+                if self.tokenizer.current_token == "false":
+                    self.vmw.writePush("constant", 0)
+
                 self.compileKeyword()
                 compiledToken = True
 
