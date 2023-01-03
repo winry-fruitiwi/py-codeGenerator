@@ -20,10 +20,7 @@ class CompilationEngine:
         self.st = SymbolTable()
 
         # the number of times I've created a label in an if statement
-        self.numIfLabels = 0
-
-        # the number of times I've created a label in a while statement
-        self.numWhileLabels = 0
+        self.numLabels = 0
 
         # the labels that currently need to be written
         self.labelsToBeWritten = []
@@ -487,20 +484,24 @@ class CompilationEngine:
         self.writeToOutput("<ifStatement>\n")
         self.indent()
 
+        self.vmw.writeComment("if statement")
+
         self.eat("if")
 
-        self.numIfLabels += 1
+        self.numLabels += 1
 
         # eat expression in parens
         self.compileExprInParens()
         self.vmw.writeArithmetic("not")
-        self.vmw.writeIf(f"L{self.numIfLabels}")
-        self.labelsToBeWritten.append(self.numIfLabels)
+        self.vmw.writeIf(f"L{self.numLabels}")
+        self.labelsToBeWritten.append(self.numLabels)
 
         # eat statement in brackets
         self.eat("{")
         self.compileStatements()
+        self.vmw.writeGoto(f"ELSE{self.numLabels}")
         self.vmw.writeLabel(f"L{self.labelsToBeWritten.pop()}")
+        self.labelsToBeWritten.append(self.numLabels)
         self.eat("}")
 
         # advance the tokenizer, then check if the current token is else. if
@@ -508,8 +509,11 @@ class CompilationEngine:
         self.advance()
         self.skip_advance = True
         if self.tokenizer.current_token == "else":
+            self.vmw.writeComment("else statement")
             self.eat("else")
             self.compileStatementsInBrackets()
+            self.vmw.writeLabel(f"ELSE{self.labelsToBeWritten.pop()}")
+
 
         # write ending tag to output
         self.dedent()
@@ -556,7 +560,7 @@ class CompilationEngine:
 
         :return:
         """
-        self.numIfLabels += 1
+        self.numLabels += 1
 
         # while + write to output
         self.writeToOutput("<whileStatement>\n")
@@ -567,16 +571,16 @@ class CompilationEngine:
         self.eat("while")
 
         # compile (expression)
-        self.vmw.writeLabel("START" + str(self.numIfLabels))
+        self.vmw.writeLabel("START" + str(self.numLabels))
         self.compileExprInParens()
         self.vmw.writeArithmetic("not")
-        self.vmw.writeIf("END" + str(self.numIfLabels))
+        self.vmw.writeIf("END" + str(self.numLabels))
 
         self.vmw.writeComment("while loop")
 
         # compile {statements}
-        self.labelsToBeWritten.append(f"END{str(self.numIfLabels)}")
-        self.labelsToBeWritten.append(f"START{str(self.numIfLabels)}")
+        self.labelsToBeWritten.append(f"END{str(self.numLabels)}")
+        self.labelsToBeWritten.append(f"START{str(self.numLabels)}")
         self.compileStatementsInBrackets()
         self.vmw.writeGoto(self.labelsToBeWritten.pop())
         self.vmw.writeLabel(self.labelsToBeWritten.pop())
@@ -698,6 +702,9 @@ class CompilationEngine:
 
                 case '>':
                     currentCommands.append("gt")
+
+                case '=':
+                    currentCommands.append("eq")
 
             # print("hello!")
             self.compileSymbol()
