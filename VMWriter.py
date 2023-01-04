@@ -21,11 +21,11 @@ class VMWriter:
 
     # writes a label
     def writeLabel(self, label):
-        self.write("label " + label)
+        self.write("label " + str(label))
 
     # writes a goto label statement
     def writeGoto(self, label):
-        self.write("goto " + label)
+        self.write("goto " + str(label))
 
     # writes an if-goto label statement
     def writeIf(self, label):

@@ -4,12 +4,28 @@ from compilationEngine import *
 from TokenType import *
 from symbolTable import *
 from VMWriter import *
+import os
 
 # the root of all files I'll need to test here.
 file_root = "11/ConvertToBin/"
 
 compilationEngine = CompilationEngine(file_root + "Main.jack")
 
+# find the path and create a list of all the files.
+path = "11/Square/"
+dir_list = os.listdir(path)
+print(dir_list)
+
+# for every jack file in dir_list, compile it!
+for file in dir_list:
+    # split the file by . and check if the file extension is jack.
+    splitFile = file.split(".")
+    if splitFile[-1] != "jack":
+        continue
+
+    print(path + file)
+    compilationEngine = CompilationEngine(path + file)
+    compilationEngine.compileClass()
 
 def mainLoop(ce):
     outputXML = open("test.xml", "w")
@@ -110,7 +126,7 @@ def VMWriterTest():
     vm_writer.close()
 
 
-compilationEngine.compileClass()
+# compilationEngine.compileClass()
 # compilationEngine.testCompile()
-print("subroutine table: ", compilationEngine.st.subroutineTable)
-print("class table: ", compilationEngine.st.classTable)
+# print("subroutine table: ", compilationEngine.st.subroutineTable)
+# print("class table0: ", compilationEngine.st.classTable)
