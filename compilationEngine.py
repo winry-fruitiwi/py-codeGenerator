@@ -4,10 +4,11 @@ from VMWriter import *
 
 
 class CompilationEngine:
-    def __init__(self, path):
+    def __init__(self, path, file):
+        self.path = path
         self.vmw = None
         self.currentClassName = None
-        self.tokenizer = JackTokenizer(path)
+        self.tokenizer = JackTokenizer(path + file)
         self.output = open("test.xml", "w")
 
         # signals to eat() if we need to skip advance()
@@ -42,7 +43,7 @@ class CompilationEngine:
         self.currentClassName = self.tokenizer.current_token
 
         # an instance of a VM writer
-        self.vmw = VMWriter(self.currentClassName)
+        self.vmw = VMWriter(self.path + self.currentClassName)
 
         # compile an identifier
         self.compileIdentifier()
