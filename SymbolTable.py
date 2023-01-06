@@ -75,3 +75,7 @@ class SymbolTable:
     def indexOf(self, name):
         table = self.findNameInTables(name)
         return table[name][2]
+
+    # returns if the argument is inside the symbol table
+    def inTable(self, name):
+        return (name in self.subroutineTable) or (name in self.classTable)

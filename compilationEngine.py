@@ -1030,7 +1030,24 @@ class CompilationEngine:
 
         currentSubName = self.tokenizer.current_token
 
-        # compile an identifier
+        # keeps track of if we found the current token in the symbol table.
+        subNameFoundInST = False
+
+        # if the subroutine name is in the table, that means it's a variable
+        # name, and we can retrieve its properties.
+        if self.st.inTable(currentSubName):
+            typeOfSubName = self.st.typeOf(currentSubName)
+            self.vmw.writeComment(currentSubName + " is in the symbol table")
+            self.vmw.writeComment(currentSubName + " has type of " + typeOfSubName)
+            if self.st.kindOf(currentSubName) == "field":
+                self.vmw.writePush("this", self.st.indexOf(currentSubName))
+
+            else:
+                self.vmw.writePush(self.st.kindOf(currentSubName),
+                                   self.st.indexOf(currentSubName))
+            currentSubName = typeOfSubName
+            subNameFoundInST = True
+
         self.compileIdentifier()
 
         # if the next token is an open paren:
@@ -1062,6 +1079,9 @@ class CompilationEngine:
             self.eat("(")
             numArgs = self.compileExpressionList()
             self.eat(")")
+
+        if subNameFoundInST:
+            numArgs += 1
 
         self.vmw.writeCall(currentSubName, numArgs)
 
