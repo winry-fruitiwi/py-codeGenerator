@@ -5,13 +5,13 @@
   <classVarDec>
     <keyword> field </keyword>
     <identifier> Square </identifier>
-    <fieldSquare> square </fieldSquare>
+    <thisSquare> square </thisSquare>
     <symbol> ; </symbol>
   </classVarDec>
   <classVarDec>
     <keyword> field </keyword>
     <keyword> int </keyword>
-    <fieldint> direction </fieldint>
+    <thisint> direction </thisint>
     <symbol> ; </symbol>
   </classVarDec>
   <subroutineDec>
@@ -27,7 +27,7 @@
       <statements>
         <letStatement>
           <keyword> let </keyword>
-          <fieldSquare> square </fieldSquare>
+          <thisSquare> square </thisSquare>
           <symbol> = </symbol>
           <expression>
             <term>
@@ -61,7 +61,7 @@
         </letStatement>
         <letStatement>
           <keyword> let </keyword>
-          <fieldint> direction </fieldint>
+          <thisint> direction </thisint>
           <symbol> = </symbol>
           <expression>
             <term>
@@ -96,7 +96,7 @@
       <statements>
         <doStatement>
           <keyword> do </keyword>
-          <fieldSquare> square </fieldSquare>
+          <thisSquare> square </thisSquare>
           <symbol> . </symbol>
           <identifier> dispose </identifier>
           <symbol> ( </symbol>
@@ -145,7 +145,7 @@
           <symbol> ( </symbol>
           <expression>
             <term>
-              <fieldint> direction </fieldint>
+              <thisint> direction </thisint>
             </term>
             <symbol> = </symbol>
             <term>
@@ -157,7 +157,7 @@
           <statements>
             <doStatement>
               <keyword> do </keyword>
-              <fieldSquare> square </fieldSquare>
+              <thisSquare> square </thisSquare>
               <symbol> . </symbol>
               <identifier> moveUp </identifier>
               <symbol> ( </symbol>
@@ -174,7 +174,7 @@
           <symbol> ( </symbol>
           <expression>
             <term>
-              <fieldint> direction </fieldint>
+              <thisint> direction </thisint>
             </term>
             <symbol> = </symbol>
             <term>
@@ -186,7 +186,7 @@
           <statements>
             <doStatement>
               <keyword> do </keyword>
-              <fieldSquare> square </fieldSquare>
+              <thisSquare> square </thisSquare>
               <symbol> . </symbol>
               <identifier> moveDown </identifier>
               <symbol> ( </symbol>
@@ -203,7 +203,7 @@
           <symbol> ( </symbol>
           <expression>
             <term>
-              <fieldint> direction </fieldint>
+              <thisint> direction </thisint>
             </term>
             <symbol> = </symbol>
             <term>
@@ -215,7 +215,7 @@
           <statements>
             <doStatement>
               <keyword> do </keyword>
-              <fieldSquare> square </fieldSquare>
+              <thisSquare> square </thisSquare>
               <symbol> . </symbol>
               <identifier> moveLeft </identifier>
               <symbol> ( </symbol>
@@ -232,7 +232,7 @@
           <symbol> ( </symbol>
           <expression>
             <term>
-              <fieldint> direction </fieldint>
+              <thisint> direction </thisint>
             </term>
             <symbol> = </symbol>
             <term>
@@ -244,7 +244,7 @@
           <statements>
             <doStatement>
               <keyword> do </keyword>
-              <fieldSquare> square </fieldSquare>
+              <thisSquare> square </thisSquare>
               <symbol> . </symbol>
               <identifier> moveRight </identifier>
               <symbol> ( </symbol>
@@ -418,7 +418,7 @@
               <statements>
                 <doStatement>
                   <keyword> do </keyword>
-                  <fieldSquare> square </fieldSquare>
+                  <thisSquare> square </thisSquare>
                   <symbol> . </symbol>
                   <identifier> decSize </identifier>
                   <symbol> ( </symbol>
@@ -447,7 +447,7 @@
               <statements>
                 <doStatement>
                   <keyword> do </keyword>
-                  <fieldSquare> square </fieldSquare>
+                  <thisSquare> square </thisSquare>
                   <symbol> . </symbol>
                   <identifier> incSize </identifier>
                   <symbol> ( </symbol>
@@ -476,7 +476,7 @@
               <statements>
                 <letStatement>
                   <keyword> let </keyword>
-                  <fieldint> direction </fieldint>
+                  <thisint> direction </thisint>
                   <symbol> = </symbol>
                   <expression>
                     <term>
@@ -505,7 +505,7 @@
               <statements>
                 <letStatement>
                   <keyword> let </keyword>
-                  <fieldint> direction </fieldint>
+                  <thisint> direction </thisint>
                   <symbol> = </symbol>
                   <expression>
                     <term>
@@ -534,7 +534,7 @@
               <statements>
                 <letStatement>
                   <keyword> let </keyword>
-                  <fieldint> direction </fieldint>
+                  <thisint> direction </thisint>
                   <symbol> = </symbol>
                   <expression>
                     <term>
@@ -563,7 +563,7 @@
               <statements>
                 <letStatement>
                   <keyword> let </keyword>
-                  <fieldint> direction </fieldint>
+                  <thisint> direction </thisint>
                   <symbol> = </symbol>
                   <expression>
                     <term>
@@ -641,18 +641,15 @@
   </subroutineDec>
   <symbol> } </symbol>
 </class>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </expression>
-                <symbol> , </symbol>
-                <expression>
-                  <term>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 <term>
                     <symbol> ( </symbol>
                     <expression>
                       <term>
-                        <fieldint> y </fieldint>
+                        <thisint> y </thisint>
                       </term>
                       <symbol> + </symbol>
                       <term>
-                        <fieldint> size </fieldint>
+                        <thisint> size </thisint>
                       </term>
                     </expression>
                     <symbol> ) </symbol>
@@ -665,21 +662,21 @@
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <fieldint> x </fieldint>
+                    <thisint> x </thisint>
                   </term>
                   <symbol> + </symbol>
                   <term>
-                    <fieldint> size </fieldint>
+                    <thisint> size </thisint>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <fieldint> y </fieldint>
+                    <thisint> y </thisint>
                   </term>
                   <symbol> + </symbol>
                   <term>
-                    <fieldint> size </fieldint>
+                    <thisint> size </thisint>
                   </term>
                 </expression>
               </expressionList>
@@ -713,7 +710,7 @@
           <symbol> ( </symbol>
           <expression>
             <term>
-              <fieldint> x </fieldint>
+              <thisint> x </thisint>
             </term>
             <symbol> &gt; </symbol>
             <term>
@@ -751,11 +748,11 @@
                     <symbol> ( </symbol>
                     <expression>
                       <term>
-                        <fieldint> x </fieldint>
+                        <thisint> x </thisint>
                       </term>
                       <symbol> + </symbol>
                       <term>
-                        <fieldint> size </fieldint>
+                        <thisint> size </thisint>
                       </term>
                     </expression>
                     <symbol> ) </symbol>
@@ -768,27 +765,27 @@
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <fieldint> y </fieldint>
+                    <thisint> y </thisint>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <fieldint> x </fieldint>
+                    <thisint> x </thisint>
                   </term>
                   <symbol> + </symbol>
                   <term>
-                    <fieldint> size </fieldint>
+                    <thisint> size </thisint>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <fieldint> y </fieldint>
+                    <thisint> y </thisint>
                   </term>
                   <symbol> + </symbol>
                   <term>
-                    <fieldint> size </fieldint>
+                    <thisint> size </thisint>
                   </term>
                 </expression>
               </expressionList>
@@ -797,11 +794,11 @@
             </doStatement>
             <letStatement>
               <keyword> let </keyword>
-              <fieldint> x </fieldint>
+              <thisint> x </thisint>
               <symbol> = </symbol>
               <expression>
                 <term>
-                  <fieldint> x </fieldint>
+                  <thisint> x </thisint>
                 </term>
                 <symbol> - </symbol>
                 <term>
@@ -835,19 +832,19 @@
               <expressionList>
                 <expression>
                   <term>
-                    <fieldint> x </fieldint>
+                    <thisint> x </thisint>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <fieldint> y </fieldint>
+                    <thisint> y </thisint>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <fieldint> x </fieldint>
+                    <thisint> x </thisint>
                   </term>
                   <symbol> + </symbol>
                   <term>
@@ -857,11 +854,11 @@
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <fieldint> y </fieldint>
+                    <thisint> y </thisint>
                   </term>
                   <symbol> + </symbol>
                   <term>
-                    <fieldint> size </fieldint>
+                    <thisint> size </thisint>
                   </term>
                 </expression>
               </expressionList>
@@ -898,11 +895,11 @@
               <symbol> ( </symbol>
               <expression>
                 <term>
-                  <fieldint> x </fieldint>
+                  <thisint> x </thisint>
                 </term>
                 <symbol> + </symbol>
                 <term>
-                  <fieldint> size </fieldint>
+                  <thisint> size </thisint>
                 </term>
               </expression>
               <symbol> ) </symbol>
@@ -940,19 +937,19 @@
               <expressionList>
                 <expression>
                   <term>
-                    <fieldint> x </fieldint>
+                    <thisint> x </thisint>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <fieldint> y </fieldint>
+                    <thisint> y </thisint>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <fieldint> x </fieldint>
+                    <thisint> x </thisint>
                   </term>
                   <symbol> + </symbol>
                   <term>
@@ -962,11 +959,11 @@
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <fieldint> y </fieldint>
+                    <thisint> y </thisint>
                   </term>
                   <symbol> + </symbol>
                   <term>
-                    <fieldint> size </fieldint>
+                    <thisint> size </thisint>
                   </term>
                 </expression>
               </expressionList>
@@ -975,11 +972,11 @@
             </doStatement>
             <letStatement>
               <keyword> let </keyword>
-              <fieldint> x </fieldint>
+              <thisint> x </thisint>
               <symbol> = </symbol>
               <expression>
                 <term>
-                  <fieldint> x </fieldint>
+                  <thisint> x </thisint>
                 </term>
                 <symbol> + </symbol>
                 <term>
@@ -1016,11 +1013,11 @@
                     <symbol> ( </symbol>
                     <expression>
                       <term>
-                        <fieldint> x </fieldint>
+                        <thisint> x </thisint>
                       </term>
                       <symbol> + </symbol>
                       <term>
-                        <fieldint> size </fieldint>
+                        <thisint> size </thisint>
                       </term>
                     </expression>
                     <symbol> ) </symbol>
@@ -1033,27 +1030,27 @@
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <fieldint> y </fieldint>
+                    <thisint> y </thisint>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <fieldint> x </fieldint>
+                    <thisint> x </thisint>
                   </term>
                   <symbol> + </symbol>
                   <term>
-                    <fieldint> size </fieldint>
+                    <thisint> size </thisint>
                   </term>
                 </expression>
                 <symbol> , </symbol>
                 <expression>
                   <term>
-                    <fieldint> y </fieldint>
+                    <thisint> y </thisint>
                   </term>
                   <symbol> + </symbol>
                   <term>
-                    <fieldint> size </fieldint>
+                    <thisint> size </thisint>
                   </term>
                 </expression>
               </expressionList>

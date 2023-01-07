@@ -6,9 +6,9 @@ push constant 0
 push constant 0
 push constant 30
 call Square.new 3
-pop field 0
+pop this 0
 push constant 0
-pop field 1
+pop this 1
 return
 
 function SquareGame.dispose 0
@@ -27,7 +27,7 @@ return
 function SquareGame.moveSquare 0
 
 // if statement
-push field 1
+push this 1
 push constant 1
 eq
 not
@@ -43,7 +43,7 @@ goto ELSE1
 label L1
 
 // if statement
-push field 1
+push this 1
 push constant 2
 eq
 not
@@ -59,7 +59,7 @@ goto ELSE2
 label L2
 
 // if statement
-push field 1
+push this 1
 push constant 3
 eq
 not
@@ -75,7 +75,7 @@ goto ELSE3
 label L3
 
 // if statement
-push field 1
+push this 1
 push constant 4
 eq
 not
@@ -175,7 +175,7 @@ eq
 not
 if-goto L10
 push constant 1
-pop field 1
+pop this 1
 goto ELSE10
 label L10
 
@@ -186,7 +186,7 @@ eq
 not
 if-goto L11
 push constant 2
-pop field 1
+pop this 1
 goto ELSE11
 label L11
 
@@ -197,7 +197,7 @@ eq
 not
 if-goto L12
 push constant 3
-pop field 1
+pop this 1
 goto ELSE12
 label L12
 
@@ -208,7 +208,7 @@ eq
 not
 if-goto L13
 push constant 4
-pop field 1
+pop this 1
 goto ELSE13
 label L13
 

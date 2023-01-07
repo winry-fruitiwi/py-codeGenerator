@@ -41,6 +41,10 @@ class SymbolTable:
         else:
             target = self.subroutineTable
 
+        # if kind is FIELD, then it's the same as THIS
+        if kind == "FIELD":
+            kind = "THIS"
+
         # use kindOf to access the name in target. You can't use in here, as it
         # doesn't check values or inside them if they're lists.
         for name in target:
@@ -64,6 +68,10 @@ class SymbolTable:
     # typeOf, and indexOf in syntaxAnalyzer.py demonstrating their usage.
     def kindOf(self, name):
         table = self.findNameInTables(name)
+
+        if table[name][1].lower() == "field":
+            return "this"
+
         return table[name][1].lower()
 
     # finds the type of the given identifier. Test in main file.
