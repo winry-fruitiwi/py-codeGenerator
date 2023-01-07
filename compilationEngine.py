@@ -26,6 +26,9 @@ class CompilationEngine:
         # the labels that currently need to be written
         self.labelsToBeWritten = []
 
+        # the number of fields
+        self.numFields = 0
+
     # compiles a complete class. This needs to be called immediately after
     # an instance is initialized.
     def compileClass(self):
@@ -87,12 +90,17 @@ class CompilationEngine:
             self.advance()
         self.skip_advance = True
 
+        ifField = False
+        numFields = 0
+
         if self.tokenizer.current_token == "static":
             self.eat("static")
             currentKind = "STATIC"
         else:
             self.eat("field")
             currentKind = "FIELD"
+            ifField = False
+            numFields = 1
 
         # advance
         self.advance()
@@ -114,6 +122,9 @@ class CompilationEngine:
 
         # while the next token is a comma, eat a comma and compile an identifier
         while self.tokenizer.current_token == ",":
+            if ifField:
+                numFields += 1
+
             # eat a comma
             self.eat(",")
 
@@ -131,8 +142,10 @@ class CompilationEngine:
         self.dedent()
         self.writeToOutput("</classVarDec>\n")
 
+        self.numFields += numFields
+
     # compiles the inside of a subroutine declaration
-    def compileSubRoutineBody(self, functionName):
+    def compileSubRoutineBody(self, functionName, ifConstructor):
         self.writeToOutput("<subroutineBody>\n")
         self.indent()
 
@@ -156,6 +169,11 @@ class CompilationEngine:
         self.vmw.writeFunction(
             self.currentClassName + "." + functionName, totalNumVars)
 
+        # if ifConstructor is true, call Memory.alloc with 1 argument
+        if ifConstructor:
+            self.vmw.writePush("constant", self.numFields)
+            self.vmw.writeCall("Memory.alloc", 1)
+
         # compile statements
         self.compileStatements()
 
@@ -175,8 +193,11 @@ class CompilationEngine:
             self.advance()
         self.skip_advance = True
 
+        ifConstructor = False
+
         match self.tokenizer.current_token:
             case "constructor":
+                ifConstructor = True
                 self.eat("constructor")
             case "function":
                 self.eat("function")
@@ -212,7 +233,7 @@ class CompilationEngine:
 
         # compile subRoutineBody. for now, this can just be a compile statement
         # for statements in brackets.
-        self.compileSubRoutineBody(functionName)
+        self.compileSubRoutineBody(functionName, ifConstructor)
 
         self.dedent()
         self.writeToOutput("</subroutineDec>\n")
