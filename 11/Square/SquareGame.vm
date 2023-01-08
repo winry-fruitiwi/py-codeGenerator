@@ -2,6 +2,7 @@
 function SquareGame.new 0
 push constant 2
 call Memory.alloc 1
+pop pointer 0
 push constant 0
 push constant 0
 push constant 30
@@ -10,6 +11,8 @@ pop this 0
 push constant 0
 pop this 1
 return
+
+// method detected
 
 function SquareGame.dispose 0
 
@@ -23,6 +26,8 @@ call Memory.deAlloc 1
 pop temp 0
 push constant 0
 return
+
+// method detected
 
 function SquareGame.moveSquare 0
 
@@ -94,6 +99,8 @@ call Sys.wait 1
 pop temp 0
 push constant 0
 return
+
+// method detected
 
 function SquareGame.run 2
 push constant 0

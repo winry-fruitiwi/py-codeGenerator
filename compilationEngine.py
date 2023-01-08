@@ -99,7 +99,7 @@ class CompilationEngine:
         else:
             self.eat("field")
             currentKind = "FIELD"
-            ifField = False
+            ifField = True
             numFields = 1
 
         # advance
@@ -173,6 +173,7 @@ class CompilationEngine:
         if ifConstructor:
             self.vmw.writePush("constant", self.numFields)
             self.vmw.writeCall("Memory.alloc", 1)
+            self.vmw.writePop("pointer", 0)
 
         # compile statements
         self.compileStatements()
@@ -203,6 +204,8 @@ class CompilationEngine:
                 self.eat("function")
             case "method":
                 self.eat("method")
+                self.st.define(self.currentClassName, "this", self.currentClassName)
+                self.vmw.writeComment("method detected")
 
         # advance, then check for void or type
         self.advance()
@@ -316,7 +319,7 @@ class CompilationEngine:
 
         # advance
         self.advance()
-        print(self.tokenizer.current_token)
+        # print(self.tokenizer.current_token)
         currentType = self.tokenizer.current_token
         self.skip_advance = True
 
@@ -795,7 +798,7 @@ class CompilationEngine:
                 # prepare for a potential subroutine call
                 current_name = self.tokenizer.current_token
 
-                print("identifier", self.tokenizer.current_token, "found")
+                # print("identifier", self.tokenizer.current_token, "found")
                 self.compileIdentifier()
 
                 self.advance()

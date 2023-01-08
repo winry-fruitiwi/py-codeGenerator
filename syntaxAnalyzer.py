@@ -23,7 +23,7 @@ for file in dir_list:
     if splitFile[-1] != "jack":
         continue
 
-    print(path + file)
+    print("\n" + path + file)
     compilationEngine = CompilationEngine(path, file)
     compilationEngine.compileClass()
 

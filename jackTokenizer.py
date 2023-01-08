@@ -220,7 +220,7 @@ class JackTokenizer:
                 self.current_char_index]
             self.current_token = ""
 
-            print("new line:", self.stripped_lines[self.current_line_index])
+            # print("new line:", self.stripped_lines[self.current_line_index])
             return
 
         # if the current character is a symbol, immediately make it the next token
@@ -234,7 +234,7 @@ class JackTokenizer:
             self.current_token = curr_line[self.current_char_index:next_quote_index + 1]
 
             self.current_char_index = next_quote_index + 1
-            print(self.current_char_index)
+            # print(self.current_char_index)
         else:
             # for each character in the current line, starting from the current
             # character index, check if the character at curr_line[char_index]
@@ -263,7 +263,7 @@ class JackTokenizer:
 
 
         self.current_char = curr_line[self.current_char_index]
-        print(self.current_char_index)
+        # print(self.current_char_index)
 
     # checks the type of the current token
     def tokenType(self):
