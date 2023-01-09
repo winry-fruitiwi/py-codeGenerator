@@ -1,56 +1,74 @@
 <class>
   <keyword> class </keyword>
-  <identifier> SquareGame </identifier>
+  <identifier> Main </identifier>
   <symbol> { </symbol>
-  <classVarDec>
-    <keyword> field </keyword>
-    <identifier> Square </identifier>
-    <thisSquare> square </thisSquare>
-    <symbol> ; </symbol>
-  </classVarDec>
-  <classVarDec>
-    <keyword> field </keyword>
-    <keyword> int </keyword>
-    <thisint> direction </thisint>
-    <symbol> ; </symbol>
-  </classVarDec>
   <subroutineDec>
-    <keyword> constructor </keyword>
-    <identifier> SquareGame </identifier>
-    <identifier> new </identifier>
+    <keyword> function </keyword>
+    <keyword> void </keyword>
+    <identifier> main </identifier>
     <symbol> ( </symbol>
     <parameterList>
     </parameterList>
     <symbol> ) </symbol>
     <subroutineBody>
       <symbol> { </symbol>
+      <varDec>
+        <keyword> var </keyword>
+        <identifier> Array </identifier>
+        <localArray> a </localArray>
+        <symbol> ; </symbol>
+      </varDec>
+      <varDec>
+        <keyword> var </keyword>
+        <keyword> int </keyword>
+        <localint> length </localint>
+        <symbol> ; </symbol>
+      </varDec>
+      <varDec>
+        <keyword> var </keyword>
+        <keyword> int </keyword>
+        <localint> i </localint>
+        <symbol> , </symbol>
+        <localint> sum </localint>
+        <symbol> ; </symbol>
+      </varDec>
       <statements>
         <letStatement>
           <keyword> let </keyword>
-          <thisSquare> square </thisSquare>
+          <localint> length </localint>
           <symbol> = </symbol>
           <expression>
             <term>
-              <identifier> Square </identifier>
+              <identifier> Keyboard </identifier>
+              <symbol> . </symbol>
+              <identifier> readInt </identifier>
+              <symbol> ( </symbol>
+              <expressionList>
+                <expression>
+                  <term>
+                    <stringConstant> How many numbers?  </stringConstant>
+                  </term>
+                </expression>
+              </expressionList>
+              <symbol> ) </symbol>
+            </term>
+          </expression>
+          <symbol> ; </symbol>
+        </letStatement>
+        <letStatement>
+          <keyword> let </keyword>
+          <localArray> a </localArray>
+          <symbol> = </symbol>
+          <expression>
+            <term>
+              <identifier> Array </identifier>
               <symbol> . </symbol>
               <identifier> new </identifier>
               <symbol> ( </symbol>
               <expressionList>
                 <expression>
                   <term>
-                    <integerConstant> 0 </integerConstant>
-                  </term>
-                </expression>
-                <symbol> , </symbol>
-                <expression>
-                  <term>
-                    <integerConstant> 0 </integerConstant>
-                  </term>
-                </expression>
-                <symbol> , </symbol>
-                <expression>
-                  <term>
-                    <integerConstant> 30 </integerConstant>
+                    <localint> length </localint>
                   </term>
                 </expression>
               </expressionList>
@@ -61,255 +79,11 @@
         </letStatement>
         <letStatement>
           <keyword> let </keyword>
-          <thisint> direction </thisint>
+          <localint> i </localint>
           <symbol> = </symbol>
           <expression>
             <term>
               <integerConstant> 0 </integerConstant>
-            </term>
-          </expression>
-          <symbol> ; </symbol>
-        </letStatement>
-        <returnStatement>
-          <keyword> return </keyword>
-          <expression>
-            <term>
-              <keyword> this </keyword>
-            </term>
-          </expression>
-          <symbol> ; </symbol>
-        </returnStatement>
-      </statements>
-      <symbol> } </symbol>
-    </subroutineBody>
-  </subroutineDec>
-  <subroutineDec>
-    <keyword> method </keyword>
-    <keyword> void </keyword>
-    <identifier> dispose </identifier>
-    <symbol> ( </symbol>
-    <parameterList>
-    </parameterList>
-    <symbol> ) </symbol>
-    <subroutineBody>
-      <symbol> { </symbol>
-      <statements>
-        <doStatement>
-          <keyword> do </keyword>
-          <thisSquare> square </thisSquare>
-          <symbol> . </symbol>
-          <identifier> dispose </identifier>
-          <symbol> ( </symbol>
-          <expressionList>
-          </expressionList>
-          <symbol> ) </symbol>
-          <symbol> ; </symbol>
-        </doStatement>
-        <doStatement>
-          <keyword> do </keyword>
-          <identifier> Memory </identifier>
-          <symbol> . </symbol>
-          <identifier> deAlloc </identifier>
-          <symbol> ( </symbol>
-          <expressionList>
-            <expression>
-              <term>
-                <keyword> this </keyword>
-              </term>
-            </expression>
-          </expressionList>
-          <symbol> ) </symbol>
-          <symbol> ; </symbol>
-        </doStatement>
-        <returnStatement>
-          <keyword> return </keyword>
-          <symbol> ; </symbol>
-        </returnStatement>
-      </statements>
-      <symbol> } </symbol>
-    </subroutineBody>
-  </subroutineDec>
-  <subroutineDec>
-    <keyword> method </keyword>
-    <keyword> void </keyword>
-    <identifier> moveSquare </identifier>
-    <symbol> ( </symbol>
-    <parameterList>
-    </parameterList>
-    <symbol> ) </symbol>
-    <subroutineBody>
-      <symbol> { </symbol>
-      <statements>
-        <ifStatement>
-          <keyword> if </keyword>
-          <symbol> ( </symbol>
-          <expression>
-            <term>
-              <thisint> direction </thisint>
-            </term>
-            <symbol> = </symbol>
-            <term>
-              <integerConstant> 1 </integerConstant>
-            </term>
-          </expression>
-          <symbol> ) </symbol>
-          <symbol> { </symbol>
-          <statements>
-            <doStatement>
-              <keyword> do </keyword>
-              <thisSquare> square </thisSquare>
-              <symbol> . </symbol>
-              <identifier> moveUp </identifier>
-              <symbol> ( </symbol>
-              <expressionList>
-              </expressionList>
-              <symbol> ) </symbol>
-              <symbol> ; </symbol>
-            </doStatement>
-          </statements>
-          <symbol> } </symbol>
-        </ifStatement>
-        <ifStatement>
-          <keyword> if </keyword>
-          <symbol> ( </symbol>
-          <expression>
-            <term>
-              <thisint> direction </thisint>
-            </term>
-            <symbol> = </symbol>
-            <term>
-              <integerConstant> 2 </integerConstant>
-            </term>
-          </expression>
-          <symbol> ) </symbol>
-          <symbol> { </symbol>
-          <statements>
-            <doStatement>
-              <keyword> do </keyword>
-              <thisSquare> square </thisSquare>
-              <symbol> . </symbol>
-              <identifier> moveDown </identifier>
-              <symbol> ( </symbol>
-              <expressionList>
-              </expressionList>
-              <symbol> ) </symbol>
-              <symbol> ; </symbol>
-            </doStatement>
-          </statements>
-          <symbol> } </symbol>
-        </ifStatement>
-        <ifStatement>
-          <keyword> if </keyword>
-          <symbol> ( </symbol>
-          <expression>
-            <term>
-              <thisint> direction </thisint>
-            </term>
-            <symbol> = </symbol>
-            <term>
-              <integerConstant> 3 </integerConstant>
-            </term>
-          </expression>
-          <symbol> ) </symbol>
-          <symbol> { </symbol>
-          <statements>
-            <doStatement>
-              <keyword> do </keyword>
-              <thisSquare> square </thisSquare>
-              <symbol> . </symbol>
-              <identifier> moveLeft </identifier>
-              <symbol> ( </symbol>
-              <expressionList>
-              </expressionList>
-              <symbol> ) </symbol>
-              <symbol> ; </symbol>
-            </doStatement>
-          </statements>
-          <symbol> } </symbol>
-        </ifStatement>
-        <ifStatement>
-          <keyword> if </keyword>
-          <symbol> ( </symbol>
-          <expression>
-            <term>
-              <thisint> direction </thisint>
-            </term>
-            <symbol> = </symbol>
-            <term>
-              <integerConstant> 4 </integerConstant>
-            </term>
-          </expression>
-          <symbol> ) </symbol>
-          <symbol> { </symbol>
-          <statements>
-            <doStatement>
-              <keyword> do </keyword>
-              <thisSquare> square </thisSquare>
-              <symbol> . </symbol>
-              <identifier> moveRight </identifier>
-              <symbol> ( </symbol>
-              <expressionList>
-              </expressionList>
-              <symbol> ) </symbol>
-              <symbol> ; </symbol>
-            </doStatement>
-          </statements>
-          <symbol> } </symbol>
-        </ifStatement>
-        <doStatement>
-          <keyword> do </keyword>
-          <identifier> Sys </identifier>
-          <symbol> . </symbol>
-          <identifier> wait </identifier>
-          <symbol> ( </symbol>
-          <expressionList>
-            <expression>
-              <term>
-                <integerConstant> 5 </integerConstant>
-              </term>
-            </expression>
-          </expressionList>
-          <symbol> ) </symbol>
-          <symbol> ; </symbol>
-        </doStatement>
-        <returnStatement>
-          <keyword> return </keyword>
-          <symbol> ; </symbol>
-        </returnStatement>
-      </statements>
-      <symbol> } </symbol>
-    </subroutineBody>
-  </subroutineDec>
-  <subroutineDec>
-    <keyword> method </keyword>
-    <keyword> void </keyword>
-    <identifier> run </identifier>
-    <symbol> ( </symbol>
-    <parameterList>
-    </parameterList>
-    <symbol> ) </symbol>
-    <subroutineBody>
-      <symbol> { </symbol>
-      <varDec>
-        <keyword> var </keyword>
-        <keyword> char </keyword>
-        <localchar> key </localchar>
-        <symbol> ; </symbol>
-      </varDec>
-      <varDec>
-        <keyword> var </keyword>
-        <keyword> boolean </keyword>
-        <localboolean> exit </localboolean>
-        <symbol> ; </symbol>
-      </varDec>
-      <statements>
-        <letStatement>
-          <keyword> let </keyword>
-          <localboolean> exit </localboolean>
-          <symbol> = </symbol>
-          <expression>
-            <term>
-              <keyword> false </keyword>
             </term>
           </expression>
           <symbol> ; </symbol>
@@ -319,747 +93,121 @@
           <symbol> ( </symbol>
           <expression>
             <term>
-              <symbol> ~ </symbol>
-              <term>
-                <localboolean> exit </localboolean>
-              </term>
-            </term>
-          </expression>
-          <symbol> ) </symbol>
-          <symbol> { </symbol>
-          <statements>
-            <whileStatement>
-              <keyword> while </keyword>
-              <symbol> ( </symbol>
-              <expression>
-                <term>
-                  <localchar> key </localchar>
-                </term>
-                <symbol> = </symbol>
-                <term>
-                  <integerConstant> 0 </integerConstant>
-                </term>
-              </expression>
-              <symbol> ) </symbol>
-              <symbol> { </symbol>
-              <statements>
-                <letStatement>
-                  <keyword> let </keyword>
-                  <localchar> key </localchar>
-                  <symbol> = </symbol>
-                  <expression>
-                    <term>
-                      <identifier> Keyboard </identifier>
-                      <symbol> . </symbol>
-                      <identifier> keyPressed </identifier>
-                      <symbol> ( </symbol>
-                      <expressionList>
-                      </expressionList>
-                      <symbol> ) </symbol>
-                    </term>
-                  </expression>
-                  <symbol> ; </symbol>
-                </letStatement>
-                <doStatement>
-                  <keyword> do </keyword>
-                  <identifier> moveSquare </identifier>
-                  <symbol> ( </symbol>
-                  <expressionList>
-                  </expressionList>
-                  <symbol> ) </symbol>
-                  <symbol> ; </symbol>
-                </doStatement>
-              </statements>
-              <symbol> } </symbol>
-            </whileStatement>
-            <ifStatement>
-              <keyword> if </keyword>
-              <symbol> ( </symbol>
-              <expression>
-                <term>
-                  <localchar> key </localchar>
-                </term>
-                <symbol> = </symbol>
-                <term>
-                  <integerConstant> 81 </integerConstant>
-                </term>
-              </expression>
-              <symbol> ) </symbol>
-              <symbol> { </symbol>
-              <statements>
-                <letStatement>
-                  <keyword> let </keyword>
-                  <localboolean> exit </localboolean>
-                  <symbol> = </symbol>
-                  <expression>
-                    <term>
-                      <keyword> true </keyword>
-                    </term>
-                  </expression>
-                  <symbol> ; </symbol>
-                </letStatement>
-              </statements>
-              <symbol> } </symbol>
-            </ifStatement>
-            <ifStatement>
-              <keyword> if </keyword>
-              <symbol> ( </symbol>
-              <expression>
-                <term>
-                  <localchar> key </localchar>
-                </term>
-                <symbol> = </symbol>
-                <term>
-                  <integerConstant> 90 </integerConstant>
-                </term>
-              </expression>
-              <symbol> ) </symbol>
-              <symbol> { </symbol>
-              <statements>
-                <doStatement>
-                  <keyword> do </keyword>
-                  <thisSquare> square </thisSquare>
-                  <symbol> . </symbol>
-                  <identifier> decSize </identifier>
-                  <symbol> ( </symbol>
-                  <expressionList>
-                  </expressionList>
-                  <symbol> ) </symbol>
-                  <symbol> ; </symbol>
-                </doStatement>
-              </statements>
-              <symbol> } </symbol>
-            </ifStatement>
-            <ifStatement>
-              <keyword> if </keyword>
-              <symbol> ( </symbol>
-              <expression>
-                <term>
-                  <localchar> key </localchar>
-                </term>
-                <symbol> = </symbol>
-                <term>
-                  <integerConstant> 88 </integerConstant>
-                </term>
-              </expression>
-              <symbol> ) </symbol>
-              <symbol> { </symbol>
-              <statements>
-                <doStatement>
-                  <keyword> do </keyword>
-                  <thisSquare> square </thisSquare>
-                  <symbol> . </symbol>
-                  <identifier> incSize </identifier>
-                  <symbol> ( </symbol>
-                  <expressionList>
-                  </expressionList>
-                  <symbol> ) </symbol>
-                  <symbol> ; </symbol>
-                </doStatement>
-              </statements>
-              <symbol> } </symbol>
-            </ifStatement>
-            <ifStatement>
-              <keyword> if </keyword>
-              <symbol> ( </symbol>
-              <expression>
-                <term>
-                  <localchar> key </localchar>
-                </term>
-                <symbol> = </symbol>
-                <term>
-                  <integerConstant> 131 </integerConstant>
-                </term>
-              </expression>
-              <symbol> ) </symbol>
-              <symbol> { </symbol>
-              <statements>
-                <letStatement>
-                  <keyword> let </keyword>
-                  <thisint> direction </thisint>
-                  <symbol> = </symbol>
-                  <expression>
-                    <term>
-                      <integerConstant> 1 </integerConstant>
-                    </term>
-                  </expression>
-                  <symbol> ; </symbol>
-                </letStatement>
-              </statements>
-              <symbol> } </symbol>
-            </ifStatement>
-            <ifStatement>
-              <keyword> if </keyword>
-              <symbol> ( </symbol>
-              <expression>
-                <term>
-                  <localchar> key </localchar>
-                </term>
-                <symbol> = </symbol>
-                <term>
-                  <integerConstant> 133 </integerConstant>
-                </term>
-              </expression>
-              <symbol> ) </symbol>
-              <symbol> { </symbol>
-              <statements>
-                <letStatement>
-                  <keyword> let </keyword>
-                  <thisint> direction </thisint>
-                  <symbol> = </symbol>
-                  <expression>
-                    <term>
-                      <integerConstant> 2 </integerConstant>
-                    </term>
-                  </expression>
-                  <symbol> ; </symbol>
-                </letStatement>
-              </statements>
-              <symbol> } </symbol>
-            </ifStatement>
-            <ifStatement>
-              <keyword> if </keyword>
-              <symbol> ( </symbol>
-              <expression>
-                <term>
-                  <localchar> key </localchar>
-                </term>
-                <symbol> = </symbol>
-                <term>
-                  <integerConstant> 130 </integerConstant>
-                </term>
-              </expression>
-              <symbol> ) </symbol>
-              <symbol> { </symbol>
-              <statements>
-                <letStatement>
-                  <keyword> let </keyword>
-                  <thisint> direction </thisint>
-                  <symbol> = </symbol>
-                  <expression>
-                    <term>
-                      <integerConstant> 3 </integerConstant>
-                    </term>
-                  </expression>
-                  <symbol> ; </symbol>
-                </letStatement>
-              </statements>
-              <symbol> } </symbol>
-            </ifStatement>
-            <ifStatement>
-              <keyword> if </keyword>
-              <symbol> ( </symbol>
-              <expression>
-                <term>
-                  <localchar> key </localchar>
-                </term>
-                <symbol> = </symbol>
-                <term>
-                  <integerConstant> 132 </integerConstant>
-                </term>
-              </expression>
-              <symbol> ) </symbol>
-              <symbol> { </symbol>
-              <statements>
-                <letStatement>
-                  <keyword> let </keyword>
-                  <thisint> direction </thisint>
-                  <symbol> = </symbol>
-                  <expression>
-                    <term>
-                      <integerConstant> 4 </integerConstant>
-                    </term>
-                  </expression>
-                  <symbol> ; </symbol>
-                </letStatement>
-              </statements>
-              <symbol> } </symbol>
-            </ifStatement>
-            <whileStatement>
-              <keyword> while </keyword>
-              <symbol> ( </symbol>
-              <expression>
-                <term>
-                  <symbol> ~ </symbol>
-                  <term>
-                    <symbol> ( </symbol>
-                    <expression>
-                      <term>
-                        <localchar> key </localchar>
-                      </term>
-                      <symbol> = </symbol>
-                      <term>
-                        <integerConstant> 0 </integerConstant>
-                      </term>
-                    </expression>
-                    <symbol> ) </symbol>
-                  </term>
-                </term>
-              </expression>
-              <symbol> ) </symbol>
-              <symbol> { </symbol>
-              <statements>
-                <letStatement>
-                  <keyword> let </keyword>
-                  <localchar> key </localchar>
-                  <symbol> = </symbol>
-                  <expression>
-                    <term>
-                      <identifier> Keyboard </identifier>
-                      <symbol> . </symbol>
-                      <identifier> keyPressed </identifier>
-                      <symbol> ( </symbol>
-                      <expressionList>
-                      </expressionList>
-                      <symbol> ) </symbol>
-                    </term>
-                  </expression>
-                  <symbol> ; </symbol>
-                </letStatement>
-                <doStatement>
-                  <keyword> do </keyword>
-                  <identifier> moveSquare </identifier>
-                  <symbol> ( </symbol>
-                  <expressionList>
-                  </expressionList>
-                  <symbol> ) </symbol>
-                  <symbol> ; </symbol>
-                </doStatement>
-              </statements>
-              <symbol> } </symbol>
-            </whileStatement>
-          </statements>
-          <symbol> } </symbol>
-        </whileStatement>
-        <returnStatement>
-          <keyword> return </keyword>
-          <symbol> ; </symbol>
-        </returnStatement>
-      </statements>
-      <symbol> } </symbol>
-    </subroutineBody>
-  </subroutineDec>
-  <symbol> } </symbol>
-</class>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 <term>
-                    <symbol> ( </symbol>
-                    <expression>
-                      <term>
-                        <thisint> y </thisint>
-                      </term>
-                      <symbol> + </symbol>
-                      <term>
-                        <thisint> size </thisint>
-                      </term>
-                    </expression>
-                    <symbol> ) </symbol>
-                  </term>
-                  <symbol> - </symbol>
-                  <term>
-                    <integerConstant> 1 </integerConstant>
-                  </term>
-                </expression>
-                <symbol> , </symbol>
-                <expression>
-                  <term>
-                    <thisint> x </thisint>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <thisint> size </thisint>
-                  </term>
-                </expression>
-                <symbol> , </symbol>
-                <expression>
-                  <term>
-                    <thisint> y </thisint>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <thisint> size </thisint>
-                  </term>
-                </expression>
-              </expressionList>
-              <symbol> ) </symbol>
-              <symbol> ; </symbol>
-            </doStatement>
-          </statements>
-          <symbol> } </symbol>
-        </ifStatement>
-        <returnStatement>
-          <keyword> return </keyword>
-          <symbol> ; </symbol>
-        </returnStatement>
-      </statements>
-      <symbol> } </symbol>
-    </subroutineBody>
-  </subroutineDec>
-  <subroutineDec>
-    <keyword> method </keyword>
-    <keyword> void </keyword>
-    <identifier> moveLeft </identifier>
-    <symbol> ( </symbol>
-    <parameterList>
-    </parameterList>
-    <symbol> ) </symbol>
-    <subroutineBody>
-      <symbol> { </symbol>
-      <statements>
-        <ifStatement>
-          <keyword> if </keyword>
-          <symbol> ( </symbol>
-          <expression>
-            <term>
-              <thisint> x </thisint>
-            </term>
-            <symbol> &gt; </symbol>
-            <term>
-              <integerConstant> 1 </integerConstant>
-            </term>
-          </expression>
-          <symbol> ) </symbol>
-          <symbol> { </symbol>
-          <statements>
-            <doStatement>
-              <keyword> do </keyword>
-              <identifier> Screen </identifier>
-              <symbol> . </symbol>
-              <identifier> setColor </identifier>
-              <symbol> ( </symbol>
-              <expressionList>
-                <expression>
-                  <term>
-                    <keyword> false </keyword>
-                  </term>
-                </expression>
-              </expressionList>
-              <symbol> ) </symbol>
-              <symbol> ; </symbol>
-            </doStatement>
-            <doStatement>
-              <keyword> do </keyword>
-              <identifier> Screen </identifier>
-              <symbol> . </symbol>
-              <identifier> drawRectangle </identifier>
-              <symbol> ( </symbol>
-              <expressionList>
-                <expression>
-                  <term>
-                    <symbol> ( </symbol>
-                    <expression>
-                      <term>
-                        <thisint> x </thisint>
-                      </term>
-                      <symbol> + </symbol>
-                      <term>
-                        <thisint> size </thisint>
-                      </term>
-                    </expression>
-                    <symbol> ) </symbol>
-                  </term>
-                  <symbol> - </symbol>
-                  <term>
-                    <integerConstant> 1 </integerConstant>
-                  </term>
-                </expression>
-                <symbol> , </symbol>
-                <expression>
-                  <term>
-                    <thisint> y </thisint>
-                  </term>
-                </expression>
-                <symbol> , </symbol>
-                <expression>
-                  <term>
-                    <thisint> x </thisint>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <thisint> size </thisint>
-                  </term>
-                </expression>
-                <symbol> , </symbol>
-                <expression>
-                  <term>
-                    <thisint> y </thisint>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <thisint> size </thisint>
-                  </term>
-                </expression>
-              </expressionList>
-              <symbol> ) </symbol>
-              <symbol> ; </symbol>
-            </doStatement>
-            <letStatement>
-              <keyword> let </keyword>
-              <thisint> x </thisint>
-              <symbol> = </symbol>
-              <expression>
-                <term>
-                  <thisint> x </thisint>
-                </term>
-                <symbol> - </symbol>
-                <term>
-                  <integerConstant> 2 </integerConstant>
-                </term>
-              </expression>
-              <symbol> ; </symbol>
-            </letStatement>
-            <doStatement>
-              <keyword> do </keyword>
-              <identifier> Screen </identifier>
-              <symbol> . </symbol>
-              <identifier> setColor </identifier>
-              <symbol> ( </symbol>
-              <expressionList>
-                <expression>
-                  <term>
-                    <keyword> true </keyword>
-                  </term>
-                </expression>
-              </expressionList>
-              <symbol> ) </symbol>
-              <symbol> ; </symbol>
-            </doStatement>
-            <doStatement>
-              <keyword> do </keyword>
-              <identifier> Screen </identifier>
-              <symbol> . </symbol>
-              <identifier> drawRectangle </identifier>
-              <symbol> ( </symbol>
-              <expressionList>
-                <expression>
-                  <term>
-                    <thisint> x </thisint>
-                  </term>
-                </expression>
-                <symbol> , </symbol>
-                <expression>
-                  <term>
-                    <thisint> y </thisint>
-                  </term>
-                </expression>
-                <symbol> , </symbol>
-                <expression>
-                  <term>
-                    <thisint> x </thisint>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <integerConstant> 1 </integerConstant>
-                  </term>
-                </expression>
-                <symbol> , </symbol>
-                <expression>
-                  <term>
-                    <thisint> y </thisint>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <thisint> size </thisint>
-                  </term>
-                </expression>
-              </expressionList>
-              <symbol> ) </symbol>
-              <symbol> ; </symbol>
-            </doStatement>
-          </statements>
-          <symbol> } </symbol>
-        </ifStatement>
-        <returnStatement>
-          <keyword> return </keyword>
-          <symbol> ; </symbol>
-        </returnStatement>
-      </statements>
-      <symbol> } </symbol>
-    </subroutineBody>
-  </subroutineDec>
-  <subroutineDec>
-    <keyword> method </keyword>
-    <keyword> void </keyword>
-    <identifier> moveRight </identifier>
-    <symbol> ( </symbol>
-    <parameterList>
-    </parameterList>
-    <symbol> ) </symbol>
-    <subroutineBody>
-      <symbol> { </symbol>
-      <statements>
-        <ifStatement>
-          <keyword> if </keyword>
-          <symbol> ( </symbol>
-          <expression>
-            <term>
-              <symbol> ( </symbol>
-              <expression>
-                <term>
-                  <thisint> x </thisint>
-                </term>
-                <symbol> + </symbol>
-                <term>
-                  <thisint> size </thisint>
-                </term>
-              </expression>
-              <symbol> ) </symbol>
+              <localint> i </localint>
             </term>
             <symbol> &lt; </symbol>
             <term>
-              <integerConstant> 510 </integerConstant>
+              <localint> length </localint>
             </term>
           </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
           <statements>
-            <doStatement>
-              <keyword> do </keyword>
-              <identifier> Screen </identifier>
-              <symbol> . </symbol>
-              <identifier> setColor </identifier>
-              <symbol> ( </symbol>
-              <expressionList>
-                <expression>
-                  <term>
-                    <keyword> false </keyword>
-                  </term>
-                </expression>
-              </expressionList>
-              <symbol> ) </symbol>
-              <symbol> ; </symbol>
-            </doStatement>
-            <doStatement>
-              <keyword> do </keyword>
-              <identifier> Screen </identifier>
-              <symbol> . </symbol>
-              <identifier> drawRectangle </identifier>
-              <symbol> ( </symbol>
-              <expressionList>
-                <expression>
-                  <term>
-                    <thisint> x </thisint>
-                  </term>
-                </expression>
-                <symbol> , </symbol>
-                <expression>
-                  <term>
-                    <thisint> y </thisint>
-                  </term>
-                </expression>
-                <symbol> , </symbol>
-                <expression>
-                  <term>
-                    <thisint> x </thisint>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <integerConstant> 1 </integerConstant>
-                  </term>
-                </expression>
-                <symbol> , </symbol>
-                <expression>
-                  <term>
-                    <thisint> y </thisint>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <thisint> size </thisint>
-                  </term>
-                </expression>
-              </expressionList>
-              <symbol> ) </symbol>
-              <symbol> ; </symbol>
-            </doStatement>
             <letStatement>
               <keyword> let </keyword>
-              <thisint> x </thisint>
+              <localArray> a </localArray>
+              <symbol> [ </symbol>
+              <expression>
+                <term>
+                  <localint> i </localint>
+                </term>
+              </expression>
+              <symbol> ] </symbol>
               <symbol> = </symbol>
               <expression>
                 <term>
-                  <thisint> x </thisint>
-                </term>
-                <symbol> + </symbol>
-                <term>
-                  <integerConstant> 2 </integerConstant>
+                  <identifier> Keyboard </identifier>
+                  <symbol> . </symbol>
+                  <identifier> readInt </identifier>
+                  <symbol> ( </symbol>
+                  <expressionList>
+                    <expression>
+                      <term>
+                        <stringConstant> Enter a number:  </stringConstant>
+                      </term>
+                    </expression>
+                  </expressionList>
+                  <symbol> ) </symbol>
                 </term>
               </expression>
               <symbol> ; </symbol>
             </letStatement>
-            <doStatement>
-              <keyword> do </keyword>
-              <identifier> Screen </identifier>
-              <symbol> . </symbol>
-              <identifier> setColor </identifier>
-              <symbol> ( </symbol>
-              <expressionList>
-                <expression>
-                  <term>
-                    <keyword> true </keyword>
-                  </term>
-                </expression>
-              </expressionList>
-              <symbol> ) </symbol>
+            <letStatement>
+              <keyword> let </keyword>
+              <localint> sum </localint>
+              <symbol> = </symbol>
+              <expression>
+                <term>
+                  <localint> sum </localint>
+                </term>
+                <symbol> + </symbol>
+                <term>
+                  <localArray> a </localArray>
+                  <symbol> [ </symbol>
+                  <expression>
+                    <term>
+                      <localint> i </localint>
+                    </term>
+                  </expression>
+                  <symbol> ] </symbol>
+                </term>
+              </expression>
               <symbol> ; </symbol>
-            </doStatement>
-            <doStatement>
-              <keyword> do </keyword>
-              <identifier> Screen </identifier>
-              <symbol> . </symbol>
-              <identifier> drawRectangle </identifier>
-              <symbol> ( </symbol>
-              <expressionList>
-                <expression>
-                  <term>
-                    <symbol> ( </symbol>
-                    <expression>
-                      <term>
-                        <thisint> x </thisint>
-                      </term>
-                      <symbol> + </symbol>
-                      <term>
-                        <thisint> size </thisint>
-                      </term>
-                    </expression>
-                    <symbol> ) </symbol>
-                  </term>
-                  <symbol> - </symbol>
-                  <term>
-                    <integerConstant> 1 </integerConstant>
-                  </term>
-                </expression>
-                <symbol> , </symbol>
-                <expression>
-                  <term>
-                    <thisint> y </thisint>
-                  </term>
-                </expression>
-                <symbol> , </symbol>
-                <expression>
-                  <term>
-                    <thisint> x </thisint>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <thisint> size </thisint>
-                  </term>
-                </expression>
-                <symbol> , </symbol>
-                <expression>
-                  <term>
-                    <thisint> y </thisint>
-                  </term>
-                  <symbol> + </symbol>
-                  <term>
-                    <thisint> size </thisint>
-                  </term>
-                </expression>
-              </expressionList>
-              <symbol> ) </symbol>
+            </letStatement>
+            <letStatement>
+              <keyword> let </keyword>
+              <localint> i </localint>
+              <symbol> = </symbol>
+              <expression>
+                <term>
+                  <localint> i </localint>
+                </term>
+                <symbol> + </symbol>
+                <term>
+                  <integerConstant> 1 </integerConstant>
+                </term>
+              </expression>
               <symbol> ; </symbol>
-            </doStatement>
+            </letStatement>
           </statements>
           <symbol> } </symbol>
-        </ifStatement>
+        </whileStatement>
+        <doStatement>
+          <keyword> do </keyword>
+          <identifier> Output </identifier>
+          <symbol> . </symbol>
+          <identifier> printString </identifier>
+          <symbol> ( </symbol>
+          <expressionList>
+            <expression>
+              <term>
+                <stringConstant> The average is  </stringConstant>
+              </term>
+            </expression>
+          </expressionList>
+          <symbol> ) </symbol>
+          <symbol> ; </symbol>
+        </doStatement>
+        <doStatement>
+          <keyword> do </keyword>
+          <identifier> Output </identifier>
+          <symbol> . </symbol>
+          <identifier> printInt </identifier>
+          <symbol> ( </symbol>
+          <expressionList>
+            <expression>
+              <term>
+                <localint> sum </localint>
+              </term>
+              <symbol> / </symbol>
+              <term>
+                <localint> length </localint>
+              </term>
+            </expression>
+          </expressionList>
+          <symbol> ) </symbol>
+          <symbol> ; </symbol>
+        </doStatement>
         <returnStatement>
           <keyword> return </keyword>
           <symbol> ; </symbol>

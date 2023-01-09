@@ -12,7 +12,7 @@ file_root = "11/ConvertToBin/"
 # compilationEngine = CompilationEngine(file_root + "Main.jack")
 
 # find the path and create a list of all the files.
-path = "11/Square/"
+path = "11/Average/"
 dir_list = os.listdir(path)
 print(dir_list)
 
