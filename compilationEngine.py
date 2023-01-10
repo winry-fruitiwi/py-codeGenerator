@@ -449,6 +449,9 @@ class CompilationEngine:
         self.writeToOutput("<letStatement>\n")
         self.indent()
 
+        # a flag for if I have to assign the expression's value to a list index
+        listIndexFound = False
+
         # eat let
         self.eat("let")
 
@@ -473,6 +476,8 @@ class CompilationEngine:
                                self.st.indexOf(name))
             self.vmw.writeArithmetic("add")
 
+            listIndexFound = True
+
         # eat =
         self.eat("=")
 
@@ -485,8 +490,15 @@ class CompilationEngine:
         self.dedent()
         self.writeToOutput("</letStatement>\n")
 
-        # write a pop statement for the kind of the name
-        self.vmw.writePop(self.st.kindOf(name), self.st.indexOf(name))
+        if listIndexFound:
+            self.vmw.writePop("temp", 0)
+            self.vmw.writePop("pointer", 1)
+            self.vmw.writePush("temp", 0)
+            self.vmw.writePop("that", 0)
+
+        else:
+            # write a pop statement for the kind of the name
+            self.vmw.writePop(self.st.kindOf(name), self.st.indexOf(name))
 
     # compiles an if statement. grammar: if (expression){statement} (else
     # {statements})?
@@ -841,6 +853,9 @@ class CompilationEngine:
 
                         self.vmw.writePush(self.st.kindOf(current_name),
                                            self.st.indexOf(current_name))
+                        self.vmw.writeArithmetic("add")
+                        self.vmw.writePop("pointer", 1)
+                        self.vmw.writePush("that", 0)
 
                     # if the next token is a period, eat period, identifier, (, exprList, )
                     case ".":
