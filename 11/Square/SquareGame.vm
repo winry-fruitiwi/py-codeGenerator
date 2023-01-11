@@ -10,11 +10,15 @@ call Square.new 3
 pop this 0
 push constant 0
 pop this 1
+push pointer 0
+push pointer 0
 return
 
 // method detected
 
 function SquareGame.dispose 0
+push argument 0
+pop pointer 0
 
 // square is in the symbol table
 
@@ -22,6 +26,7 @@ function SquareGame.dispose 0
 push this 0
 call Square.dispose 1
 pop temp 0
+push pointer 0
 call Memory.deAlloc 1
 pop temp 0
 push constant 0
@@ -30,13 +35,15 @@ return
 // method detected
 
 function SquareGame.moveSquare 0
+push argument 0
+pop pointer 0
 
 // if statement
 push this 1
 push constant 1
 eq
 not
-if-goto L1
+if-goto IF_TRUE0
 
 // square is in the symbol table
 
@@ -44,15 +51,16 @@ if-goto L1
 push this 0
 call Square.moveUp 1
 pop temp 0
-goto ELSE1
-label L1
+goto IF_FALSE0
+label IF_TRUE0
+label IF_FALSE0
 
 // if statement
 push this 1
 push constant 2
 eq
 not
-if-goto L2
+if-goto IF_TRUE1
 
 // square is in the symbol table
 
@@ -60,15 +68,16 @@ if-goto L2
 push this 0
 call Square.moveDown 1
 pop temp 0
-goto ELSE2
-label L2
+goto IF_FALSE1
+label IF_TRUE1
+label IF_FALSE1
 
 // if statement
 push this 1
 push constant 3
 eq
 not
-if-goto L3
+if-goto IF_TRUE2
 
 // square is in the symbol table
 
@@ -76,15 +85,16 @@ if-goto L3
 push this 0
 call Square.moveLeft 1
 pop temp 0
-goto ELSE3
-label L3
+goto IF_FALSE2
+label IF_TRUE2
+label IF_FALSE2
 
 // if statement
 push this 1
 push constant 4
 eq
 not
-if-goto L4
+if-goto IF_TRUE3
 
 // square is in the symbol table
 
@@ -92,8 +102,9 @@ if-goto L4
 push this 0
 call Square.moveRight 1
 pop temp 0
-goto ELSE4
-label L4
+goto IF_FALSE3
+label IF_TRUE3
+label IF_FALSE3
 push constant 5
 call Sys.wait 1
 pop temp 0
@@ -103,52 +114,56 @@ return
 // method detected
 
 function SquareGame.run 2
+push argument 0
+pop pointer 0
 push constant 0
 pop local 1
 
 // while
-label START5
+label WHILE_EXP4
 push local 1
 not
 not
-if-goto END5
+if-goto WHILE_END4
 
 // while loop
 
 // while
-label START6
+label WHILE_EXP5
 push local 0
 push constant 0
 eq
 not
-if-goto END6
+if-goto WHILE_END5
 
 // while loop
 call Keyboard.keyPressed 0
 pop local 0
-call moveSquare 0
+push pointer 0
+call SquareGame.moveSquare 1
 pop temp 0
-goto START6
-label END6
+goto WHILE_EXP5
+label WHILE_END5
 
 // if statement
 push local 0
 push constant 81
 eq
 not
-if-goto L7
-push constant 1
-neg
+if-goto IF_TRUE6
+push constant 0
+not
 pop local 1
-goto ELSE7
-label L7
+goto IF_FALSE6
+label IF_TRUE6
+label IF_FALSE6
 
 // if statement
 push local 0
 push constant 90
 eq
 not
-if-goto L8
+if-goto IF_TRUE7
 
 // square is in the symbol table
 
@@ -156,15 +171,16 @@ if-goto L8
 push this 0
 call Square.decSize 1
 pop temp 0
-goto ELSE8
-label L8
+goto IF_FALSE7
+label IF_TRUE7
+label IF_FALSE7
 
 // if statement
 push local 0
 push constant 88
 eq
 not
-if-goto L9
+if-goto IF_TRUE8
 
 // square is in the symbol table
 
@@ -172,70 +188,76 @@ if-goto L9
 push this 0
 call Square.incSize 1
 pop temp 0
-goto ELSE9
-label L9
+goto IF_FALSE8
+label IF_TRUE8
+label IF_FALSE8
 
 // if statement
 push local 0
 push constant 131
 eq
 not
-if-goto L10
+if-goto IF_TRUE9
 push constant 1
 pop this 1
-goto ELSE10
-label L10
+goto IF_FALSE9
+label IF_TRUE9
+label IF_FALSE9
 
 // if statement
 push local 0
 push constant 133
 eq
 not
-if-goto L11
+if-goto IF_TRUE10
 push constant 2
 pop this 1
-goto ELSE11
-label L11
+goto IF_FALSE10
+label IF_TRUE10
+label IF_FALSE10
 
 // if statement
 push local 0
 push constant 130
 eq
 not
-if-goto L12
+if-goto IF_TRUE11
 push constant 3
 pop this 1
-goto ELSE12
-label L12
+goto IF_FALSE11
+label IF_TRUE11
+label IF_FALSE11
 
 // if statement
 push local 0
 push constant 132
 eq
 not
-if-goto L13
+if-goto IF_TRUE12
 push constant 4
 pop this 1
-goto ELSE13
-label L13
+goto IF_FALSE12
+label IF_TRUE12
+label IF_FALSE12
 
 // while
-label START14
+label WHILE_EXP13
 push local 0
 push constant 0
 eq
 not
 not
-if-goto END14
+if-goto WHILE_END13
 
 // while loop
 call Keyboard.keyPressed 0
 pop local 0
-call moveSquare 0
+push pointer 0
+call SquareGame.moveSquare 1
 pop temp 0
-goto START14
-label END14
-goto 13
-label 12
+goto WHILE_EXP13
+label WHILE_END13
+goto WHILE_EXP4
+label WHILE_END4
 push constant 0
 return

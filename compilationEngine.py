@@ -21,7 +21,7 @@ class CompilationEngine:
         self.st = SymbolTable()
 
         # the number of times I've created a label in an if statement
-        self.numLabels = 0
+        self.numLabels = -1
 
         # the labels that currently need to be written
         self.labelsToBeWritten = []
@@ -145,7 +145,7 @@ class CompilationEngine:
         self.numFields += numFields
 
     # compiles the inside of a subroutine declaration
-    def compileSubRoutineBody(self, functionName, ifConstructor):
+    def compileSubRoutineBody(self, functionName, ifConstructor, ifMethod):
         self.writeToOutput("<subroutineBody>\n")
         self.indent()
 
@@ -175,6 +175,10 @@ class CompilationEngine:
             self.vmw.writeCall("Memory.alloc", 1)
             self.vmw.writePop("pointer", 0)
 
+        if ifMethod:
+            self.vmw.writePush("argument", 0)
+            self.vmw.writePop("pointer", 0)
+
         # compile statements
         self.compileStatements()
 
@@ -195,6 +199,7 @@ class CompilationEngine:
         self.skip_advance = True
 
         ifConstructor = False
+        ifMethod = False
 
         match self.tokenizer.current_token:
             case "constructor":
@@ -206,6 +211,7 @@ class CompilationEngine:
                 self.eat("method")
                 self.st.define(self.currentClassName, "this", self.currentClassName)
                 self.vmw.writeComment("method detected")
+                ifMethod = True
 
         # advance, then check for void or type
         self.advance()
@@ -236,7 +242,7 @@ class CompilationEngine:
 
         # compile subRoutineBody. for now, this can just be a compile statement
         # for statements in brackets.
-        self.compileSubRoutineBody(functionName, ifConstructor)
+        self.compileSubRoutineBody(functionName, ifConstructor, ifMethod)
 
         self.dedent()
         self.writeToOutput("</subroutineDec>\n")
@@ -518,14 +524,14 @@ class CompilationEngine:
         # eat expression in parens
         self.compileExprInParens()
         self.vmw.writeArithmetic("not")
-        self.vmw.writeIf(f"L{self.numLabels}")
+        self.vmw.writeIf(f"IF_TRUE{self.numLabels}")
         self.labelsToBeWritten.append(self.numLabels)
 
         # eat statement in brackets
         self.eat("{")
         self.compileStatements()
-        self.vmw.writeGoto(f"ELSE{self.numLabels}")
-        self.vmw.writeLabel(f"L{self.labelsToBeWritten.pop()}")
+        self.vmw.writeGoto(f"IF_FALSE{self.numLabels}")
+        self.vmw.writeLabel(f"IF_TRUE{self.labelsToBeWritten.pop()}")
         self.labelsToBeWritten.append(self.numLabels)
         self.eat("}")
 
@@ -537,7 +543,7 @@ class CompilationEngine:
             self.vmw.writeComment("else statement")
             self.eat("else")
             self.compileStatementsInBrackets()
-            self.vmw.writeLabel(f"ELSE{self.labelsToBeWritten.pop()}")
+        self.vmw.writeLabel(f"IF_FALSE{self.labelsToBeWritten.pop()}")
 
 
         # write ending tag to output
@@ -596,16 +602,16 @@ class CompilationEngine:
         self.eat("while")
 
         # compile (expression)
-        self.vmw.writeLabel("START" + str(self.numLabels))
+        self.vmw.writeLabel("WHILE_EXP" + str(self.numLabels))
         self.compileExprInParens()
         self.vmw.writeArithmetic("not")
-        self.vmw.writeIf("END" + str(self.numLabels))
+        self.vmw.writeIf("WHILE_END" + str(self.numLabels))
 
         self.vmw.writeComment("while loop")
 
         # compile {statements}
-        self.labelsToBeWritten.append(f"END{str(self.numLabels)}")
-        self.labelsToBeWritten.append(f"START{str(self.numLabels)}")
+        self.labelsToBeWritten.append(f"WHILE_END{str(self.numLabels)}")
+        self.labelsToBeWritten.append(f"WHILE_EXP{str(self.numLabels)}")
         self.compileStatementsInBrackets()
         self.vmw.writeGoto(self.labelsToBeWritten.pop())
         self.vmw.writeLabel(self.labelsToBeWritten.pop())
@@ -663,11 +669,14 @@ class CompilationEngine:
         self.skip_advance = True
 
         # if the current token is a term, compile expression
-        if (self.tokenizer.current_token == "this" or
-                self.tokenizer.tokenType() == TokenType.IDENTIFIER or
+        if (self.tokenizer.tokenType() == TokenType.IDENTIFIER or
                 self.tokenizer.tokenType() == TokenType.STRING_CONST or
                 self.tokenizer.tokenType() == TokenType.INT_CONST):
             self.compileExpression()
+
+        if self.tokenizer.current_token == "this":
+            self.compileExpression()
+            self.vmw.writePush("pointer", 0)
 
         # otherwise, then we know that there's no new value pushed onto the
         # stack, so we can write "push constant 0"
@@ -784,11 +793,14 @@ class CompilationEngine:
             # if the type is a keyword, compile a keyword.
             case TokenType.KEYWORD:
                 if self.tokenizer.current_token == "true":
-                    self.vmw.writePush("constant", 1)
-                    self.vmw.writeArithmetic("neg")
+                    self.vmw.writePush("constant", 0)
+                    self.vmw.writeArithmetic("not")
 
                 if self.tokenizer.current_token == "false":
                     self.vmw.writePush("constant", 0)
+
+                if self.tokenizer.current_token == "this":
+                    self.vmw.writePush("pointer", 0)
 
                 self.compileKeyword()
                 compiledToken = True
@@ -811,7 +823,9 @@ class CompilationEngine:
                         numArgs = self.compileExpressionList()
                         self.eat(")")
 
-                        self.vmw.writeCall(current_name, numArgs)
+                        self.vmw.writeCall(
+                            self.currentClassName + "." + current_name,
+                            numArgs + 1)
 
                     # if the next token is [, eat [, compile expr, eat ]
                     case "[":
@@ -1057,6 +1071,9 @@ class CompilationEngine:
         # keeps track of if we found the current token in the symbol table.
         subNameFoundInST = False
 
+        # checks if the current subroutine call doesn't include className.
+        classNameNotIncluded = False
+
         # if the subroutine name is in the table, that means it's a variable
         # name, and we can retrieve its properties.
         if self.st.inTable(currentSubName):
@@ -1079,6 +1096,8 @@ class CompilationEngine:
         self.skip_advance = True
 
         if self.tokenizer.current_token == "(":
+            classNameNotIncluded = True
+
             # eat (
             self.eat("(")
 
@@ -1104,10 +1123,17 @@ class CompilationEngine:
             numArgs = self.compileExpressionList()
             self.eat(")")
 
+        # if the class name is found in ST, numArgs += 1
         if subNameFoundInST:
             numArgs += 1
 
-        self.vmw.writeCall(currentSubName, numArgs)
+        # if the class name wasn't found, push pointer 0
+        if classNameNotIncluded:
+            self.vmw.writePush("pointer", 0)
+            self.vmw.writeCall(self.currentClassName + "." + currentSubName,
+                               numArgs + 1)
+        else:
+            self.vmw.writeCall(currentSubName, numArgs)
 
     # increases self.indent
     def indent(self):

@@ -9,13 +9,19 @@ push argument 1
 pop this 1
 push argument 2
 pop this 2
-call draw 0
+push pointer 0
+call Square.draw 1
 pop temp 0
+push pointer 0
+push pointer 0
 return
 
 // method detected
 
 function Square.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
 call Memory.deAlloc 1
 pop temp 0
 push constant 0
@@ -24,8 +30,10 @@ return
 // method detected
 
 function Square.draw 0
-push constant 1
-neg
+push argument 0
+pop pointer 0
+push constant 0
+not
 call Screen.setColor 1
 pop temp 0
 push this 0
@@ -44,6 +52,8 @@ return
 // method detected
 
 function Square.erase 0
+push argument 0
+pop pointer 0
 push constant 0
 call Screen.setColor 1
 pop temp 0
@@ -63,6 +73,8 @@ return
 // method detected
 
 function Square.incSize 0
+push argument 0
+pop pointer 0
 
 // if statement
 push this 1
@@ -77,53 +89,63 @@ push constant 510
 lt
 and
 not
-if-goto L1
-call erase 0
+if-goto IF_TRUE0
+push pointer 0
+call Square.erase 1
 pop temp 0
 push this 2
 push constant 2
 add
 pop this 2
-call draw 0
+push pointer 0
+call Square.draw 1
 pop temp 0
-goto ELSE1
-label L1
+goto IF_FALSE0
+label IF_TRUE0
+label IF_FALSE0
 push constant 0
 return
 
 // method detected
 
 function Square.decSize 0
+push argument 0
+pop pointer 0
 
 // if statement
 push this 2
 push constant 2
 gt
 not
-if-goto L2
-call erase 0
+if-goto IF_TRUE1
+push pointer 0
+call Square.erase 1
 pop temp 0
 push this 2
 push constant 2
 sub
 pop this 2
-call draw 0
+push pointer 0
+call Square.draw 1
 pop temp 0
-goto ELSE2
-label L2
+goto IF_FALSE1
+label IF_TRUE1
+label IF_FALSE1
 push constant 0
 return
 
 // method detected
 
 function Square.moveUp 0
+push argument 0
+pop pointer 0
 
 // if statement
 push this 1
 push constant 1
 gt
 not
-if-goto L3
+if-goto IF_TRUE2
 push constant 0
 call Screen.setColor 1
 pop temp 0
@@ -145,8 +167,8 @@ push this 1
 push constant 2
 sub
 pop this 1
-push constant 1
-neg
+push constant 0
+not
 call Screen.setColor 1
 pop temp 0
 push this 0
@@ -159,14 +181,17 @@ push constant 1
 add
 call Screen.drawRectangle 4
 pop temp 0
-goto ELSE3
-label L3
+goto IF_FALSE2
+label IF_TRUE2
+label IF_FALSE2
 push constant 0
 return
 
 // method detected
 
 function Square.moveDown 0
+push argument 0
+pop pointer 0
 
 // if statement
 push this 1
@@ -175,7 +200,7 @@ add
 push constant 254
 lt
 not
-if-goto L4
+if-goto IF_TRUE3
 push constant 0
 call Screen.setColor 1
 pop temp 0
@@ -193,8 +218,8 @@ push this 1
 push constant 2
 add
 pop this 1
-push constant 1
-neg
+push constant 0
+not
 call Screen.setColor 1
 pop temp 0
 push this 0
@@ -211,21 +236,24 @@ push this 2
 add
 call Screen.drawRectangle 4
 pop temp 0
-goto ELSE4
-label L4
+goto IF_FALSE3
+label IF_TRUE3
+label IF_FALSE3
 push constant 0
 return
 
 // method detected
 
 function Square.moveLeft 0
+push argument 0
+pop pointer 0
 
 // if statement
 push this 0
 push constant 1
 gt
 not
-if-goto L5
+if-goto IF_TRUE4
 push constant 0
 call Screen.setColor 1
 pop temp 0
@@ -247,8 +275,8 @@ push this 0
 push constant 2
 sub
 pop this 0
-push constant 1
-neg
+push constant 0
+not
 call Screen.setColor 1
 pop temp 0
 push this 0
@@ -261,14 +289,17 @@ push this 2
 add
 call Screen.drawRectangle 4
 pop temp 0
-goto ELSE5
-label L5
+goto IF_FALSE4
+label IF_TRUE4
+label IF_FALSE4
 push constant 0
 return
 
 // method detected
 
 function Square.moveRight 0
+push argument 0
+pop pointer 0
 
 // if statement
 push this 0
@@ -277,7 +308,7 @@ add
 push constant 510
 lt
 not
-if-goto L6
+if-goto IF_TRUE5
 push constant 0
 call Screen.setColor 1
 pop temp 0
@@ -295,8 +326,8 @@ push this 0
 push constant 2
 add
 pop this 0
-push constant 1
-neg
+push constant 0
+not
 call Screen.setColor 1
 pop temp 0
 push this 0
@@ -313,7 +344,8 @@ push this 2
 add
 call Screen.drawRectangle 4
 pop temp 0
-goto ELSE6
-label L6
+goto IF_FALSE5
+label IF_TRUE5
+label IF_FALSE5
 push constant 0
 return
