@@ -469,6 +469,10 @@ class CompilationEngine:
             self.compileExpression()
             self.eat("]")
 
+            self.vmw.writePush(self.st.kindOf(name),
+                               self.st.indexOf(name))
+            self.vmw.writeArithmetic("add")
+
         # eat =
         self.eat("=")
 
@@ -782,6 +786,8 @@ class CompilationEngine:
         match self.tokenizer.tokenType():
             # if current token is a string constant, compile it
             case TokenType.STRING_CONST:
+                self.vmw.writeComment(
+                    "str_const found: " + self.tokenizer.current_token)
                 self.compileStrConst()
                 compiledToken = True
 
@@ -832,6 +838,9 @@ class CompilationEngine:
                         self.eat("[")
                         self.compileExpression()
                         self.eat("]")
+
+                        self.vmw.writePush(self.st.kindOf(current_name),
+                                           self.st.indexOf(current_name))
 
                     # if the next token is a period, eat period, identifier, (, exprList, )
                     case ".":
@@ -965,6 +974,16 @@ class CompilationEngine:
             self.skip_advance = False
 
         assert self.tokenizer.tokenType() == TokenType.STRING_CONST
+
+        tokenizedString = self.tokenizer.stringVal()
+        lenStr = len(tokenizedString)
+
+        self.vmw.writePush("constant", lenStr)
+        self.vmw.writeCall("String.new", 1)
+
+        for char in tokenizedString:
+            self.vmw.writePush("constant", ord(char))
+            self.vmw.writeCall("String.appendChar", 2)
 
         self.writeToOutput(
             f"<stringConstant> {self.tokenizer.stringVal()} </stringConstant>\n")
