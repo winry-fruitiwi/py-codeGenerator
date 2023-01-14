@@ -25,7 +25,6 @@ push pointer 0
 call Ball.show 1
 pop temp 0
 push pointer 0
-push pointer 0
 return
 
 // method detected
@@ -92,7 +91,6 @@ function Ball.getLeft 0
 push argument 0
 pop pointer 0
 push this 0
-push constant 0
 return
 
 // method detected
@@ -103,7 +101,6 @@ pop pointer 0
 push this 0
 push constant 5
 add
-push constant 0
 return
 
 // method detected
@@ -111,11 +108,11 @@ return
 function Ball.setDestination 3
 push argument 0
 pop pointer 0
-push argument 0
+push argument 1
 push this 0
 sub
 pop this 2
-push argument 1
+push argument 2
 push this 1
 sub
 pop this 3
@@ -141,11 +138,11 @@ pop local 0
 push local 2
 pop local 1
 push this 1
-push argument 1
+push argument 2
 lt
 pop this 8
 push this 0
-push argument 0
+push argument 1
 lt
 pop this 9
 goto IF_FALSE0
@@ -153,11 +150,11 @@ label IF_TRUE0
 
 // else statement
 push this 0
-push argument 0
+push argument 1
 lt
 pop this 8
 push this 1
-push argument 1
+push argument 2
 lt
 pop this 9
 label IF_FALSE0
@@ -364,7 +361,6 @@ push pointer 0
 call Ball.show 1
 pop temp 0
 push this 14
-push constant 0
 return
 
 // method detected
@@ -382,7 +378,7 @@ call Math.divide 2
 pop local 3
 
 // if statement
-push argument 0
+push argument 1
 push constant 0
 eq
 not
@@ -399,14 +395,14 @@ push this 2
 push constant 0
 lt
 not
-push argument 0
+push argument 1
 push constant 1
 eq
 and
 push this 2
 push constant 0
 lt
-push argument 0
+push argument 1
 push constant 1
 neg
 eq

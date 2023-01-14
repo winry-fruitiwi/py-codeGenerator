@@ -209,7 +209,7 @@ class CompilationEngine:
                 self.eat("function")
             case "method":
                 self.eat("method")
-                self.st.define(self.currentClassName, "this", self.currentClassName)
+                self.st.define(self.currentClassName, "argument", self.currentClassName)
                 self.vmw.writeComment("method detected")
                 ifMethod = True
 
@@ -687,12 +687,9 @@ class CompilationEngine:
         # if the current token is a term, compile expression
         if (self.tokenizer.tokenType() == TokenType.IDENTIFIER or
                 self.tokenizer.tokenType() == TokenType.STRING_CONST or
-                self.tokenizer.tokenType() == TokenType.INT_CONST):
+                self.tokenizer.tokenType() == TokenType.INT_CONST or
+                self.tokenizer.current_token == "this"):
             self.compileExpression()
-
-        if self.tokenizer.current_token == "this":
-            self.compileExpression()
-            self.vmw.writePush("pointer", 0)
 
         # otherwise, then we know that there's no new value pushed onto the
         # stack, so we can write "push constant 0"
@@ -762,6 +759,8 @@ class CompilationEngine:
             if not self.skip_advance:
                 self.advance()
             self.skip_advance = True
+
+        currentCommands = currentCommands[::-1]
 
         for command in currentCommands:
             if command == "mul":
