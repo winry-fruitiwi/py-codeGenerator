@@ -8,7 +8,7 @@
  */
 class PongGame {
 
-    static PongGame instance; // the singelton, a Pong game instance     
+    static PongGame instance; // the singleton, a Pong game instance
     field Bat bat;            // the bat
     field Ball ball;          // the ball
     field int wall;           // the current wall that the ball is bouncing off of.
@@ -57,7 +57,7 @@ class PongGame {
         return instance;
     }
 
-    /** Starts the game, and andles inputs from the user that control
+    /** Starts the game, and handles inputs from the user that control
      *  the bat's movement direction. */
     method void run() {
         var char key;

@@ -844,6 +844,8 @@ class CompilationEngine:
                             self.currentClassName + "." + current_name,
                             numArgs + 1)
 
+                        self.vmw.writeComment(current_name)
+
                     # if the next token is [, eat [, compile expr, eat ]
                     case "[":
                         self.eat("[")
@@ -858,9 +860,15 @@ class CompilationEngine:
 
                     # if the next token is a period, eat period, identifier, (, exprList, )
                     case ".":
+                        numArgs = 0
                         # this is a subroutine call, so add a period and the
                         # next token to current_name, then write call statement
                         # with numArgs from compileExpressionList
+                        if self.st.inTable(current_name):
+                            numArgs += 1
+                            self.vmw.writePush("this", self.st.indexOf(current_name))
+                            current_name = self.st.typeOf(current_name)
+
                         current_name += "."
                         self.eat(".")
 
@@ -869,7 +877,7 @@ class CompilationEngine:
                         current_name += self.tokenizer.current_token
                         self.compileIdentifier()
                         self.eat("(")
-                        numArgs = self.compileExpressionList()
+                        numArgs += self.compileExpressionList()
                         self.eat(")")
 
                         self.vmw.writeCall(current_name, numArgs)
