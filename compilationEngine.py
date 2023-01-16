@@ -210,7 +210,6 @@ class CompilationEngine:
             case "method":
                 self.eat("method")
                 self.st.define(self.currentClassName, "argument", self.currentClassName)
-                self.vmw.writeComment("method detected")
                 ifMethod = True
 
         # advance, then check for void or type
@@ -531,8 +530,6 @@ class CompilationEngine:
         self.writeToOutput("<ifStatement>\n")
         self.indent()
 
-        self.vmw.writeComment("if statement")
-
         self.eat("if")
 
         self.numLabels += 1
@@ -556,7 +553,6 @@ class CompilationEngine:
         self.advance()
         self.skip_advance = True
         if self.tokenizer.current_token == "else":
-            self.vmw.writeComment("else statement")
             self.eat("else")
             self.compileStatementsInBrackets()
         self.vmw.writeLabel(f"IF_FALSE{self.labelsToBeWritten.pop()}")
@@ -613,8 +609,6 @@ class CompilationEngine:
         self.writeToOutput("<whileStatement>\n")
         self.indent()
 
-        self.vmw.writeComment("while")
-
         self.eat("while")
 
         # compile (expression)
@@ -622,8 +616,6 @@ class CompilationEngine:
         self.compileExprInParens()
         self.vmw.writeArithmetic("not")
         self.vmw.writeIf("WHILE_END" + str(self.numLabels))
-
-        self.vmw.writeComment("while loop")
 
         # compile {statements}
         self.labelsToBeWritten.append(f"WHILE_END{str(self.numLabels)}")
@@ -797,8 +789,6 @@ class CompilationEngine:
         match self.tokenizer.tokenType():
             # if current token is a string constant, compile it
             case TokenType.STRING_CONST:
-                self.vmw.writeComment(
-                    "str_const found: " + self.tokenizer.current_token)
                 self.compileStrConst()
                 compiledToken = True
 
@@ -1119,8 +1109,6 @@ class CompilationEngine:
         # name, and we can retrieve its properties.
         if self.st.inTable(currentSubName):
             typeOfSubName = self.st.typeOf(currentSubName)
-            self.vmw.writeComment(currentSubName + " is in the symbol table")
-            self.vmw.writeComment(currentSubName + " has type of " + typeOfSubName)
             if self.st.kindOf(currentSubName) == "field":
                 self.vmw.writePush("this", self.st.indexOf(currentSubName))
 

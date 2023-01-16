@@ -1,4 +1,3 @@
-
 function Bat.new 0
 push constant 5
 call Memory.alloc 1
@@ -18,9 +17,6 @@ call Bat.show 1
 pop temp 0
 push pointer 0
 return
-
-// method detected
-
 function Bat.dispose 0
 push argument 0
 pop pointer 0
@@ -29,9 +25,6 @@ call Memory.deAlloc 1
 pop temp 0
 push constant 0
 return
-
-// method detected
-
 function Bat.show 0
 push argument 0
 pop pointer 0
@@ -44,9 +37,6 @@ call Bat.draw 1
 pop temp 0
 push constant 0
 return
-
-// method detected
-
 function Bat.hide 0
 push argument 0
 pop pointer 0
@@ -58,9 +48,6 @@ call Bat.draw 1
 pop temp 0
 push constant 0
 return
-
-// method detected
-
 function Bat.draw 0
 push argument 0
 pop pointer 0
@@ -76,9 +63,6 @@ call Screen.drawRectangle 4
 pop temp 0
 push constant 0
 return
-
-// method detected
-
 function Bat.setDirection 0
 push argument 0
 pop pointer 0
@@ -86,17 +70,11 @@ push argument 1
 pop this 4
 push constant 0
 return
-
-// method detected
-
 function Bat.getLeft 0
 push argument 0
 pop pointer 0
 push this 0
 return
-
-// method detected
-
 function Bat.getRight 0
 push argument 0
 pop pointer 0
@@ -104,9 +82,6 @@ push this 0
 push this 2
 add
 return
-
-// method detected
-
 function Bat.setWidth 0
 push argument 0
 pop pointer 0
@@ -120,14 +95,9 @@ call Bat.show 1
 pop temp 0
 push constant 0
 return
-
-// method detected
-
 function Bat.move 0
 push argument 0
 pop pointer 0
-
-// if statement
 push this 4
 push constant 1
 eq
@@ -137,8 +107,6 @@ push this 0
 push constant 4
 sub
 pop this 0
-
-// if statement
 push this 0
 push constant 0
 lt
@@ -184,14 +152,10 @@ call Screen.drawRectangle 4
 pop temp 0
 goto IF_FALSE1
 label IF_TRUE0
-
-// else statement
 push this 0
 push constant 4
 add
 pop this 0
-
-// if statement
 push this 0
 push this 2
 add

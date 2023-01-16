@@ -1,4 +1,3 @@
-
 function Ball.new 0
 push constant 15
 call Memory.alloc 1
@@ -26,9 +25,6 @@ call Ball.show 1
 pop temp 0
 push pointer 0
 return
-
-// method detected
-
 function Ball.dispose 0
 push argument 0
 pop pointer 0
@@ -37,9 +33,6 @@ call Memory.deAlloc 1
 pop temp 0
 push constant 0
 return
-
-// method detected
-
 function Ball.show 0
 push argument 0
 pop pointer 0
@@ -52,9 +45,6 @@ call Ball.draw 1
 pop temp 0
 push constant 0
 return
-
-// method detected
-
 function Ball.hide 0
 push argument 0
 pop pointer 0
@@ -66,9 +56,6 @@ call Ball.draw 1
 pop temp 0
 push constant 0
 return
-
-// method detected
-
 function Ball.draw 0
 push argument 0
 pop pointer 0
@@ -84,17 +71,11 @@ call Screen.drawRectangle 4
 pop temp 0
 push constant 0
 return
-
-// method detected
-
 function Ball.getLeft 0
 push argument 0
 pop pointer 0
 push this 0
 return
-
-// method detected
-
 function Ball.getRight 0
 push argument 0
 pop pointer 0
@@ -102,9 +83,6 @@ push this 0
 push constant 5
 add
 return
-
-// method detected
-
 function Ball.setDestination 3
 push argument 0
 pop pointer 0
@@ -126,8 +104,6 @@ push local 0
 push local 1
 lt
 pop this 7
-
-// if statement
 push this 7
 not
 if-goto IF_TRUE0
@@ -147,8 +123,6 @@ lt
 pop this 9
 goto IF_FALSE0
 label IF_TRUE0
-
-// else statement
 push this 0
 push argument 1
 lt
@@ -176,17 +150,12 @@ call Math.multiply 2
 pop this 6
 push constant 0
 return
-
-// method detected
-
 function Ball.move 0
 push argument 0
 pop pointer 0
 push pointer 0
 call Ball.hide 1
 pop temp 0
-
-// if statement
 push this 4
 push constant 0
 lt
@@ -198,19 +167,13 @@ add
 pop this 4
 goto IF_FALSE1
 label IF_TRUE1
-
-// else statement
 push this 4
 push this 6
 add
 pop this 4
-
-// if statement
 push this 9
 not
 if-goto IF_TRUE2
-
-// if statement
 push this 7
 not
 if-goto IF_TRUE3
@@ -220,8 +183,6 @@ add
 pop this 0
 goto IF_FALSE3
 label IF_TRUE3
-
-// else statement
 push this 1
 push constant 4
 add
@@ -229,10 +190,6 @@ pop this 1
 label IF_FALSE3
 goto IF_FALSE3
 label IF_TRUE2
-
-// else statement
-
-// if statement
 push this 7
 not
 if-goto IF_TRUE4
@@ -242,8 +199,6 @@ sub
 pop this 0
 goto IF_FALSE4
 label IF_TRUE4
-
-// else statement
 push this 1
 push constant 4
 sub
@@ -251,13 +206,9 @@ pop this 1
 label IF_FALSE4
 label IF_FALSE3
 label IF_FALSE1
-
-// if statement
 push this 8
 not
 if-goto IF_TRUE5
-
-// if statement
 push this 7
 not
 if-goto IF_TRUE6
@@ -267,8 +218,6 @@ add
 pop this 1
 goto IF_FALSE6
 label IF_TRUE6
-
-// else statement
 push this 0
 push constant 4
 add
@@ -276,10 +225,6 @@ pop this 0
 label IF_FALSE6
 goto IF_FALSE6
 label IF_TRUE5
-
-// else statement
-
-// if statement
 push this 7
 not
 if-goto IF_TRUE7
@@ -289,16 +234,12 @@ sub
 pop this 1
 goto IF_FALSE7
 label IF_TRUE7
-
-// else statement
 push this 0
 push constant 4
 sub
 pop this 0
 label IF_FALSE7
 label IF_FALSE6
-
-// if statement
 push this 0
 push this 10
 gt
@@ -312,8 +253,6 @@ pop this 0
 goto IF_FALSE8
 label IF_TRUE8
 label IF_FALSE8
-
-// if statement
 push this 0
 push this 11
 lt
@@ -327,8 +266,6 @@ pop this 0
 goto IF_FALSE9
 label IF_TRUE9
 label IF_FALSE9
-
-// if statement
 push this 1
 push this 12
 gt
@@ -342,8 +279,6 @@ pop this 1
 goto IF_FALSE10
 label IF_TRUE10
 label IF_FALSE10
-
-// if statement
 push this 1
 push this 13
 lt
@@ -362,9 +297,6 @@ call Ball.show 1
 pop temp 0
 push this 14
 return
-
-// method detected
-
 function Ball.bounce 5
 push argument 0
 pop pointer 0
@@ -376,8 +308,6 @@ push this 3
 push constant 10
 call Math.divide 2
 pop local 3
-
-// if statement
 push argument 1
 push constant 0
 eq
@@ -387,10 +317,6 @@ push constant 10
 pop local 4
 goto IF_FALSE12
 label IF_TRUE12
-
-// else statement
-
-// if statement
 push this 2
 push constant 0
 lt
@@ -414,14 +340,10 @@ push constant 20
 pop local 4
 goto IF_FALSE13
 label IF_TRUE13
-
-// else statement
 push constant 5
 pop local 4
 label IF_FALSE13
 label IF_FALSE12
-
-// if statement
 push this 14
 push constant 1
 eq
@@ -444,10 +366,6 @@ add
 pop local 1
 goto IF_FALSE14
 label IF_TRUE14
-
-// else statement
-
-// if statement
 push this 14
 push constant 2
 eq
@@ -469,10 +387,6 @@ add
 pop local 1
 goto IF_FALSE15
 label IF_TRUE15
-
-// else statement
-
-// if statement
 push this 14
 push constant 3
 eq
@@ -495,8 +409,6 @@ add
 pop local 0
 goto IF_FALSE16
 label IF_TRUE16
-
-// else statement
 push constant 0
 pop local 1
 push local 2

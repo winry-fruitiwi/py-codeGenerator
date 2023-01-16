@@ -1,4 +1,3 @@
-
 function PongGame.new 0
 push constant 7
 call Memory.alloc 1
@@ -21,10 +20,6 @@ push constant 0
 push constant 229
 call Ball.new 6
 pop this 1
-
-// ball is in the symbol table
-
-// ball has type of Ball
 push this 1
 push constant 400
 push constant 0
@@ -40,8 +35,6 @@ push constant 22
 push constant 0
 call Output.moveCursor 2
 pop temp 0
-
-// str_const found: "Score: 0"
 push constant 8
 call String.new 1
 push constant 83
@@ -72,23 +65,12 @@ push constant 0
 pop this 5
 push pointer 0
 return
-
-// method detected
-
 function PongGame.dispose 0
 push argument 0
 pop pointer 0
-
-// bat is in the symbol table
-
-// bat has type of Bat
 push this 0
 call Bat.dispose 1
 pop temp 0
-
-// ball is in the symbol table
-
-// ball has type of Ball
 push this 1
 call Ball.dispose 1
 pop temp 0
@@ -97,33 +79,22 @@ call Memory.deAlloc 1
 pop temp 0
 push constant 0
 return
-
 function PongGame.newInstance 0
 call PongGame.new 0
 pop static 0
 push constant 0
 return
-
 function PongGame.getInstance 0
 push static 0
 return
-
-// method detected
-
 function PongGame.run 1
 push argument 0
 pop pointer 0
-
-// while
 label WHILE_EXP0
 push this 3
 not
 not
 if-goto WHILE_END0
-
-// while loop
-
-// while
 label WHILE_EXP1
 push local 0
 push constant 0
@@ -133,14 +104,8 @@ not
 and
 not
 if-goto WHILE_END1
-
-// while loop
 call Keyboard.keyPressed 0
 pop local 0
-
-// bat is in the symbol table
-
-// bat has type of Bat
 push this 0
 call Bat.move 1
 pop temp 0
@@ -152,46 +117,28 @@ call Sys.wait 1
 pop temp 0
 goto WHILE_EXP1
 label WHILE_END1
-
-// if statement
 push local 0
 push constant 130
 eq
 not
 if-goto IF_TRUE2
-
-// bat is in the symbol table
-
-// bat has type of Bat
 push this 0
 push constant 1
 call Bat.setDirection 2
 pop temp 0
 goto IF_FALSE2
 label IF_TRUE2
-
-// else statement
-
-// if statement
 push local 0
 push constant 132
 eq
 not
 if-goto IF_TRUE3
-
-// bat is in the symbol table
-
-// bat has type of Bat
 push this 0
 push constant 2
 call Bat.setDirection 2
 pop temp 0
 goto IF_FALSE3
 label IF_TRUE3
-
-// else statement
-
-// if statement
 push local 0
 push constant 140
 eq
@@ -205,8 +152,6 @@ label IF_TRUE4
 label IF_FALSE4
 label IF_FALSE3
 label IF_FALSE2
-
-// while
 label WHILE_EXP5
 push local 0
 push constant 0
@@ -217,14 +162,8 @@ not
 and
 not
 if-goto WHILE_END5
-
-// while loop
 call Keyboard.keyPressed 0
 pop local 0
-
-// bat is in the symbol table
-
-// bat has type of Bat
 push this 0
 call Bat.move 1
 pop temp 0
@@ -238,8 +177,6 @@ goto WHILE_EXP5
 label WHILE_END5
 goto WHILE_EXP0
 label WHILE_END0
-
-// if statement
 push this 3
 not
 if-goto IF_TRUE6
@@ -247,8 +184,6 @@ push constant 10
 push constant 27
 call Output.moveCursor 2
 pop temp 0
-
-// str_const found: "Game Over"
 push constant 9
 call String.new 1
 push constant 71
@@ -276,17 +211,12 @@ label IF_TRUE6
 label IF_FALSE6
 push constant 0
 return
-
-// method detected
-
 function PongGame.moveBall 5
 push argument 0
 pop pointer 0
 push this 1
 call Ball.move 1
 pop this 2
-
-// if statement
 push this 2
 push constant 0
 gt
@@ -313,8 +243,6 @@ pop local 3
 push this 1
 call Ball.getRight 1
 pop local 4
-
-// if statement
 push this 2
 push constant 4
 eq
@@ -328,14 +256,10 @@ push local 3
 lt
 or
 pop this 3
-
-// if statement
 push this 3
 not
 not
 if-goto IF_TRUE9
-
-// if statement
 push local 4
 push local 1
 push constant 10
@@ -348,10 +272,6 @@ neg
 pop local 0
 goto IF_FALSE10
 label IF_TRUE10
-
-// else statement
-
-// if statement
 push local 3
 push local 2
 push constant 10
@@ -369,10 +289,6 @@ push this 6
 push constant 2
 sub
 pop this 6
-
-// bat is in the symbol table
-
-// bat has type of Bat
 push this 0
 push this 6
 call Bat.setWidth 2
@@ -394,10 +310,6 @@ label IF_FALSE11
 goto IF_FALSE11
 label IF_TRUE8
 label IF_FALSE11
-
-// ball is in the symbol table
-
-// ball has type of Ball
 push this 1
 push local 0
 call Ball.bounce 2

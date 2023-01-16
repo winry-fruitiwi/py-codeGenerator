@@ -37,7 +37,7 @@ class VMWriter:
 
     # writes a function declaration
     def writeFunction(self, function, args):
-        self.write("\nfunction " + function + " " + str(args))
+        self.write("function " + function + " " + str(args))
 
     # writes a return statement, which is just return
     def writeReturn(self):
@@ -45,7 +45,7 @@ class VMWriter:
 
     # utility method writing a comment
     def writeComment(self, comment):
-        self.write("\n// " + comment)
+        self.write("// " + comment)
 
     # closes the write-only output
     def close(self):
