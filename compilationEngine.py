@@ -536,15 +536,17 @@ class CompilationEngine:
 
         # eat expression in parens
         self.compileExprInParens()
-        self.vmw.writeArithmetic("not")
         self.vmw.writeIf(f"IF_TRUE{self.numLabels}")
+        self.vmw.writeGoto(f"IF_FALSE{self.numLabels}")
+        self.vmw.writeLabel(f"IF_TRUE{self.numLabels}")
+        self.labelsToBeWritten.append(self.numLabels)
         self.labelsToBeWritten.append(self.numLabels)
 
         # eat statement in brackets
         self.eat("{")
         self.compileStatements()
-        self.vmw.writeGoto(f"IF_FALSE{self.numLabels}")
-        self.vmw.writeLabel(f"IF_TRUE{self.labelsToBeWritten.pop()}")
+        # after statements is done, goto the end of the loop
+        self.vmw.writeGoto(f"IF_END{self.labelsToBeWritten.pop()}")
         self.labelsToBeWritten.append(self.numLabels)
         self.eat("}")
 
@@ -552,10 +554,11 @@ class CompilationEngine:
         # it is, then eat else and {statements}.
         self.advance()
         self.skip_advance = True
+        self.vmw.writeLabel(f"IF_FALSE{self.labelsToBeWritten.pop()}")
         if self.tokenizer.current_token == "else":
             self.eat("else")
             self.compileStatementsInBrackets()
-        self.vmw.writeLabel(f"IF_FALSE{self.labelsToBeWritten.pop()}")
+        self.vmw.writeLabel(f"IF_END{self.labelsToBeWritten.pop()}")
 
 
         # write ending tag to output
@@ -1125,6 +1128,7 @@ class CompilationEngine:
         self.skip_advance = True
 
         if self.tokenizer.current_token == "(":
+            self.vmw.writePush("pointer", 0)
             classNameNotIncluded = True
 
             # eat (
@@ -1158,7 +1162,6 @@ class CompilationEngine:
 
         # if the class name wasn't found, push pointer 0
         if classNameNotIncluded:
-            self.vmw.writePush("pointer", 0)
             self.vmw.writeCall(self.currentClassName + "." + currentSubName,
                                numArgs + 1)
         else:

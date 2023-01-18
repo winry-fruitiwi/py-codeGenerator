@@ -16,6 +16,8 @@ path = "11/Pong/"
 dir_list = os.listdir(path)
 print(dir_list)
 
+print()
+
 # for every jack file in dir_list, compile it!
 for file in dir_list:
     # split the file by . and check if the file extension is jack.
