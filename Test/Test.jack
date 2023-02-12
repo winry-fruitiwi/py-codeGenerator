@@ -12,7 +12,9 @@ class Test {
 
 
     method int move() {
-	    if (invert) { let x = x + 4; }
+        if (positivey) {
+	        if (invert) { let x = x + 4; }
+	    }
 
 	    return 0;
     }

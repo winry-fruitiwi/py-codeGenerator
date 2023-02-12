@@ -462,7 +462,7 @@ class CompilationEngine:
         self.skip_advance = True
         name = self.tokenizer.current_token
 
-        self.vmw.writeComment(name)
+        # self.vmw.writeComment(name)
 
         # compile an identifier
         self.compileIdentifier(False)
@@ -541,20 +541,17 @@ class CompilationEngine:
 
         self.numLabels += 1
 
-        # eat expression in parens
+        # eat expression in parens, then goto beginning of if statement if
+        # condition is true. Otherwise, goto the end.
         self.compileExprInParens()
         self.vmw.writeIf(f"IF_TRUE{self.numLabels}")
         self.vmw.writeGoto(f"IF_FALSE{self.numLabels}")
         self.vmw.writeLabel(f"IF_TRUE{self.numLabels}")
         self.labelsToBeWritten.append(self.numLabels)
-        self.labelsToBeWritten.append(self.numLabels)
 
         # eat statement in brackets
         self.eat("{")
         self.compileStatements()
-        # after statements is done, goto the end of the loop
-        self.vmw.writeGoto(f"IF_END{self.labelsToBeWritten.pop()}")
-        self.labelsToBeWritten.append(self.numLabels)
         self.eat("}")
 
         # advance the tokenizer, then check if the current token is else. if
@@ -563,9 +560,12 @@ class CompilationEngine:
         self.skip_advance = True
         self.vmw.writeLabel(f"IF_FALSE{self.labelsToBeWritten.pop()}")
         if self.tokenizer.current_token == "else":
+            # after statements is done, goto the end of the if statement
+            self.vmw.writeGoto(f"IF_END{self.labelsToBeWritten.pop()}")
+            self.labelsToBeWritten.append(self.numLabels)
             self.eat("else")
             self.compileStatementsInBrackets()
-        self.vmw.writeLabel(f"IF_END{self.labelsToBeWritten.pop()}")
+            self.vmw.writeLabel(f"IF_END{self.labelsToBeWritten.pop()}")
 
 
         # write ending tag to output
@@ -844,7 +844,7 @@ class CompilationEngine:
                             self.currentClassName + "." + current_name,
                             numArgs + 1)
 
-                        self.vmw.writeComment(current_name)
+                        # self.vmw.writeComment(current_name)
 
                     # if the next token is [, eat [, compile expr, eat ]
                     case "[":
@@ -994,9 +994,9 @@ class CompilationEngine:
             f"<{iKindAndType}> {self.tokenizer.identifier()} </{iKindAndType}>\n"
         )
 
-        self.vmw.writeComment(
-            "Identifier name is " + self.tokenizer.identifier()
-        )
+        # self.vmw.writeComment(
+        #     "Identifier name is " + self.tokenizer.identifier()
+        # )
 
         if writePush:
             try:

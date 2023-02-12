@@ -1,14 +1,19 @@
 function Test.move 0
 push argument 0
 pop pointer 0
-push this 7
+push this 9
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
+push this 7
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
 push this 0
 push constant 4
 add
 pop this 0
+label IF_FALSE1
 label IF_FALSE0
 push constant 0
 return
