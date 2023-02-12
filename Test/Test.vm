@@ -1,0 +1,48 @@
+// Identifier name is Test
+// field int x, y; 
+// Identifier name is x
+// Identifier name is y
+// field int lengthx, lengthy; 
+// Identifier name is lengthx
+// Identifier name is lengthy
+// field int d, straightD, diagonalD; 
+// Identifier name is d
+// Identifier name is straightD
+// Identifier name is diagonalD
+// field boolean invert, positivex, positivey; 
+// Identifier name is invert
+// Identifier name is positivex
+// Identifier name is positivey
+// field int leftWall, rightWall, topWall, bottomWall; 
+// Identifier name is leftWall
+// Identifier name is rightWall
+// Identifier name is topWall
+// Identifier name is bottomWall
+// field int wall; 
+// Identifier name is wall
+// method int move() { 
+// Identifier name is move
+// if (invert) { let x = x + 4; } 
+function Test.move 0
+push argument 0
+pop pointer 0
+// if found
+// Identifier name is invert
+push this 7
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+// x
+// Identifier name is x
+// Identifier name is x
+push this 0
+push constant 4
+add
+pop this 0
+goto IF_END0
+// return 0; 
+label IF_FALSE0
+label IF_END0
+push constant 0
+return
+// } 

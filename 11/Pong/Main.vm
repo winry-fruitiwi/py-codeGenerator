@@ -1,13 +1,35 @@
+// Identifier name is Main
+// function void main() { 
+// Identifier name is main
+// var PongGame game; 
+// Identifier name is PongGame
+// Identifier name is game
+// do PongGame.newInstance(); 
 function Main.main 1
+// Identifier name is PongGame
+// Identifier name is newInstance
 call PongGame.newInstance 0
 pop temp 0
+// let game = PongGame.getInstance(); 
+// game
+// Identifier name is game
+// Identifier name is PongGame
+// Identifier name is getInstance
 call PongGame.getInstance 0
 pop local 0
+// do game.run(); 
 push local 0
+// Identifier name is game
+// Identifier name is run
 call PongGame.run 1
 pop temp 0
+// do game.dispose(); 
 push local 0
+// Identifier name is game
+// Identifier name is dispose
 call PongGame.dispose 1
 pop temp 0
+// return; 
 push constant 0
 return
+// } 

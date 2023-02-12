@@ -1,164 +1,322 @@
+// Identifier name is Bat
+// field int x, y; 
+// Identifier name is x
+// Identifier name is y
+// field int width, height; 
+// Identifier name is width
+// Identifier name is height
+// field int direction; 
+// Identifier name is direction
+// constructor Bat new(int Ax, int Ay, int Awidth, int Aheight) { 
+// Identifier name is Bat
+// Identifier name is new
+// Identifier name is Ax
+// Identifier name is Ay
+// Identifier name is Awidth
+// Identifier name is Aheight
+// let x = Ax; 
 function Bat.new 0
 push constant 5
 call Memory.alloc 1
 pop pointer 0
+// x
+// Identifier name is x
+// Identifier name is Ax
 push argument 0
 pop this 0
+// let y = Ay; 
+// y
+// Identifier name is y
+// Identifier name is Ay
 push argument 1
 pop this 1
+// let width = Awidth; 
+// width
+// Identifier name is width
+// Identifier name is Awidth
 push argument 2
 pop this 2
+// let height = Aheight; 
+// height
+// Identifier name is height
+// Identifier name is Aheight
 push argument 3
 pop this 3
+// let direction = 2; 
+// direction
+// Identifier name is direction
 push constant 2
 pop this 4
+// do show(); 
+// Identifier name is show
 push pointer 0
 call Bat.show 1
 pop temp 0
+// return this; 
 push pointer 0
 return
+// } 
+// method void dispose() { 
+// Identifier name is dispose
+// do Memory.deAlloc(this); 
 function Bat.dispose 0
 push argument 0
 pop pointer 0
+// Identifier name is Memory
+// Identifier name is deAlloc
 push pointer 0
 call Memory.deAlloc 1
 pop temp 0
+// return; 
 push constant 0
 return
+// } 
+// method void show() { 
+// Identifier name is show
+// do Screen.setColor(true); 
 function Bat.show 0
 push argument 0
 pop pointer 0
+// Identifier name is Screen
+// Identifier name is setColor
 push constant 0
 not
 call Screen.setColor 1
 pop temp 0
+// do draw(); 
+// Identifier name is draw
 push pointer 0
 call Bat.draw 1
 pop temp 0
+// return; 
 push constant 0
 return
+// } 
+// method void hide() { 
+// Identifier name is hide
+// do Screen.setColor(false); 
 function Bat.hide 0
 push argument 0
 pop pointer 0
+// Identifier name is Screen
+// Identifier name is setColor
 push constant 0
 call Screen.setColor 1
 pop temp 0
+// do draw(); 
+// Identifier name is draw
 push pointer 0
 call Bat.draw 1
 pop temp 0
+// return; 
 push constant 0
 return
+// } 
+// method void draw() { 
+// Identifier name is draw
+// do Screen.drawRectangle(x, y, x + width, y + height); 
 function Bat.draw 0
 push argument 0
 pop pointer 0
+// Identifier name is Screen
+// Identifier name is drawRectangle
+// Identifier name is x
 push this 0
+// Identifier name is y
 push this 1
+// Identifier name is x
 push this 0
+// Identifier name is width
 push this 2
 add
+// Identifier name is y
 push this 1
+// Identifier name is height
 push this 3
 add
 call Screen.drawRectangle 4
 pop temp 0
+// return; 
 push constant 0
 return
+// } 
+// method void setDirection(int Adirection) { 
+// Identifier name is setDirection
+// Identifier name is Adirection
+// let direction = Adirection; 
 function Bat.setDirection 0
 push argument 0
 pop pointer 0
+// direction
+// Identifier name is direction
+// Identifier name is Adirection
 push argument 1
 pop this 4
+// return; 
 push constant 0
 return
+// } 
+// method int getLeft() { 
+// Identifier name is getLeft
+// return x; 
 function Bat.getLeft 0
 push argument 0
 pop pointer 0
+// Identifier name is x
 push this 0
 return
+// } 
+// method int getRight() { 
+// Identifier name is getRight
+// return x + width; 
 function Bat.getRight 0
 push argument 0
 pop pointer 0
+// Identifier name is x
 push this 0
+// Identifier name is width
 push this 2
 add
 return
+// } 
+// method void setWidth(int Awidth) { 
+// Identifier name is setWidth
+// Identifier name is Awidth
+// do hide(); 
 function Bat.setWidth 0
 push argument 0
 pop pointer 0
+// Identifier name is hide
 push pointer 0
 call Bat.hide 1
 pop temp 0
+// let width = Awidth; 
+// width
+// Identifier name is width
+// Identifier name is Awidth
 push argument 1
 pop this 2
+// do show(); 
+// Identifier name is show
 push pointer 0
 call Bat.show 1
 pop temp 0
+// return; 
 push constant 0
 return
+// } 
+// method void move() { 
+// Identifier name is move
+// if (direction = 1) { 
 function Bat.move 0
 push argument 0
 pop pointer 0
+// if found
+// Identifier name is direction
 push this 4
 push constant 1
 eq
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
+// let x = x - 4; 
+// x
+// Identifier name is x
+// Identifier name is x
 push this 0
 push constant 4
 sub
 pop this 0
+// if (x < 0) { let x = 0; } 
+// if found
+// Identifier name is x
 push this 0
 push constant 0
 lt
 if-goto IF_TRUE1
 goto IF_FALSE1
 label IF_TRUE1
+// x
+// Identifier name is x
 push constant 0
 pop this 0
 goto IF_END1
+// do Screen.setColor(false); 
 label IF_FALSE1
 label IF_END1
+// Identifier name is Screen
+// Identifier name is setColor
 push constant 0
 call Screen.setColor 1
 pop temp 0
+// do Screen.drawRectangle((x + width) + 1, y, (x + width) + 4, y + height); 
+// Identifier name is Screen
+// Identifier name is drawRectangle
+// Identifier name is x
 push this 0
+// Identifier name is width
 push this 2
 add
 push constant 1
 add
+// Identifier name is y
 push this 1
+// Identifier name is x
 push this 0
+// Identifier name is width
 push this 2
 add
 push constant 4
 add
+// Identifier name is y
 push this 1
+// Identifier name is height
 push this 3
 add
 call Screen.drawRectangle 4
 pop temp 0
+// do Screen.setColor(true); 
+// Identifier name is Screen
+// Identifier name is setColor
 push constant 0
 not
 call Screen.setColor 1
 pop temp 0
+// do Screen.drawRectangle(x, y, x + 3, y + height); 
+// Identifier name is Screen
+// Identifier name is drawRectangle
+// Identifier name is x
 push this 0
+// Identifier name is y
 push this 1
+// Identifier name is x
 push this 0
 push constant 3
 add
+// Identifier name is y
 push this 1
+// Identifier name is height
 push this 3
 add
 call Screen.drawRectangle 4
 pop temp 0
+// } 
 goto IF_END0
+// else { 
 label IF_FALSE1
+// let x = x + 4; 
+// x
+// Identifier name is x
+// Identifier name is x
 push this 0
 push constant 4
 add
 pop this 0
+// if ((x + width) > 511) { let x = 511 - width; } 
+// if found
+// Identifier name is x
 push this 0
+// Identifier name is width
 push this 2
 add
 push constant 511
@@ -166,46 +324,76 @@ gt
 if-goto IF_TRUE2
 goto IF_FALSE2
 label IF_TRUE2
+// x
+// Identifier name is x
 push constant 511
+// Identifier name is width
 push this 2
 sub
 pop this 0
 goto IF_END2
+// do Screen.setColor(false); 
 label IF_FALSE2
 label IF_END2
+// Identifier name is Screen
+// Identifier name is setColor
 push constant 0
 call Screen.setColor 1
 pop temp 0
+// do Screen.drawRectangle(x - 4, y, x - 1, y + height); 
+// Identifier name is Screen
+// Identifier name is drawRectangle
+// Identifier name is x
 push this 0
 push constant 4
 sub
+// Identifier name is y
 push this 1
+// Identifier name is x
 push this 0
 push constant 1
 sub
+// Identifier name is y
 push this 1
+// Identifier name is height
 push this 3
 add
 call Screen.drawRectangle 4
 pop temp 0
+// do Screen.setColor(true); 
+// Identifier name is Screen
+// Identifier name is setColor
 push constant 0
 not
 call Screen.setColor 1
 pop temp 0
+// do Screen.drawRectangle((x + width) - 3, y, x + width, y + height); 
+// Identifier name is Screen
+// Identifier name is drawRectangle
+// Identifier name is x
 push this 0
+// Identifier name is width
 push this 2
 add
 push constant 3
 sub
+// Identifier name is y
 push this 1
+// Identifier name is x
 push this 0
+// Identifier name is width
 push this 2
 add
+// Identifier name is y
 push this 1
+// Identifier name is height
 push this 3
 add
 call Screen.drawRectangle 4
 pop temp 0
+// } 
 label IF_END0
+// return; 
 push constant 0
 return
+// } 

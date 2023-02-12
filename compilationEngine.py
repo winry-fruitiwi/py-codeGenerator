@@ -29,6 +29,9 @@ class CompilationEngine:
         # the number of fields
         self.numFields = 0
 
+        # the current line
+        self.currentLine = self.tokenizer.stripped_lines[self.tokenizer.current_line_index]
+
     # compiles a complete class. This needs to be called immediately after
     # an instance is initialized.
     def compileClass(self):
@@ -49,7 +52,7 @@ class CompilationEngine:
         self.vmw = VMWriter(self.path + self.currentClassName)
 
         # compile an identifier
-        self.compileIdentifier()
+        self.compileIdentifier(False)
 
         # eat {
         self.eat("{")
@@ -114,7 +117,7 @@ class CompilationEngine:
         self.advance()
         self.skip_advance = True
         self.st.define(self.tokenizer.current_token, currentKind, currentType)
-        self.compileIdentifier()
+        self.compileIdentifier(False)
 
         # advance
         self.advance()
@@ -133,7 +136,7 @@ class CompilationEngine:
             self.skip_advance = True
             self.st.define(self.tokenizer.current_token, currentKind,
                            currentType)
-            self.compileIdentifier()
+            self.compileIdentifier(False)
 
             self.advance()
             self.skip_advance = True
@@ -228,7 +231,7 @@ class CompilationEngine:
         functionName = self.tokenizer.current_token
 
         # compile an identifier
-        self.compileIdentifier()
+        self.compileIdentifier(False)
 
         # eat (
         self.eat("(")
@@ -264,7 +267,7 @@ class CompilationEngine:
             self.skip_advance = True
             self.st.define(self.tokenizer.current_token, "ARGUMENT",
                            currentType)
-            self.compileIdentifier()
+            self.compileIdentifier(False)
 
             # advance
             self.advance()
@@ -292,7 +295,7 @@ class CompilationEngine:
                                currentType)
 
                 # compile identifier
-                self.compileIdentifier()
+                self.compileIdentifier(False)
 
                 # advance to prepare for the next iteration
                 self.advance()
@@ -335,7 +338,7 @@ class CompilationEngine:
         self.advance()
         self.skip_advance = True
         self.st.define(self.tokenizer.current_token, "LOCAL", currentType)
-        self.compileIdentifier()
+        self.compileIdentifier(False)
 
         # advance
         self.advance()
@@ -348,7 +351,7 @@ class CompilationEngine:
             self.advance()
             self.skip_advance = True
             self.st.define(self.tokenizer.current_token, "LOCAL", currentType)
-            self.compileIdentifier()
+            self.compileIdentifier(False)
 
             self.advance()
             self.skip_advance = True
@@ -405,7 +408,7 @@ class CompilationEngine:
                 self.eat("boolean")
                 return
         if self.tokenizer.tokenType() == TokenType.IDENTIFIER:
-            self.compileIdentifier()
+            self.compileIdentifier(False)
 
         pass
 
@@ -459,8 +462,10 @@ class CompilationEngine:
         self.skip_advance = True
         name = self.tokenizer.current_token
 
+        self.vmw.writeComment(name)
+
         # compile an identifier
-        self.compileIdentifier()
+        self.compileIdentifier(False)
 
         # advance and check for a bracket. If there is one, eat [, compile
         # expression, and then eat ]. If not, continue.
@@ -525,6 +530,8 @@ class CompilationEngine:
 
         :return:
         """
+
+        self.vmw.writeComment("if found")
 
         # write opening tag, eat if
         self.writeToOutput("<ifStatement>\n")
@@ -821,7 +828,7 @@ class CompilationEngine:
                 current_name = self.tokenizer.current_token
 
                 # print("identifier", self.tokenizer.current_token, "found")
-                self.compileIdentifier()
+                self.compileIdentifier(False)
 
                 self.advance()
                 self.skip_advance = True
@@ -868,7 +875,7 @@ class CompilationEngine:
                         self.advance()
                         self.skip_advance = True
                         current_name += self.tokenizer.current_token
-                        self.compileIdentifier()
+                        self.compileIdentifier(False)
                         self.eat("(")
                         numArgs += self.compileExpressionList()
                         self.eat(")")
@@ -876,8 +883,7 @@ class CompilationEngine:
                         self.vmw.writeCall(current_name, numArgs)
 
                     case _:
-                        identifierSegment = self.st.kindOf(
-                            current_name).lower()
+                        identifierSegment = self.st.kindOf(current_name)
                         identifierIndex = self.st.indexOf(current_name)
                         self.vmw.writePush(identifierSegment, identifierIndex)
 
@@ -918,7 +924,7 @@ class CompilationEngine:
             self.eat("this")
 
         else:
-            self.compileIdentifier()
+            self.compileIdentifier(True)
 
         self.dedent()
         self.writeToOutput("</term>\n")
@@ -963,24 +969,42 @@ class CompilationEngine:
         self.writeToOutput("</expressionList>\n")
         return numArgs
 
-    # compiles an identifier
-    def compileIdentifier(self):
+    # compiles an identifier. writePush is a boolean saying if we should write
+    # a push statement inside compileIdentifier, as when we have to look ahead
+    # before pushing onto the stack, we usually don't want to immediately push
+    # an identifier onto the stack.
+    def compileIdentifier(self, writePush):
         if not self.skip_advance:
             self.advance()
         else:
             self.skip_advance = False
+
+        identifier = self.tokenizer.identifier()
 
         assert self.tokenizer.tokenType() == TokenType.IDENTIFIER
 
         try:
             identifierKind = self.st.kindOf(self.tokenizer.current_token)
             identifierType = self.st.typeOf(self.tokenizer.current_token)
-            identifier = identifierKind + identifierType
+            iKindAndType = identifierKind + identifierType
         except KeyError:
-            identifier = "identifier"
+            iKindAndType = "identifier"
 
         self.writeToOutput(
-            f"<{identifier}> {self.tokenizer.identifier()} </{identifier}>\n")
+            f"<{iKindAndType}> {self.tokenizer.identifier()} </{iKindAndType}>\n"
+        )
+
+        self.vmw.writeComment(
+            "Identifier name is " + self.tokenizer.identifier()
+        )
+
+        if writePush:
+            try:
+                self.vmw.writePush(
+                    self.st.kindOf(identifier), self.st.indexOf(identifier)
+                )
+            except KeyError:
+                pass
 
     def compileStrConst(self):
         if not self.skip_advance:
@@ -1041,6 +1065,11 @@ class CompilationEngine:
         # advance the tokenizer.
         self.tokenizer.advance()
 
+        # check if the tokenizer's and CE's current line is different.
+        if self.tokenizer.currentLine != self.currentLine:
+            self.vmw.writeComment(self.tokenizer.currentLine)
+            self.currentLine = self.tokenizer.currentLine
+
         # get the token type of the tokenizer.
         token_type = self.tokenizer.tokenType()
 
@@ -1049,6 +1078,10 @@ class CompilationEngine:
         while token_type == "delimiter" or token_type == "Not a token.":
             self.tokenizer.advance()
             token_type = self.tokenizer.tokenType()
+            # check if the tokenizer's and CE's current line is different.
+            if self.tokenizer.currentLine != self.currentLine:
+                self.vmw.writeComment(self.tokenizer.currentLine)
+                self.currentLine = self.tokenizer.currentLine
 
     # asserts that the next token is its first argument. its second argument, a
     # boolean, determines whether to advance. We can sometimes not advance when
@@ -1121,7 +1154,7 @@ class CompilationEngine:
             currentSubName = typeOfSubName
             subNameFoundInST = True
 
-        self.compileIdentifier()
+        self.compileIdentifier(False)
 
         # if the next token is an open paren:
         self.advance()
@@ -1151,7 +1184,7 @@ class CompilationEngine:
             self.advance()
             self.skip_advance = True
             currentSubName += self.tokenizer.current_token
-            self.compileIdentifier()
+            self.compileIdentifier(False)
             self.eat("(")
             numArgs = self.compileExpressionList()
             self.eat(")")
@@ -1175,6 +1208,6 @@ class CompilationEngine:
     def dedent(self):
         self.indents -= 1
 
-    # write to the output, taking into account
+    # write to the output, taking into account number of indents
     def writeToOutput(self, string):
         self.output.write("  " * self.indents + string)

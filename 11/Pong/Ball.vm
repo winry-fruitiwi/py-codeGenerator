@@ -1,346 +1,695 @@
+// Identifier name is Ball
+// field int x, y; 
+// Identifier name is x
+// Identifier name is y
+// field int lengthx, lengthy; 
+// Identifier name is lengthx
+// Identifier name is lengthy
+// field int d, straightD, diagonalD; 
+// Identifier name is d
+// Identifier name is straightD
+// Identifier name is diagonalD
+// field boolean invert, positivex, positivey; 
+// Identifier name is invert
+// Identifier name is positivex
+// Identifier name is positivey
+// field int leftWall, rightWall, topWall, bottomWall; 
+// Identifier name is leftWall
+// Identifier name is rightWall
+// Identifier name is topWall
+// Identifier name is bottomWall
+// field int wall; 
+// Identifier name is wall
+// constructor Ball new(int Ax, int Ay, 
+// Identifier name is Ball
+// Identifier name is new
+// Identifier name is Ax
+// Identifier name is Ay
+// int AleftWall, int ArightWall, int AtopWall, int AbottomWall) {     
+// Identifier name is AleftWall
+// Identifier name is ArightWall
+// Identifier name is AtopWall
+// Identifier name is AbottomWall
+// let x = Ax; 
 function Ball.new 0
 push constant 15
 call Memory.alloc 1
 pop pointer 0
+// x
+// Identifier name is x
+// Identifier name is Ax
 push argument 0
 pop this 0
+// let y = Ay; 
+// y
+// Identifier name is y
+// Identifier name is Ay
 push argument 1
 pop this 1
+// let leftWall = AleftWall; 
+// leftWall
+// Identifier name is leftWall
+// Identifier name is AleftWall
 push argument 2
 pop this 10
+// let rightWall = ArightWall - 6; 
+// rightWall
+// Identifier name is rightWall
+// Identifier name is ArightWall
 push argument 3
 push constant 6
 sub
 pop this 11
+// let topWall = AtopWall; 
+// topWall
+// Identifier name is topWall
+// Identifier name is AtopWall
 push argument 4
 pop this 12
+// let bottomWall = AbottomWall - 6; 
+// bottomWall
+// Identifier name is bottomWall
+// Identifier name is AbottomWall
 push argument 5
 push constant 6
 sub
 pop this 13
+// let wall = 0; 
+// wall
+// Identifier name is wall
 push constant 0
 pop this 14
+// do show(); 
+// Identifier name is show
 push pointer 0
 call Ball.show 1
 pop temp 0
+// return this; 
 push pointer 0
 return
+// } 
+// method void dispose() { 
+// Identifier name is dispose
+// do Memory.deAlloc(this); 
 function Ball.dispose 0
 push argument 0
 pop pointer 0
+// Identifier name is Memory
+// Identifier name is deAlloc
 push pointer 0
 call Memory.deAlloc 1
 pop temp 0
+// return; 
 push constant 0
 return
+// } 
+// method void show() { 
+// Identifier name is show
+// do Screen.setColor(true); 
 function Ball.show 0
 push argument 0
 pop pointer 0
+// Identifier name is Screen
+// Identifier name is setColor
 push constant 0
 not
 call Screen.setColor 1
 pop temp 0
+// do draw(); 
+// Identifier name is draw
 push pointer 0
 call Ball.draw 1
 pop temp 0
+// return; 
 push constant 0
 return
+// } 
+// method void hide() { 
+// Identifier name is hide
+// do Screen.setColor(false); 
 function Ball.hide 0
 push argument 0
 pop pointer 0
+// Identifier name is Screen
+// Identifier name is setColor
 push constant 0
 call Screen.setColor 1
 pop temp 0
+// do draw(); 
+// Identifier name is draw
 push pointer 0
 call Ball.draw 1
 pop temp 0
+// return; 
 push constant 0
 return
+// } 
+// method void draw() { 
+// Identifier name is draw
+// do Screen.drawRectangle(x, y, x + 5, y + 5); 
 function Ball.draw 0
 push argument 0
 pop pointer 0
+// Identifier name is Screen
+// Identifier name is drawRectangle
+// Identifier name is x
 push this 0
+// Identifier name is y
 push this 1
+// Identifier name is x
 push this 0
 push constant 5
 add
+// Identifier name is y
 push this 1
 push constant 5
 add
 call Screen.drawRectangle 4
 pop temp 0
+// return; 
 push constant 0
 return
+// } 
+// method int getLeft() { 
+// Identifier name is getLeft
+// return x; 
 function Ball.getLeft 0
 push argument 0
 pop pointer 0
+// Identifier name is x
 push this 0
 return
+// } 
+// method int getRight() { 
+// Identifier name is getRight
+// return x + 5; 
 function Ball.getRight 0
 push argument 0
 pop pointer 0
+// Identifier name is x
 push this 0
 push constant 5
 add
 return
+// } 
+// method void setDestination(int destx, int desty) { 
+// Identifier name is setDestination
+// Identifier name is destx
+// Identifier name is desty
+// var int dx, dy, temp; 
+// Identifier name is dx
+// Identifier name is dy
+// Identifier name is temp
+//     let lengthx = destx - x; 
 function Ball.setDestination 3
 push argument 0
 pop pointer 0
+// lengthx
+// Identifier name is lengthx
+// Identifier name is destx
 push argument 1
+// Identifier name is x
 push this 0
 sub
 pop this 2
+// let lengthy = desty - y; 
+// lengthy
+// Identifier name is lengthy
+// Identifier name is desty
 push argument 2
+// Identifier name is y
 push this 1
 sub
 pop this 3
+// let dx = Math.abs(lengthx); 
+// dx
+// Identifier name is dx
+// Identifier name is Math
+// Identifier name is abs
+// Identifier name is lengthx
 push this 2
 call Math.abs 1
 pop local 0
+// let dy = Math.abs(lengthy); 
+// dy
+// Identifier name is dy
+// Identifier name is Math
+// Identifier name is abs
+// Identifier name is lengthy
 push this 3
 call Math.abs 1
 pop local 1
+// let invert = (dx < dy); 
+// invert
+// Identifier name is invert
+// Identifier name is dx
 push local 0
+// Identifier name is dy
 push local 1
 lt
 pop this 7
+// if (invert) { 
+// if found
+// Identifier name is invert
 push this 7
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
+// let temp = dx; 
+// temp
+// Identifier name is temp
+// Identifier name is dx
 push local 0
 pop local 2
+// let dx = dy; 
+// dx
+// Identifier name is dx
+// Identifier name is dy
 push local 1
 pop local 0
+// let dy = temp; 
+// dy
+// Identifier name is dy
+// Identifier name is temp
 push local 2
 pop local 1
+//         let positivex = (y < desty); 
+// positivex
+// Identifier name is positivex
+// Identifier name is y
 push this 1
+// Identifier name is desty
 push argument 2
 lt
 pop this 8
+// let positivey = (x < destx); 
+// positivey
+// Identifier name is positivey
+// Identifier name is x
 push this 0
+// Identifier name is destx
 push argument 1
 lt
 pop this 9
+// } 
 goto IF_END0
+// else { 
 label IF_FALSE0
+// let positivex = (x < destx); 
+// positivex
+// Identifier name is positivex
+// Identifier name is x
 push this 0
+// Identifier name is destx
 push argument 1
 lt
 pop this 8
+// let positivey = (y < desty); 
+// positivey
+// Identifier name is positivey
+// Identifier name is y
 push this 1
+// Identifier name is desty
 push argument 2
 lt
 pop this 9
+// } 
 label IF_END0
+// let d = (2 * dy) - dx; 
+// d
+// Identifier name is d
 push constant 2
+// Identifier name is dy
 push local 1
 call Math.multiply 2
+// Identifier name is dx
 push local 0
 sub
 pop this 4
+// let straightD = 2 * dy; 
+// straightD
+// Identifier name is straightD
 push constant 2
+// Identifier name is dy
 push local 1
 call Math.multiply 2
 pop this 5
+// let diagonalD = 2 * (dy - dx); 
+// diagonalD
+// Identifier name is diagonalD
 push constant 2
+// Identifier name is dy
 push local 1
+// Identifier name is dx
 push local 0
 sub
 call Math.multiply 2
 pop this 6
+// return; 
 push constant 0
 return
+// } 
+// method int move() { 
+// Identifier name is move
+// do hide(); 
 function Ball.move 0
 push argument 0
 pop pointer 0
+// Identifier name is hide
 push pointer 0
 call Ball.hide 1
 pop temp 0
+// if (d < 0) { let d = d + straightD; } 
+// if found
+// Identifier name is d
 push this 4
 push constant 0
 lt
 if-goto IF_TRUE1
 goto IF_FALSE1
 label IF_TRUE1
+// d
+// Identifier name is d
+// Identifier name is d
 push this 4
+// Identifier name is straightD
 push this 5
 add
 pop this 4
 goto IF_END1
+// else { 
 label IF_FALSE1
+// let d = d + diagonalD; 
+// d
+// Identifier name is d
+// Identifier name is d
 push this 4
+// Identifier name is diagonalD
 push this 6
 add
 pop this 4
+// if (positivey) { 
+// if found
+// Identifier name is positivey
 push this 9
 if-goto IF_TRUE2
 goto IF_FALSE2
 label IF_TRUE2
+// if (invert) { let x = x + 4; } 
+// if found
+// Identifier name is invert
 push this 7
 if-goto IF_TRUE3
 goto IF_FALSE3
 label IF_TRUE3
+// x
+// Identifier name is x
+// Identifier name is x
 push this 0
 push constant 4
 add
 pop this 0
 goto IF_END3
+// else { let y = y + 4; } 
 label IF_FALSE3
+// y
+// Identifier name is y
+// Identifier name is y
 push this 1
 push constant 4
 add
 pop this 1
 label IF_END3
+// } 
 goto IF_END2
+// else { 
 label IF_FALSE3
+// if (invert) { let x = x - 4; } 
+// if found
+// Identifier name is invert
 push this 7
 if-goto IF_TRUE4
 goto IF_FALSE4
 label IF_TRUE4
+// x
+// Identifier name is x
+// Identifier name is x
 push this 0
 push constant 4
 sub
 pop this 0
 goto IF_END4
+// else { let y = y - 4; } 
 label IF_FALSE4
+// y
+// Identifier name is y
+// Identifier name is y
 push this 1
 push constant 4
 sub
 pop this 1
 label IF_END4
+// } 
 label IF_END2
 label IF_END1
+// if (positivex) { 
+// if found
+// Identifier name is positivex
 push this 8
 if-goto IF_TRUE5
 goto IF_FALSE5
 label IF_TRUE5
+// if (invert) { let y = y + 4; } 
+// if found
+// Identifier name is invert
 push this 7
 if-goto IF_TRUE6
 goto IF_FALSE6
 label IF_TRUE6
+// y
+// Identifier name is y
+// Identifier name is y
 push this 1
 push constant 4
 add
 pop this 1
 goto IF_END6
+// else { let x = x + 4; } 
 label IF_FALSE6
+// x
+// Identifier name is x
+// Identifier name is x
 push this 0
 push constant 4
 add
 pop this 0
 label IF_END6
+// } 
 goto IF_END5
+// else { 
 label IF_FALSE6
+// if (invert) { let y = y - 4; } 
+// if found
+// Identifier name is invert
 push this 7
 if-goto IF_TRUE7
 goto IF_FALSE7
 label IF_TRUE7
+// y
+// Identifier name is y
+// Identifier name is y
 push this 1
 push constant 4
 sub
 pop this 1
 goto IF_END7
+// else { let x = x - 4; } 
 label IF_FALSE7
+// x
+// Identifier name is x
+// Identifier name is x
 push this 0
 push constant 4
 sub
 pop this 0
 label IF_END7
+// } 
 label IF_END5
+// if (~(x > leftWall)) { 
+// if found
+// Identifier name is x
 push this 0
+// Identifier name is leftWall
 push this 10
 gt
 not
 if-goto IF_TRUE8
 goto IF_FALSE8
 label IF_TRUE8
+// let wall = 1; 
+// wall
+// Identifier name is wall
 push constant 1
 pop this 14
+// let x = leftWall; 
+// x
+// Identifier name is x
+// Identifier name is leftWall
 push this 10
 pop this 0
+// } 
 goto IF_END8
+// if (~(x < rightWall)) { 
 label IF_FALSE8
 label IF_END8
+// if found
+// Identifier name is x
 push this 0
+// Identifier name is rightWall
 push this 11
 lt
 not
 if-goto IF_TRUE9
 goto IF_FALSE9
 label IF_TRUE9
+// let wall = 2; 
+// wall
+// Identifier name is wall
 push constant 2
 pop this 14
+// let x = rightWall; 
+// x
+// Identifier name is x
+// Identifier name is rightWall
 push this 11
 pop this 0
+// } 
 goto IF_END9
+// if (~(y > topWall)) { 
 label IF_FALSE9
 label IF_END9
+// if found
+// Identifier name is y
 push this 1
+// Identifier name is topWall
 push this 12
 gt
 not
 if-goto IF_TRUE10
 goto IF_FALSE10
 label IF_TRUE10
+// let wall = 3; 
+// wall
+// Identifier name is wall
 push constant 3
 pop this 14
+// let y = topWall; 
+// y
+// Identifier name is y
+// Identifier name is topWall
 push this 12
 pop this 1
+// } 
 goto IF_END10
+// if (~(y < bottomWall)) { 
 label IF_FALSE10
 label IF_END10
+// if found
+// Identifier name is y
 push this 1
+// Identifier name is bottomWall
 push this 13
 lt
 not
 if-goto IF_TRUE11
 goto IF_FALSE11
 label IF_TRUE11
+// let wall = 4; 
+// wall
+// Identifier name is wall
 push constant 4
 pop this 14
+// let y = bottomWall; 
+// y
+// Identifier name is y
+// Identifier name is bottomWall
 push this 13
 pop this 1
+// } 
 goto IF_END11
+// do show(); 
 label IF_FALSE11
 label IF_END11
+// Identifier name is show
 push pointer 0
 call Ball.show 1
 pop temp 0
+// return wall; 
+// Identifier name is wall
 push this 14
 return
+// } 
+// method void bounce(int bouncingDirection) { 
+// Identifier name is bounce
+// Identifier name is bouncingDirection
+// var int newx, newy, divLengthx, divLengthy, factor; 
+// Identifier name is newx
+// Identifier name is newy
+// Identifier name is divLengthx
+// Identifier name is divLengthy
+// Identifier name is factor
+// let divLengthx = lengthx / 10; 
 function Ball.bounce 5
 push argument 0
 pop pointer 0
+// divLengthx
+// Identifier name is divLengthx
+// Identifier name is lengthx
 push this 2
 push constant 10
 call Math.divide 2
 pop local 2
+// let divLengthy = lengthy / 10; 
+// divLengthy
+// Identifier name is divLengthy
+// Identifier name is lengthy
 push this 3
 push constant 10
 call Math.divide 2
 pop local 3
+// if (bouncingDirection = 0) { let factor = 10; } 
+// if found
+// Identifier name is bouncingDirection
 push argument 1
 push constant 0
 eq
 if-goto IF_TRUE12
 goto IF_FALSE12
 label IF_TRUE12
+// factor
+// Identifier name is factor
 push constant 10
 pop local 4
 goto IF_END12
+// else { 
 label IF_FALSE12
+// if (((~(lengthx < 0)) & (bouncingDirection = 1)) | ((lengthx < 0) & (bouncingDirection = (-1)))) { 
+// if found
+// Identifier name is lengthx
 push this 2
 push constant 0
 lt
 not
+// Identifier name is bouncingDirection
 push argument 1
 push constant 1
 eq
 and
+// Identifier name is lengthx
 push this 2
 push constant 0
 lt
+// Identifier name is bouncingDirection
 push argument 1
 push constant 1
 neg
@@ -350,103 +699,189 @@ or
 if-goto IF_TRUE13
 goto IF_FALSE13
 label IF_TRUE13
+// let factor = 20; 
+// factor
+// Identifier name is factor
 push constant 20
 pop local 4
+// } 
 goto IF_END13
+// else { let factor = 5; } 
 label IF_FALSE13
+// factor
+// Identifier name is factor
 push constant 5
 pop local 4
 label IF_END13
+// } 
 label IF_END12
+// if (wall = 1) { 
+// if found
+// Identifier name is wall
 push this 14
 push constant 1
 eq
 if-goto IF_TRUE14
 goto IF_FALSE14
 label IF_TRUE14
+// let newx = 506; 
+// newx
+// Identifier name is newx
 push constant 506
 pop local 0
+// let newy = (divLengthy * (-50)) / divLengthx; 
+// newy
+// Identifier name is newy
+// Identifier name is divLengthy
 push local 3
 push constant 50
 neg
 call Math.multiply 2
+// Identifier name is divLengthx
 push local 2
 call Math.divide 2
 pop local 1
+// let newy = y + (newy * factor); 
+// newy
+// Identifier name is newy
+// Identifier name is y
 push this 1
+// Identifier name is newy
 push local 1
+// Identifier name is factor
 push local 4
 call Math.multiply 2
 add
 pop local 1
+// } 
 goto IF_END14
+// else { 
 label IF_FALSE14
+// if (wall = 2) { 
+// if found
+// Identifier name is wall
 push this 14
 push constant 2
 eq
 if-goto IF_TRUE15
 goto IF_FALSE15
 label IF_TRUE15
+// let newx = 0; 
+// newx
+// Identifier name is newx
 push constant 0
 pop local 0
+// let newy = (divLengthy * 50) / divLengthx; 
+// newy
+// Identifier name is newy
+// Identifier name is divLengthy
 push local 3
 push constant 50
 call Math.multiply 2
+// Identifier name is divLengthx
 push local 2
 call Math.divide 2
 pop local 1
+// let newy = y + (newy * factor); 
+// newy
+// Identifier name is newy
+// Identifier name is y
 push this 1
+// Identifier name is newy
 push local 1
+// Identifier name is factor
 push local 4
 call Math.multiply 2
 add
 pop local 1
+// } 
 goto IF_END15
+// else { 
 label IF_FALSE15
+// if (wall = 3) { 
+// if found
+// Identifier name is wall
 push this 14
 push constant 3
 eq
 if-goto IF_TRUE16
 goto IF_FALSE16
 label IF_TRUE16
+// let newy = 250; 
+// newy
+// Identifier name is newy
 push constant 250
 pop local 1
+// let newx = (divLengthx * (-25)) / divLengthy; 
+// newx
+// Identifier name is newx
+// Identifier name is divLengthx
 push local 2
 push constant 25
 neg
 call Math.multiply 2
+// Identifier name is divLengthy
 push local 3
 call Math.divide 2
 pop local 0
+// let newx = x + (newx * factor); 
+// newx
+// Identifier name is newx
+// Identifier name is x
 push this 0
+// Identifier name is newx
 push local 0
+// Identifier name is factor
 push local 4
 call Math.multiply 2
 add
 pop local 0
+// } 
 goto IF_END16
+// else { 
 label IF_FALSE16
+// let newy = 0; 
+// newy
+// Identifier name is newy
 push constant 0
 pop local 1
+// let newx = (divLengthx * 25) / divLengthy; 
+// newx
+// Identifier name is newx
+// Identifier name is divLengthx
 push local 2
 push constant 25
 call Math.multiply 2
+// Identifier name is divLengthy
 push local 3
 call Math.divide 2
 pop local 0
+// let newx = x + (newx * factor); 
+// newx
+// Identifier name is newx
+// Identifier name is x
 push this 0
+// Identifier name is newx
 push local 0
+// Identifier name is factor
 push local 4
 call Math.multiply 2
 add
 pop local 0
+// } 
 label IF_END16
 label IF_END15
 label IF_END14
+// do setDestination(newx, newy); 
+// Identifier name is setDestination
 push pointer 0
+// Identifier name is newx
 push local 0
+// Identifier name is newy
 push local 1
 call Ball.setDestination 3
 pop temp 0
+// return; 
 push constant 0
 return
+// } 

@@ -188,6 +188,9 @@ class JackTokenizer:
         # the current character
         self.current_char = None
 
+        # the current line
+        self.currentLine = None
+
     # detects if the tokenizer has more tokens
     def hasMoreTokens(self):
         # return if the current character index is the same as
@@ -209,6 +212,7 @@ class JackTokenizer:
             self.current_char_index = 0
             self.current_line_index = 0
             self.current_char = self.stripped_lines[0][0]
+            self.currentLine = self.stripped_lines[0]
             return
 
         # if I'm done finding all the delimiters, advance to the next line
@@ -220,7 +224,8 @@ class JackTokenizer:
                 self.current_char_index]
             self.current_token = ""
 
-            # print("new line:", self.stripped_lines[self.current_line_index])
+            print("new line:", self.stripped_lines[self.current_line_index])
+            self.currentLine = self.stripped_lines[self.current_line_index]
             return
 
         # if the current character is a symbol, immediately make it the next token
@@ -263,7 +268,7 @@ class JackTokenizer:
 
 
         self.current_char = curr_line[self.current_char_index]
-        # print(self.current_char_index)
+        print(self.current_char_index, ":", self.current_token)
 
     # checks the type of the current token
     def tokenType(self):
