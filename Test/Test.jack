@@ -14,6 +14,7 @@ class Test {
     method int move() {
         if (positivey) {
 	        if (invert) { let x = x + 4; }
+	        else { let y = y + 4; }
 	    }
 
 	    return 0;

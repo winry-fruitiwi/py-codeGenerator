@@ -548,6 +548,7 @@ class CompilationEngine:
         self.vmw.writeGoto(f"IF_FALSE{self.numLabels}")
         self.vmw.writeLabel(f"IF_TRUE{self.numLabels}")
         self.labelsToBeWritten.append(self.numLabels)
+        self.labelsToBeWritten.append(self.numLabels)
 
         # eat statement in brackets
         self.eat("{")
@@ -558,14 +559,18 @@ class CompilationEngine:
         # it is, then eat else and {statements}.
         self.advance()
         self.skip_advance = True
-        self.vmw.writeLabel(f"IF_FALSE{self.labelsToBeWritten.pop()}")
         if self.tokenizer.current_token == "else":
             # after statements is done, goto the end of the if statement
             self.vmw.writeGoto(f"IF_END{self.labelsToBeWritten.pop()}")
+            self.vmw.writeLabel(f"IF_FALSE{self.labelsToBeWritten.pop()}")
             self.labelsToBeWritten.append(self.numLabels)
             self.eat("else")
             self.compileStatementsInBrackets()
             self.vmw.writeLabel(f"IF_END{self.labelsToBeWritten.pop()}")
+
+        else:
+            self.vmw.writeLabel(f"IF_FALSE{self.labelsToBeWritten.pop()}")
+            self.labelsToBeWritten.pop()
 
 
         # write ending tag to output

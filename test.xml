@@ -106,6 +106,26 @@
                 </letStatement>
               </statements>
               <symbol> } </symbol>
+              <keyword> else </keyword>
+              <symbol> { </symbol>
+              <statements>
+                <letStatement>
+                  <keyword> let </keyword>
+                  <thisint> y </thisint>
+                  <symbol> = </symbol>
+                  <expression>
+                    <term>
+                      <thisint> y </thisint>
+                    </term>
+                    <symbol> + </symbol>
+                    <term>
+                      <integerConstant> 4 </integerConstant>
+                    </term>
+                  </expression>
+                  <symbol> ; </symbol>
+                </letStatement>
+              </statements>
+              <symbol> } </symbol>
             </ifStatement>
           </statements>
           <symbol> } </symbol>

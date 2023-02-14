@@ -13,7 +13,13 @@ push this 0
 push constant 4
 add
 pop this 0
+goto IF_END1
 label IF_FALSE1
+push this 1
+push constant 4
+add
+pop this 1
+label IF_END1
 label IF_FALSE0
 push constant 0
 return
