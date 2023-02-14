@@ -20,6 +20,17 @@ push constant 4
 add
 pop this 1
 label IF_END1
+goto IF_END0
 label IF_FALSE0
+push this 7
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push this 0
+push constant 4
+sub
+pop this 0
+label IF_FALSE2
+label IF_END0
 push constant 0
 return
