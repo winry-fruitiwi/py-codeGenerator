@@ -1,48 +1,30 @@
-// field int x, y; 
-// field int width, height; 
-// field int direction; 
-// constructor Bat new(int Ax, int Ay, int Awidth, int Aheight) { 
-// let x = Ax; 
 function Bat.new 0
 push constant 5
 call Memory.alloc 1
 pop pointer 0
 push argument 0
 pop this 0
-// let y = Ay; 
 push argument 1
 pop this 1
-// let width = Awidth; 
 push argument 2
 pop this 2
-// let height = Aheight; 
 push argument 3
 pop this 3
-// let direction = 2; 
 push constant 2
 pop this 4
-// do show(); 
 push pointer 0
 call Bat.show 1
 pop temp 0
-// return this; 
 push pointer 0
 return
-// } 
-// method void dispose() { 
-// do Memory.deAlloc(this); 
 function Bat.dispose 0
 push argument 0
 pop pointer 0
 push pointer 0
 call Memory.deAlloc 1
 pop temp 0
-// return; 
 push constant 0
 return
-// } 
-// method void show() { 
-// do Screen.setColor(true); 
 function Bat.show 0
 push argument 0
 pop pointer 0
@@ -50,32 +32,22 @@ push constant 0
 not
 call Screen.setColor 1
 pop temp 0
-// do draw(); 
 push pointer 0
 call Bat.draw 1
 pop temp 0
-// return; 
 push constant 0
 return
-// } 
-// method void hide() { 
-// do Screen.setColor(false); 
 function Bat.hide 0
 push argument 0
 pop pointer 0
 push constant 0
 call Screen.setColor 1
 pop temp 0
-// do draw(); 
 push pointer 0
 call Bat.draw 1
 pop temp 0
-// return; 
 push constant 0
 return
-// } 
-// method void draw() { 
-// do Screen.drawRectangle(x, y, x + width, y + height); 
 function Bat.draw 0
 push argument 0
 pop pointer 0
@@ -89,31 +61,20 @@ push this 3
 add
 call Screen.drawRectangle 4
 pop temp 0
-// return; 
 push constant 0
 return
-// } 
-// method void setDirection(int Adirection) { 
-// let direction = Adirection; 
 function Bat.setDirection 0
 push argument 0
 pop pointer 0
 push argument 1
 pop this 4
-// return; 
 push constant 0
 return
-// } 
-// method int getLeft() { 
-// return x; 
 function Bat.getLeft 0
 push argument 0
 pop pointer 0
 push this 0
 return
-// } 
-// method int getRight() { 
-// return x + width; 
 function Bat.getRight 0
 push argument 0
 pop pointer 0
@@ -121,45 +82,32 @@ push this 0
 push this 2
 add
 return
-// } 
-// method void setWidth(int Awidth) { 
-// do hide(); 
 function Bat.setWidth 0
 push argument 0
 pop pointer 0
 push pointer 0
 call Bat.hide 1
 pop temp 0
-// let width = Awidth; 
 push argument 1
 pop this 2
-// do show(); 
 push pointer 0
 call Bat.show 1
 pop temp 0
-// return; 
 push constant 0
 return
-// } 
-// method void move() { 
-// if (direction = 1) { 
 function Bat.move 0
 push argument 0
 pop pointer 0
-// if found
 push this 4
 push constant 1
 eq
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
-// let x = x - 4; 
 push this 0
 push constant 4
 sub
 pop this 0
-// if (x < 0) { let x = 0; } 
-// if found
 push this 0
 push constant 0
 lt
@@ -168,12 +116,10 @@ goto IF_FALSE1
 label IF_TRUE1
 push constant 0
 pop this 0
-// do Screen.setColor(false); 
 label IF_FALSE1
 push constant 0
 call Screen.setColor 1
 pop temp 0
-// do Screen.drawRectangle((x + width) + 1, y, (x + width) + 4, y + height); 
 push this 0
 push this 2
 add
@@ -190,12 +136,10 @@ push this 3
 add
 call Screen.drawRectangle 4
 pop temp 0
-// do Screen.setColor(true); 
 push constant 0
 not
 call Screen.setColor 1
 pop temp 0
-// do Screen.drawRectangle(x, y, x + 3, y + height); 
 push this 0
 push this 1
 push this 0
@@ -206,17 +150,12 @@ push this 3
 add
 call Screen.drawRectangle 4
 pop temp 0
-// } 
-// else { 
 goto IF_END0
 label IF_FALSE0
-// let x = x + 4; 
 push this 0
 push constant 4
 add
 pop this 0
-// if ((x + width) > 511) { let x = 511 - width; } 
-// if found
 push this 0
 push this 2
 add
@@ -229,12 +168,10 @@ push constant 511
 push this 2
 sub
 pop this 0
-// do Screen.setColor(false); 
 label IF_FALSE2
 push constant 0
 call Screen.setColor 1
 pop temp 0
-// do Screen.drawRectangle(x - 4, y, x - 1, y + height); 
 push this 0
 push constant 4
 sub
@@ -247,12 +184,10 @@ push this 3
 add
 call Screen.drawRectangle 4
 pop temp 0
-// do Screen.setColor(true); 
 push constant 0
 not
 call Screen.setColor 1
 pop temp 0
-// do Screen.drawRectangle((x + width) - 3, y, x + width, y + height); 
 push this 0
 push this 2
 add
@@ -267,9 +202,6 @@ push this 3
 add
 call Screen.drawRectangle 4
 pop temp 0
-// } 
 label IF_END0
-// return; 
 push constant 0
 return
-// } 
