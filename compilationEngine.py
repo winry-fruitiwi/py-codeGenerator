@@ -827,6 +827,9 @@ class CompilationEngine:
                 if self.tokenizer.current_token == "this":
                     self.vmw.writePush("pointer", 0)
 
+                if self.tokenizer.current_token == "null":
+                    self.vmw.writePush("constant", 0)
+
                 self.compileKeyword()
                 compiledToken = True
 
