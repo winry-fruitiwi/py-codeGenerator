@@ -30,7 +30,13 @@ push this 0
 push constant 4
 sub
 pop this 0
+goto IF_END2
 label IF_FALSE2
+push this 1
+push constant 4
+sub
+pop this 1
+label IF_END2
 label IF_END0
 push constant 0
 return

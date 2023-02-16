@@ -18,6 +18,7 @@ class Test {
 	    }
 	    else {
             if (invert) { let x = x - 4; }
+            else { let y = y - 4; }
         }
 
 	    return 0;
