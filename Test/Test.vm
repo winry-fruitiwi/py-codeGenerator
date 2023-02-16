@@ -5,38 +5,31 @@
 // field int leftWall, rightWall, topWall, bottomWall; 
 // field int wall; 
 // method int move() { 
-// if (positivey) { 
+// if (d < 0) { let d = d + straightD; } 
 function Test.move 0
 push argument 0
 pop pointer 0
 // if found
-push this 9
+push this 4
+push constant 0
+lt
 if-goto IF_TRUE0
 goto IF_FALSE0
 label IF_TRUE0
-// if (invert) { let x = x + 4; } 
-// if found
-push this 7
-if-goto IF_TRUE1
-goto IF_FALSE1
-label IF_TRUE1
-push this 0
-push constant 4
+push this 4
+push this 5
 add
-pop this 0
-// else { let y = y + 4; } 
-goto IF_END1
-label IF_FALSE1
-push this 1
-push constant 4
-add
-pop this 1
-label IF_END1
-// } 
+pop this 4
 // else { 
 goto IF_END0
 label IF_FALSE0
-// if (invert) { let x = x - 4; } 
+// if (positivey) { 
+// if found
+push this 9
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+// if (invert) { let x = x + 4; } 
 // if found
 push this 7
 if-goto IF_TRUE2
@@ -44,17 +37,40 @@ goto IF_FALSE2
 label IF_TRUE2
 push this 0
 push constant 4
-sub
+add
 pop this 0
-// else { let y = y - 4; } 
+// else { let y = y + 4; } 
 goto IF_END2
 label IF_FALSE2
 push this 1
 push constant 4
-sub
+add
 pop this 1
 label IF_END2
 // } 
+// else { 
+goto IF_END1
+label IF_FALSE1
+// if (invert) { let x = x - 4; } 
+// if found
+push this 7
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push this 0
+push constant 4
+sub
+pop this 0
+// else { let y = y - 4; } 
+goto IF_END3
+label IF_FALSE3
+push this 1
+push constant 4
+sub
+pop this 1
+label IF_END3
+// } 
+label IF_END1
 label IF_END0
 // return 0; 
 push constant 0

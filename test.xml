@@ -72,61 +72,31 @@
           <symbol> ( </symbol>
           <expression>
             <term>
-              <thisboolean> positivey </thisboolean>
+              <thisint> d </thisint>
+            </term>
+            <symbol> &lt; </symbol>
+            <term>
+              <integerConstant> 0 </integerConstant>
             </term>
           </expression>
           <symbol> ) </symbol>
           <symbol> { </symbol>
           <statements>
-            <ifStatement>
-              <keyword> if </keyword>
-              <symbol> ( </symbol>
+            <letStatement>
+              <keyword> let </keyword>
+              <thisint> d </thisint>
+              <symbol> = </symbol>
               <expression>
                 <term>
-                  <thisboolean> invert </thisboolean>
+                  <thisint> d </thisint>
+                </term>
+                <symbol> + </symbol>
+                <term>
+                  <thisint> straightD </thisint>
                 </term>
               </expression>
-              <symbol> ) </symbol>
-              <symbol> { </symbol>
-              <statements>
-                <letStatement>
-                  <keyword> let </keyword>
-                  <thisint> x </thisint>
-                  <symbol> = </symbol>
-                  <expression>
-                    <term>
-                      <thisint> x </thisint>
-                    </term>
-                    <symbol> + </symbol>
-                    <term>
-                      <integerConstant> 4 </integerConstant>
-                    </term>
-                  </expression>
-                  <symbol> ; </symbol>
-                </letStatement>
-              </statements>
-              <symbol> } </symbol>
-              <keyword> else </keyword>
-              <symbol> { </symbol>
-              <statements>
-                <letStatement>
-                  <keyword> let </keyword>
-                  <thisint> y </thisint>
-                  <symbol> = </symbol>
-                  <expression>
-                    <term>
-                      <thisint> y </thisint>
-                    </term>
-                    <symbol> + </symbol>
-                    <term>
-                      <integerConstant> 4 </integerConstant>
-                    </term>
-                  </expression>
-                  <symbol> ; </symbol>
-                </letStatement>
-              </statements>
-              <symbol> } </symbol>
-            </ifStatement>
+              <symbol> ; </symbol>
+            </letStatement>
           </statements>
           <symbol> } </symbol>
           <keyword> else </keyword>
@@ -137,47 +107,115 @@
               <symbol> ( </symbol>
               <expression>
                 <term>
-                  <thisboolean> invert </thisboolean>
+                  <thisboolean> positivey </thisboolean>
                 </term>
               </expression>
               <symbol> ) </symbol>
               <symbol> { </symbol>
               <statements>
-                <letStatement>
-                  <keyword> let </keyword>
-                  <thisint> x </thisint>
-                  <symbol> = </symbol>
+                <ifStatement>
+                  <keyword> if </keyword>
+                  <symbol> ( </symbol>
                   <expression>
                     <term>
-                      <thisint> x </thisint>
-                    </term>
-                    <symbol> - </symbol>
-                    <term>
-                      <integerConstant> 4 </integerConstant>
+                      <thisboolean> invert </thisboolean>
                     </term>
                   </expression>
-                  <symbol> ; </symbol>
-                </letStatement>
+                  <symbol> ) </symbol>
+                  <symbol> { </symbol>
+                  <statements>
+                    <letStatement>
+                      <keyword> let </keyword>
+                      <thisint> x </thisint>
+                      <symbol> = </symbol>
+                      <expression>
+                        <term>
+                          <thisint> x </thisint>
+                        </term>
+                        <symbol> + </symbol>
+                        <term>
+                          <integerConstant> 4 </integerConstant>
+                        </term>
+                      </expression>
+                      <symbol> ; </symbol>
+                    </letStatement>
+                  </statements>
+                  <symbol> } </symbol>
+                  <keyword> else </keyword>
+                  <symbol> { </symbol>
+                  <statements>
+                    <letStatement>
+                      <keyword> let </keyword>
+                      <thisint> y </thisint>
+                      <symbol> = </symbol>
+                      <expression>
+                        <term>
+                          <thisint> y </thisint>
+                        </term>
+                        <symbol> + </symbol>
+                        <term>
+                          <integerConstant> 4 </integerConstant>
+                        </term>
+                      </expression>
+                      <symbol> ; </symbol>
+                    </letStatement>
+                  </statements>
+                  <symbol> } </symbol>
+                </ifStatement>
               </statements>
               <symbol> } </symbol>
               <keyword> else </keyword>
               <symbol> { </symbol>
               <statements>
-                <letStatement>
-                  <keyword> let </keyword>
-                  <thisint> y </thisint>
-                  <symbol> = </symbol>
+                <ifStatement>
+                  <keyword> if </keyword>
+                  <symbol> ( </symbol>
                   <expression>
                     <term>
-                      <thisint> y </thisint>
-                    </term>
-                    <symbol> - </symbol>
-                    <term>
-                      <integerConstant> 4 </integerConstant>
+                      <thisboolean> invert </thisboolean>
                     </term>
                   </expression>
-                  <symbol> ; </symbol>
-                </letStatement>
+                  <symbol> ) </symbol>
+                  <symbol> { </symbol>
+                  <statements>
+                    <letStatement>
+                      <keyword> let </keyword>
+                      <thisint> x </thisint>
+                      <symbol> = </symbol>
+                      <expression>
+                        <term>
+                          <thisint> x </thisint>
+                        </term>
+                        <symbol> - </symbol>
+                        <term>
+                          <integerConstant> 4 </integerConstant>
+                        </term>
+                      </expression>
+                      <symbol> ; </symbol>
+                    </letStatement>
+                  </statements>
+                  <symbol> } </symbol>
+                  <keyword> else </keyword>
+                  <symbol> { </symbol>
+                  <statements>
+                    <letStatement>
+                      <keyword> let </keyword>
+                      <thisint> y </thisint>
+                      <symbol> = </symbol>
+                      <expression>
+                        <term>
+                          <thisint> y </thisint>
+                        </term>
+                        <symbol> - </symbol>
+                        <term>
+                          <integerConstant> 4 </integerConstant>
+                        </term>
+                      </expression>
+                      <symbol> ; </symbol>
+                    </letStatement>
+                  </statements>
+                  <symbol> } </symbol>
+                </ifStatement>
               </statements>
               <symbol> } </symbol>
             </ifStatement>
