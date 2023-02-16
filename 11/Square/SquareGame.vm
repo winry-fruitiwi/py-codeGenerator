@@ -1,4 +1,7 @@
-
+// field Square square; 
+// field int direction; 
+// constructor SquareGame new() { 
+// let square = Square.new(0, 0, 30); 
 function SquareGame.new 0
 push constant 2
 call Memory.alloc 1
@@ -8,239 +11,202 @@ push constant 0
 push constant 30
 call Square.new 3
 pop this 0
+// let direction = 0; 
 push constant 0
 pop this 1
-push pointer 0
+// return this; 
 push pointer 0
 return
-
-// method detected
-
+// } 
+// method void dispose() { 
+// do square.dispose(); 
 function SquareGame.dispose 0
 push argument 0
 pop pointer 0
-
-// square is in the symbol table
-
-// square has type of Square
 push this 0
 call Square.dispose 1
 pop temp 0
+// do Memory.deAlloc(this); 
 push pointer 0
 call Memory.deAlloc 1
 pop temp 0
+// return; 
 push constant 0
 return
-
-// method detected
-
+// } 
+// method void moveSquare() { 
+// if (direction = 1) { do square.moveUp(); } 
 function SquareGame.moveSquare 0
 push argument 0
 pop pointer 0
-
-// if statement
+// if found
 push this 1
 push constant 1
 eq
-not
 if-goto IF_TRUE0
-
-// square is in the symbol table
-
-// square has type of Square
+goto IF_FALSE0
+label IF_TRUE0
 push this 0
 call Square.moveUp 1
 pop temp 0
-goto IF_FALSE0
-label IF_TRUE0
+// if (direction = 2) { do square.moveDown(); } 
 label IF_FALSE0
-
-// if statement
+// if found
 push this 1
 push constant 2
 eq
-not
 if-goto IF_TRUE1
-
-// square is in the symbol table
-
-// square has type of Square
+goto IF_FALSE1
+label IF_TRUE1
 push this 0
 call Square.moveDown 1
 pop temp 0
-goto IF_FALSE1
-label IF_TRUE1
+// if (direction = 3) { do square.moveLeft(); } 
 label IF_FALSE1
-
-// if statement
+// if found
 push this 1
 push constant 3
 eq
-not
 if-goto IF_TRUE2
-
-// square is in the symbol table
-
-// square has type of Square
+goto IF_FALSE2
+label IF_TRUE2
 push this 0
 call Square.moveLeft 1
 pop temp 0
-goto IF_FALSE2
-label IF_TRUE2
+// if (direction = 4) { do square.moveRight(); } 
 label IF_FALSE2
-
-// if statement
+// if found
 push this 1
 push constant 4
 eq
-not
 if-goto IF_TRUE3
-
-// square is in the symbol table
-
-// square has type of Square
+goto IF_FALSE3
+label IF_TRUE3
 push this 0
 call Square.moveRight 1
 pop temp 0
-goto IF_FALSE3
-label IF_TRUE3
+// do Sys.wait(5); 
 label IF_FALSE3
 push constant 5
 call Sys.wait 1
 pop temp 0
+// return; 
 push constant 0
 return
-
-// method detected
-
+// } 
+// method void run() { 
+// var char key; 
+// var boolean exit; 
+// let exit = false; 
 function SquareGame.run 2
 push argument 0
 pop pointer 0
 push constant 0
 pop local 1
-
-// while
+// while (~exit) { 
 label WHILE_EXP4
 push local 1
 not
 not
 if-goto WHILE_END4
-
-// while loop
-
-// while
+// while (key = 0) { 
 label WHILE_EXP5
 push local 0
 push constant 0
 eq
 not
 if-goto WHILE_END5
-
-// while loop
+// let key = Keyboard.keyPressed(); 
 call Keyboard.keyPressed 0
 pop local 0
+// do moveSquare(); 
 push pointer 0
 call SquareGame.moveSquare 1
 pop temp 0
+// } 
 goto WHILE_EXP5
 label WHILE_END5
-
-// if statement
+// if (key = 81)  { let exit = true; } 
+// if found
 push local 0
 push constant 81
 eq
-not
 if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
 push constant 0
 not
 pop local 1
-goto IF_FALSE6
-label IF_TRUE6
+// if (key = 90)  { do square.decSize(); } 
 label IF_FALSE6
-
-// if statement
+// if found
 push local 0
 push constant 90
 eq
-not
 if-goto IF_TRUE7
-
-// square is in the symbol table
-
-// square has type of Square
+goto IF_FALSE7
+label IF_TRUE7
 push this 0
 call Square.decSize 1
 pop temp 0
-goto IF_FALSE7
-label IF_TRUE7
+// if (key = 88)  { do square.incSize(); } 
 label IF_FALSE7
-
-// if statement
+// if found
 push local 0
 push constant 88
 eq
-not
 if-goto IF_TRUE8
-
-// square is in the symbol table
-
-// square has type of Square
+goto IF_FALSE8
+label IF_TRUE8
 push this 0
 call Square.incSize 1
 pop temp 0
-goto IF_FALSE8
-label IF_TRUE8
+// if (key = 131) { let direction = 1; } 
 label IF_FALSE8
-
-// if statement
+// if found
 push local 0
 push constant 131
 eq
-not
 if-goto IF_TRUE9
-push constant 1
-pop this 1
 goto IF_FALSE9
 label IF_TRUE9
+push constant 1
+pop this 1
+// if (key = 133) { let direction = 2; } 
 label IF_FALSE9
-
-// if statement
+// if found
 push local 0
 push constant 133
 eq
-not
 if-goto IF_TRUE10
-push constant 2
-pop this 1
 goto IF_FALSE10
 label IF_TRUE10
+push constant 2
+pop this 1
+// if (key = 130) { let direction = 3; } 
 label IF_FALSE10
-
-// if statement
+// if found
 push local 0
 push constant 130
 eq
-not
 if-goto IF_TRUE11
-push constant 3
-pop this 1
 goto IF_FALSE11
 label IF_TRUE11
+push constant 3
+pop this 1
+// if (key = 132) { let direction = 4; } 
 label IF_FALSE11
-
-// if statement
+// if found
 push local 0
 push constant 132
 eq
-not
 if-goto IF_TRUE12
-push constant 4
-pop this 1
 goto IF_FALSE12
 label IF_TRUE12
+push constant 4
+pop this 1
+// while (~(key = 0)) { 
 label IF_FALSE12
-
-// while
 label WHILE_EXP13
 push local 0
 push constant 0
@@ -248,16 +214,19 @@ eq
 not
 not
 if-goto WHILE_END13
-
-// while loop
+// let key = Keyboard.keyPressed(); 
 call Keyboard.keyPressed 0
 pop local 0
+// do moveSquare(); 
 push pointer 0
 call SquareGame.moveSquare 1
 pop temp 0
+// } 
 goto WHILE_EXP13
 label WHILE_END13
 goto WHILE_EXP4
 label WHILE_END4
+// return; 
 push constant 0
 return
+// } 

@@ -1,34 +1,41 @@
-
+// field int x, y; 
+// field int size; 
+// constructor Square new(int Ax, int Ay, int Asize) { 
+// let x = Ax; 
 function Square.new 0
 push constant 3
 call Memory.alloc 1
 pop pointer 0
 push argument 0
 pop this 0
+// let y = Ay; 
 push argument 1
 pop this 1
+// let size = Asize; 
 push argument 2
 pop this 2
+// do draw(); 
 push pointer 0
 call Square.draw 1
 pop temp 0
-push pointer 0
+// return this; 
 push pointer 0
 return
-
-// method detected
-
+// } 
+// method void dispose() { 
+// do Memory.deAlloc(this); 
 function Square.dispose 0
 push argument 0
 pop pointer 0
 push pointer 0
 call Memory.deAlloc 1
 pop temp 0
+// return; 
 push constant 0
 return
-
-// method detected
-
+// } 
+// method void draw() { 
+// do Screen.setColor(true); 
 function Square.draw 0
 push argument 0
 pop pointer 0
@@ -36,6 +43,7 @@ push constant 0
 not
 call Screen.setColor 1
 pop temp 0
+// do Screen.drawRectangle(x, y, x + size, y + size); 
 push this 0
 push this 1
 push this 0
@@ -46,17 +54,19 @@ push this 2
 add
 call Screen.drawRectangle 4
 pop temp 0
+// return; 
 push constant 0
 return
-
-// method detected
-
+// } 
+// method void erase() { 
+// do Screen.setColor(false); 
 function Square.erase 0
 push argument 0
 pop pointer 0
 push constant 0
 call Screen.setColor 1
 pop temp 0
+// do Screen.drawRectangle(x, y, x + size, y + size); 
 push this 0
 push this 1
 push this 0
@@ -67,16 +77,16 @@ push this 2
 add
 call Screen.drawRectangle 4
 pop temp 0
+// return; 
 push constant 0
 return
-
-// method detected
-
+// } 
+// method void incSize() { 
+// if (((y + size) < 254) & ((x + size) < 510)) { 
 function Square.incSize 0
 push argument 0
 pop pointer 0
-
-// if statement
+// if found
 push this 1
 push this 2
 add
@@ -88,67 +98,76 @@ add
 push constant 510
 lt
 and
-not
 if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+// do erase(); 
 push pointer 0
 call Square.erase 1
 pop temp 0
+// let size = size + 2; 
 push this 2
 push constant 2
 add
 pop this 2
+// do draw(); 
 push pointer 0
 call Square.draw 1
 pop temp 0
-goto IF_FALSE0
-label IF_TRUE0
+// } 
+// return; 
 label IF_FALSE0
 push constant 0
 return
-
-// method detected
-
+// } 
+// method void decSize() { 
+// if (size > 2) { 
 function Square.decSize 0
 push argument 0
 pop pointer 0
-
-// if statement
+// if found
 push this 2
 push constant 2
 gt
-not
 if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+// do erase(); 
 push pointer 0
 call Square.erase 1
 pop temp 0
+// let size = size - 2; 
 push this 2
 push constant 2
 sub
 pop this 2
+// do draw(); 
 push pointer 0
 call Square.draw 1
 pop temp 0
-goto IF_FALSE1
-label IF_TRUE1
+// } 
+// return; 
 label IF_FALSE1
 push constant 0
 return
-
-// method detected
-
+// } 
+// method void moveUp() { 
+// if (y > 1) { 
 function Square.moveUp 0
 push argument 0
 pop pointer 0
-
-// if statement
+// if found
 push this 1
 push constant 1
 gt
-not
 if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+// do Screen.setColor(false); 
 push constant 0
 call Screen.setColor 1
 pop temp 0
+// do Screen.drawRectangle(x, (y + size) - 1, x + size, y + size); 
 push this 0
 push this 1
 push this 2
@@ -163,14 +182,17 @@ push this 2
 add
 call Screen.drawRectangle 4
 pop temp 0
+// let y = y - 2; 
 push this 1
 push constant 2
 sub
 pop this 1
+// do Screen.setColor(true); 
 push constant 0
 not
 call Screen.setColor 1
 pop temp 0
+// do Screen.drawRectangle(x, y, x + size, y + 1); 
 push this 0
 push this 1
 push this 0
@@ -181,29 +203,31 @@ push constant 1
 add
 call Screen.drawRectangle 4
 pop temp 0
-goto IF_FALSE2
-label IF_TRUE2
+// } 
+// return; 
 label IF_FALSE2
 push constant 0
 return
-
-// method detected
-
+// } 
+// method void moveDown() { 
+// if ((y + size) < 254) { 
 function Square.moveDown 0
 push argument 0
 pop pointer 0
-
-// if statement
+// if found
 push this 1
 push this 2
 add
 push constant 254
 lt
-not
 if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+// do Screen.setColor(false); 
 push constant 0
 call Screen.setColor 1
 pop temp 0
+// do Screen.drawRectangle(x, y, x + size, y + 1); 
 push this 0
 push this 1
 push this 0
@@ -214,14 +238,17 @@ push constant 1
 add
 call Screen.drawRectangle 4
 pop temp 0
+// let y = y + 2; 
 push this 1
 push constant 2
 add
 pop this 1
+// do Screen.setColor(true); 
 push constant 0
 not
 call Screen.setColor 1
 pop temp 0
+// do Screen.drawRectangle(x, (y + size) - 1, x + size, y + size); 
 push this 0
 push this 1
 push this 2
@@ -236,27 +263,29 @@ push this 2
 add
 call Screen.drawRectangle 4
 pop temp 0
-goto IF_FALSE3
-label IF_TRUE3
+// } 
+// return; 
 label IF_FALSE3
 push constant 0
 return
-
-// method detected
-
+// } 
+// method void moveLeft() { 
+// if (x > 1) { 
 function Square.moveLeft 0
 push argument 0
 pop pointer 0
-
-// if statement
+// if found
 push this 0
 push constant 1
 gt
-not
 if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+// do Screen.setColor(false); 
 push constant 0
 call Screen.setColor 1
 pop temp 0
+// do Screen.drawRectangle((x + size) - 1, y, x + size, y + size); 
 push this 0
 push this 2
 add
@@ -271,14 +300,17 @@ push this 2
 add
 call Screen.drawRectangle 4
 pop temp 0
+// let x = x - 2; 
 push this 0
 push constant 2
 sub
 pop this 0
+// do Screen.setColor(true); 
 push constant 0
 not
 call Screen.setColor 1
 pop temp 0
+// do Screen.drawRectangle(x, y, x + 1, y + size); 
 push this 0
 push this 1
 push this 0
@@ -289,29 +321,31 @@ push this 2
 add
 call Screen.drawRectangle 4
 pop temp 0
-goto IF_FALSE4
-label IF_TRUE4
+// } 
+// return; 
 label IF_FALSE4
 push constant 0
 return
-
-// method detected
-
+// } 
+// method void moveRight() { 
+// if ((x + size) < 510) { 
 function Square.moveRight 0
 push argument 0
 pop pointer 0
-
-// if statement
+// if found
 push this 0
 push this 2
 add
 push constant 510
 lt
-not
 if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+// do Screen.setColor(false); 
 push constant 0
 call Screen.setColor 1
 pop temp 0
+// do Screen.drawRectangle(x, y, x + 1, y + size); 
 push this 0
 push this 1
 push this 0
@@ -322,14 +356,17 @@ push this 2
 add
 call Screen.drawRectangle 4
 pop temp 0
+// let x = x + 2; 
 push this 0
 push constant 2
 add
 pop this 0
+// do Screen.setColor(true); 
 push constant 0
 not
 call Screen.setColor 1
 pop temp 0
+// do Screen.drawRectangle((x + size) - 1, y, x + size, y + size); 
 push this 0
 push this 2
 add
@@ -344,8 +381,9 @@ push this 2
 add
 call Screen.drawRectangle 4
 pop temp 0
-goto IF_FALSE5
-label IF_TRUE5
+// } 
+// return; 
 label IF_FALSE5
 push constant 0
 return
+// } 

@@ -1,0 +1,155 @@
+// function void main() { 
+// var int value; 
+// do Main.fillMemory(8001, 16, -1); 
+function Main.main 1
+push constant 8001
+push constant 16
+push constant 1
+neg
+call Main.fillMemory 3
+pop temp 0
+// let value = Memory.peek(8000); 
+push constant 8000
+call Memory.peek 1
+pop local 0
+// do Main.convert(value); 
+push local 0
+call Main.convert 1
+pop temp 0
+// return; 
+push constant 0
+return
+// } 
+// function void convert(int value) { 
+// var int mask, position; 
+// var boolean loop; 
+// let loop = true; 
+function Main.convert 3
+push constant 0
+not
+pop local 2
+// while (loop) { 
+label WHILE_EXP0
+push local 2
+not
+if-goto WHILE_END0
+//     let position = position + 1; 
+push local 1
+push constant 1
+add
+pop local 1
+//     let mask = Main.nextMask(mask); 
+push local 0
+call Main.nextMask 1
+pop local 0
+//     if (~(position > 16)) { 
+// if found
+push local 1
+push constant 16
+gt
+not
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+//         if (~((value & mask) = 0)) { 
+// if found
+push argument 0
+push local 0
+and
+push constant 0
+eq
+not
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+//             do Memory.poke(8000 + position, 1); 
+push constant 8000
+push local 1
+add
+push constant 1
+call Memory.poke 2
+pop temp 0
+//         } 
+//         else { 
+goto IF_END2
+label IF_FALSE2
+//             do Memory.poke(8000 + position, 0); 
+push constant 8000
+push local 1
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+//         } 
+label IF_END2
+//     } 
+//     else { 
+goto IF_END1
+label IF_FALSE1
+//         let loop = false; 
+push constant 0
+pop local 2
+//     } 
+label IF_END1
+// } 
+goto WHILE_EXP0
+label WHILE_END0
+// return; 
+push constant 0
+return
+// } 
+// function int nextMask(int mask) { 
+// if (mask = 0) { 
+function Main.nextMask 0
+// if found
+push argument 0
+push constant 0
+eq
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+//     return 1; 
+push constant 1
+return
+// } 
+// else { 
+goto IF_END3
+label IF_FALSE3
+// return mask * 2; 
+push argument 0
+push constant 2
+call Math.multiply 2
+return
+// } 
+label IF_END3
+// function void fillMemory(int startAddress, int length, int value) { 
+// while (length > 0) { 
+function Main.fillMemory 0
+label WHILE_EXP4
+push argument 1
+push constant 0
+gt
+not
+if-goto WHILE_END4
+// do Memory.poke(startAddress, value); 
+push argument 0
+push argument 2
+call Memory.poke 2
+pop temp 0
+// let length = length - 1; 
+push argument 1
+push constant 1
+sub
+pop argument 1
+// let startAddress = startAddress + 1; 
+push argument 0
+push constant 1
+add
+pop argument 0
+// } 
+goto WHILE_EXP4
+label WHILE_END4
+// return; 
+push constant 0
+return
+// } 
